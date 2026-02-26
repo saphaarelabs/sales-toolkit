@@ -45,7 +45,7 @@ const tools: Tool[] = [
   { name: "Discount Calculator", description: "Calculate discount impact on revenue and protect margins.", icon: Percent, path: "/discount", category: "Calculators" },
   { name: "Cold Email Generator", description: "Get personalized cold email variations for any scenario.", icon: Mail, path: "/cold-email", category: "Email & Outreach" },
   { name: "Follow-up Sequence Builder", description: "Build a multi-step email sequence with timing and templates.", icon: ListOrdered, path: "/sequence", category: "Email & Outreach" },
-  { name: "Email Template Library", description: "75+ ready-to-use email templates across 13 categories.", icon: BookOpen, path: "/email-templates", category: "Templates" },
+  { name: "Email Template Library", description: "150+ ready-to-use email templates across 13 categories.", icon: BookOpen, path: "/email-templates", category: "Templates" },
   { name: "AI Prompt Templates", description: "Pre-built sales prompts to paste into any AI tool.", icon: Sparkles, path: "/prompts", category: "Templates" },
   { name: "ICP Builder", description: "Define your ideal customer profile and export it.", icon: Target, path: "/icp", category: "Prospecting" },
   { name: "Objection Handler", description: "Browse common objections with proven response frameworks.", icon: ShieldCheck, path: "/objections", category: "Prospecting" },
