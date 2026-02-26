@@ -1,73 +1,161 @@
-# Welcome to your Lovable project
+<div align="center">
 
-## Project info
+# 🎯 CloserKit
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**Free, open-source sales tools to close more deals.**
 
-## How can I edit this code?
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Built with React](https://img.shields.io/badge/Built_with-React-61DAFB?logo=react)](https://react.dev)
+[![Styled with Tailwind](https://img.shields.io/badge/Styled_with-Tailwind_CSS-06B6D4?logo=tailwindcss)](https://tailwindcss.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 
-There are several ways of editing your application.
+A collection of **21 fast, privacy-first tools** built for modern sales reps.  
+No sign-ups. No tracking. No data stored. Just results.
 
-**Use Lovable**
+</div>
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## ✨ Features
 
-**Use your preferred IDE**
+- 🔒 **100% client-side** — your data never leaves your browser
+- ⚡ **Instant results** — no loading screens, no API calls
+- 🎨 **Clean, modern UI** — built with shadcn/ui + Tailwind CSS
+- 📱 **Fully responsive** — works on desktop, tablet, and mobile
+- 🆓 **Free forever** — no paywalls, no sign-ups required
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🧰 Tools (21)
 
-Follow these steps:
+### 📊 Calculators
+| Tool | Description |
+|------|-------------|
+| **Commission Calculator** | Calculate rep earnings across multi-tier commission structures |
+| **ROI Calculator** | Generate a shareable ROI summary with payback period |
+| **Discount Calculator** | Calculate discount impact on revenue and protect margins |
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### 📧 Email & Outreach
+| Tool | Description |
+|------|-------------|
+| **Cold Email Generator** | Get 2-3 personalized cold email variations for any scenario |
+| **Follow-up Sequence Builder** | Build a multi-step email sequence with timing and templates |
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### 🎯 Prospecting
+| Tool | Description |
+|------|-------------|
+| **ICP Builder** | Define your ideal customer profile and export as a document |
+| **Objection Handler** | Browse common objections with proven response frameworks |
+| **AI Prompt Templates** | Pre-built sales prompts for any AI tool (Claude, ChatGPT, etc.) |
 
-# Step 3: Install the necessary dependencies.
-npm i
+### 📄 Docs
+| Tool | Description |
+|------|-------------|
+| **Email Signature Generator** | Create a professional HTML email signature in seconds |
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### 🔶 Pipeline & Forecasting
+| Tool | Description |
+|------|-------------|
+| **Win Probability Calculator** | Estimate deal win probability with improvement recommendations |
+| **Pipeline Health Checker** | Assess pipeline coverage, stage balance, and risk flags |
+| **Quota Attainment Tracker** | Track quota progress, run rate, and pace projection |
+| **Sales Velocity Calculator** | Calculate revenue per day and impact of improving each lever |
+
+### 🔵 LinkedIn & Social Selling
+| Tool | Description |
+|------|-------------|
+| **LinkedIn Headline Generator** | Generate compelling headlines that attract your audience |
+| **Connection Request Writer** | Personalized requests under 300 characters |
+| **LinkedIn Post Generator** | Formatted posts with hooks, body, and CTA |
+| **Social Selling Sequence** | Multi-touch social selling plan with timed actions |
+
+### 🟢 Proposal & Pricing
+| Tool | Description |
+|------|-------------|
+| **Pricing Table Generator** | Build a clean pricing table and copy as HTML |
+| **Proposal Outline Builder** | Generate a structured proposal outline |
+| **SOW Generator** | Generate a formatted Statement of Work document |
+| **Battle Card Creator** | Build competitive battle cards with talk tracks |
+
+---
+
+## 🚀 Getting Started
+
+```bash
+# Clone the repository
+git clone https://github.com/YOUR_USERNAME/closerkit.git
+
+# Navigate to the project
+cd closerkit
+
+# Install dependencies
+npm install
+
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## 🛠️ Tech Stack
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+| Technology | Purpose |
+|-----------|---------|
+| [React](https://react.dev) | UI framework |
+| [TypeScript](https://typescriptlang.org) | Type safety |
+| [Vite](https://vitejs.dev) | Build tool & dev server |
+| [Tailwind CSS](https://tailwindcss.com) | Utility-first styling |
+| [shadcn/ui](https://ui.shadcn.com) | Component library |
+| [React Router](https://reactrouter.com) | Client-side routing |
+| [Lucide](https://lucide.dev) | Icon set |
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## 📁 Project Structure
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```
+src/
+├── components/
+│   ├── ToolLayout.tsx      # Shared tool page layout
+│   └── ui/                 # shadcn/ui components
+├── pages/
+│   ├── Index.tsx            # Homepage with tool grid
+│   ├── CommissionCalculator.tsx
+│   ├── ROICalculator.tsx
+│   ├── WinProbability.tsx
+│   ├── PipelineHealth.tsx
+│   ├── LinkedInHeadline.tsx
+│   ├── BattleCard.tsx
+│   └── ... (21 tool pages)
+├── hooks/                   # Custom React hooks
+├── lib/                     # Utility functions
+└── index.css                # Design tokens & global styles
+```
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## 🤝 Contributing
 
-## Can I connect a custom domain to my Lovable project?
+Contributions are welcome! Feel free to:
 
-Yes, you can!
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/new-tool`)
+3. Commit your changes (`git commit -m 'Add new tool'`)
+4. Push to the branch (`git push origin feature/new-tool`)
+5. Open a Pull Request
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+---
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+<div align="center">
+
+**Built with ❤️ for sales teams everywhere.**
+
+</div>
