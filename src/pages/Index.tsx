@@ -25,6 +25,7 @@ import {
   Github,
   BookOpen,
   ArrowRight,
+  Brain,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
@@ -60,6 +61,7 @@ const tools: Tool[] = [
   { name: "Proposal Outline Builder", description: "Generate a structured proposal outline.", icon: ClipboardList, path: "/proposal-outline", category: "Proposals" },
   { name: "SOW Generator", description: "Generate a formatted Statement of Work document.", icon: ScrollText, path: "/sow-generator", category: "Proposals" },
   { name: "Battle Card Creator", description: "Build competitive battle cards with talk tracks.", icon: Swords, path: "/battle-card", category: "Proposals" },
+  { name: "AI Skills Library", description: "Copy-paste AI skills for coding agents and sales agents.", icon: Brain, path: "/skills", category: "Docs" },
 ];
 
 const featuredTools = [
@@ -78,6 +80,14 @@ const featuredTools = [
     path: "/prompts",
     stats: ["6 AI prompts", "Paste into any AI", "Sales-optimized"],
     gradient: "from-accent/20 to-accent/5",
+  },
+  {
+    name: "AI Skills Library",
+    description: "Turn any AI into your sales co-pilot. Copy-paste skills for Claude Code, Codex, Clay, and more.",
+    icon: Brain,
+    path: "/skills",
+    stats: ["12 skills", "Coding & Sales agents", "Works with Clay"],
+    gradient: "from-primary/15 to-accent/10",
   },
 ];
 
@@ -143,8 +153,8 @@ const Index = () => {
               </div>
               <div className="w-px h-8 bg-border hidden sm:block" />
               <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold font-display text-foreground">6</span>
-                <span className="text-muted-foreground">AI Prompts</span>
+                <span className="text-2xl font-bold font-display text-foreground">12</span>
+                <span className="text-muted-foreground">AI Skills</span>
               </div>
             </div>
 
