@@ -13,6 +13,7 @@ import ICPBuilder from "./pages/ICPBuilder";
 import ObjectionHandler from "./pages/ObjectionHandler";
 import EmailSignatureGenerator from "./pages/EmailSignatureGenerator";
 import DiscountCalculator from "./pages/DiscountCalculator";
+import PromptTemplates from "./pages/PromptTemplates";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/objections" element={<ObjectionHandler />} />
           <Route path="/signature" element={<EmailSignatureGenerator />} />
           <Route path="/discount" element={<DiscountCalculator />} />
+          <Route path="/prompts" element={<PromptTemplates />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
