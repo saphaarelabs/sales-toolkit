@@ -1,95 +1,104 @@
 
 
-# CloserKit Redesign — Value-First Homepage + New Expert Frameworks
+# New Feature: AI Skills Library
 
-## Overview
+## What We're Building
 
-Restructure the entire homepage to lead with the most valuable content and add 15+ new expert email frameworks from the uploaded files. The goal: a salesperson lands on this page and immediately sees massive value.
+A new **"AI Skills"** page — a library of ready-to-copy system prompts ("skills") that salespeople can paste into AI tools to instantly get a specialized sales assistant. Two flavors:
 
----
+1. **AI Coding Agent Skills** — For Claude Code, Codex, Antigravity, Cursor, etc. These are `.md`-style skill files that turn a coding agent into a sales tool builder.
+2. **AI Sales Agent Skills** — For Clay, AI SDR platforms, and general-purpose agents. These are system prompts that turn an AI into a specialized outbound sales agent.
 
-## 1. New Templates: "Expert Frameworks" Category
-
-Add a new category to the Email Template Library with templates from top sales experts:
-
-| Template | Source | Emails |
-|---|---|---|
-| Ask Before Pitch | Will Allred | 1 |
-| Insight Validation Framework | Leslie Venetz | 1 (framework) |
-| PWJ Pattern Interrupt | Patrick William Joyce | 1 |
-| Pain Point + Case Study Sequence | Alan Ruchtein | 2 |
-| Follow-Up: Meme, Bullet Points, Reference | Eric Nowoslawski | 3 |
-| Lead Magnet Approach | Alan Ruchtein | 2 (template + example) |
-| Selling Software to Sales | Christian Krause | 1 + example |
-| Trigger > Quick Pitch > Calculation > CTA | Thibaut Souyris | 1 + example |
-| Trigger > Agitation > Social Proof > CTA | Alan Ruchtein | 1 |
-| Feedback Only | Jed Mahrle | 2 |
-
-Total: ~15 new templates, bringing the library to 165+.
-
-Each template will include the expert's name as attribution in the title or description.
+Each skill is a long, detailed system prompt that users copy with one click and paste into their tool.
 
 ---
 
-## 2. Homepage Redesign — Value-First Layout
+## Skills to Include
 
-The current homepage is a flat grid of tool cards. The new layout puts the best stuff front and center:
+### AI Coding Agent Skills (paste into Claude Code / Codex)
+| Skill | What It Does |
+|---|---|
+| Cold Outreach System Builder | Builds a complete cold email system with personalization, sequencing, and A/B testing |
+| Sales Dashboard Generator | Creates pipeline dashboards with quota tracking, velocity metrics, and forecasting |
+| CRM Data Enrichment Script | Builds scripts to enrich CRM data using APIs (Clearbit, Apollo, etc.) |
+| Lead Scoring Model | Creates a lead scoring algorithm based on ICP criteria and engagement signals |
+| Outbound Sequence Automator | Builds multi-channel outreach sequences with timing logic |
+
+### AI Sales Agent Skills (paste into Clay / AI SDRs)
+| Skill | What It Does |
+|---|---|
+| Hyper-Personalization Agent | Uses company data, job title duration, competitor news, and social presence to craft 1:1 messages |
+| ICP Research Agent | Analyzes a company to determine if they match your ICP and suggests the best angle |
+| Objection Handling Agent | Responds to common objections using proven frameworks (feel-felt-found, boomerang, etc.) |
+| Follow-Up Strategist | Decides the best follow-up approach based on engagement signals and timing |
+| Meeting Prep Agent | Researches a prospect before a call and generates discovery questions, talking points, and competitive intel |
+| LinkedIn DM Writer | Crafts personalized LinkedIn messages using the prospect's recent posts, job changes, and company news |
+| Competitor Battle Card Agent | Generates real-time competitive positioning based on the prospect's current stack |
+
+---
+
+## Page Design
 
 ```text
 +--------------------------------------------------+
-|  CloserKit                          [Search bar]  |
-|  The free sales toolkit. 165+ templates,          |
-|  22 tools, zero sign-ups.                         |
+|  AI Skills Library                                |
+|  Copy-paste skills that turn any AI into your     |
+|  sales co-pilot. Works with Claude, ChatGPT,      |
+|  Clay, Codex, and more.                           |
 +--------------------------------------------------+
 |                                                    |
-|  -- FEATURED (big hero cards) --                   |
-|  [Email Template Library]  [AI Prompt Templates]   |
-|   165+ templates            6 AI-ready prompts     |
-|   13 categories             Paste into ChatGPT     |
+|  [Tab: For Coding Agents] [Tab: For Sales Agents] |
 |                                                    |
-+--------------------------------------------------+
-|                                                    |
-|  -- ALL TOOLS --                                   |
-|  [Category pills: All | Calculators | ...]         |
-|  [Grid of remaining tool cards]                    |
-|                                                    |
-+--------------------------------------------------+
-|  Footer: CloserKit · Free & open-source · GitHub   |
+|  +----------------------------------------------+ |
+|  | Cold Outreach System Builder                  | |
+|  | Turn Claude Code into a cold email machine    | |
+|  | [Copy Skill]                [Preview v]       | |
+|  +----------------------------------------------+ |
+|  | ...more skills...                             | |
+|  +----------------------------------------------+ |
 +--------------------------------------------------+
 ```
 
-Key differences from current design:
-- **Stats banner** in the header: "165+ email templates, 22 tools, 6 AI prompts"
-- **Two featured cards** at top — Email Template Library and AI Prompt Templates — displayed as large, eye-catching cards with stats and descriptions (not mixed into the grid)
-- **Remaining tools** appear in the grid below with category filters
-- Search bar stays in header but gets a cleaner, more prominent placement
+Each skill card:
+- Title + short description
+- "Works with:" badges (e.g., Claude Code, Codex, Clay)
+- Expandable preview showing the full skill text
+- One-click copy button
+- Variables section (e.g., `{{YOUR_PRODUCT}}`, `{{ICP_DESCRIPTION}}`) that users fill in before copying
 
 ---
 
-## 3. Technical Changes
+## Technical Plan
 
-### Files to modify:
+### 1. Create `src/data/skillTemplates.ts`
+- Define `Skill` interface: `id`, `title`, `description`, `category` ("Coding Agents" | "Sales Agents"), `compatibleTools` (string array), `skill` (the full system prompt text), `variables` (same pattern as email templates)
+- Export `codingAgentSkills` and `salesAgentSkills` arrays with ~12 total skills
 
-**`src/data/externalTemplates.ts`** — Add a new `expertFrameworkTemplates` array with ~15 templates from the uploaded files, each with proper `{{variable}}` placeholders and attribution to the original author.
+### 2. Create `src/pages/SkillsLibrary.tsx`
+- New page using the existing `ToolLayout` component
+- Tab-based UI (Coding Agents / Sales Agents) using Radix Tabs
+- Each skill rendered as an expandable card (same accordion pattern as `PromptTemplates.tsx`)
+- Variable fill-in fields, live preview, and copy button
+- "Works with" badges showing compatible tools
 
-**`src/pages/EmailTemplateLibrary.tsx`** — Import and merge the new `expertFrameworkTemplates`. Update the template count in the description.
+### 3. Update `src/App.tsx`
+- Add route: `/skills` pointing to `SkillsLibrary`
 
-**`src/pages/Index.tsx`** — Full redesign:
-- Add a stats row in the header (template count, tool count, prompt count)
-- Add a "Featured" section with two large cards for Email Template Library and AI Prompt Templates
-- Move the remaining 20 tools into the grid below
-- Update tool count and description for the email template library entry
-- Clean up spacing, typography, and card styles for a premium feel
-
-### No new files needed. No new routes. No new dependencies.
+### 4. Update `src/pages/Index.tsx`
+- Add "AI Skills Library" as a third featured card on the homepage
+- Update stats banner to include skill count
+- Add to the tools grid as well
 
 ---
 
-## 4. UX Details
+## Skill Content Details
 
-- Featured cards will have a subtle gradient background and larger text to draw attention
-- Stats in the header will use bold numbers with labels (e.g., "165+ Templates" / "22 Tools")
-- Category pills get slightly more spacing and a cleaner active state
-- Tool cards in the grid remain compact but with better hover states
-- Mobile: featured cards stack vertically, search remains full-width
+Each skill will be a comprehensive system prompt (200-500 words) containing:
+- Role definition ("You are a...")
+- Specific instructions for the task
+- Output format requirements
+- Examples where helpful
+- Variable placeholders for customization (product, ICP, industry, etc.)
+
+For example, the **Hyper-Personalization Agent** skill for Clay would include instructions on how to use website keywords, online ratings, company mission summaries, job title duration, competitor mentions, and social presence analysis — pulling directly from the personalization frameworks already in the template library.
 
