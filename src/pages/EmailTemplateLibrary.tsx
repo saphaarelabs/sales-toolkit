@@ -1109,6 +1109,578 @@ Kind regards, [Name]`,
       { key: "CompanyName", label: "Company Name", placeholder: "Acme Inc" },
     ],
   },
+
+  // ── Hunter.io Templates ──
+  {
+    id: "hu-1", category: "Hunter.io", title: "Help with Pain Point",
+    subject: "Can I help with {{PainPoint}}?",
+    body: `Hi {{FirstName}},
+
+I want to reach out and ask how everything is going at {{Company}}? How is your current solution working out for you?
+
+We've recently added some new features to our software that I believe would be really helpful for {{PainPoint}}. If you would be interested in a quick chat or demo this week, please let me know or if there are any other ways we can help {{Company}}.
+
+Best,
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "PainPoint", label: "Pain Point", placeholder: "managing customer data" },
+    ],
+  },
+  {
+    id: "hu-2", category: "Hunter.io", title: "Solution for Challenge",
+    subject: "Solution for {{Challenge}}",
+    body: `Hi {{FirstName}},
+
+In working with other {{Industry}} professionals, one of the key issues they're struggling with is {{Challenge}}.
+
+This past year we helped numerous companies to {{BusinessDriver}}, resulting in {{Results}}.
+
+If this is something you're challenged with too, let's set up a quick call. I have some ideas that might help.
+
+All the best,
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Industry", label: "Industry/Position", placeholder: "SaaS founders" },
+      { key: "Challenge", label: "Challenge", placeholder: "scaling outbound" },
+      { key: "BusinessDriver", label: "Business Driver", placeholder: "automate outreach" },
+      { key: "Results", label: "Results Achieved", placeholder: "50% more meetings booked" },
+    ],
+  },
+  {
+    id: "hu-3", category: "Hunter.io", title: "Right Person to Talk To",
+    subject: "Right person at {{Company}}?",
+    body: `Hi {{FirstName}},
+
+I hope this note finds you well.
+
+I've been working for a company called [Your Company] that specializes in {{Service}}.
+
+In thinking about your role at {{Company}}, I thought there might be a good fit for your group.
+
+Our {{Product}} has garnered a lot of attention in the marketplace and I think it's something that your organization might see immediate value in.
+
+Can you help me get in contact with the right decision-maker?
+
+Best,
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "Service", label: "Your Service", placeholder: "sales automation" },
+      { key: "Product", label: "Product Name", placeholder: "OutreachPro" },
+    ],
+  },
+  {
+    id: "hu-4", category: "Hunter.io", title: "Referral Introduction",
+    subject: "Reaching out via {{ReferralName}}",
+    body: `Hi {{FirstName}},
+
+My name is [Your Name], I was given your name by {{ReferralName}}. I run a {{Industry}} business and it sounds like we could benefit from knowing one another!
+
+I browsed through your site — love {{SiteCompliment}}.
+
+If you ever want to meet up for coffee or have a phone/video chat to exchange ideas, let me know!
+
+Have a great rest of your week,
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "ReferralName", label: "Referral Name", placeholder: "Sarah" },
+      { key: "Industry", label: "Industry", placeholder: "marketing" },
+      { key: "SiteCompliment", label: "What You Like", placeholder: "the clean design" },
+    ],
+  },
+  {
+    id: "hu-5", category: "Hunter.io", title: "Solve Their Problem",
+    subject: "Solve {{Problem}}",
+    body: `Dear {{FirstName}},
+
+Do you struggle with {{Problem}}? {{ProblemDetail}}
+
+Here at [Your Company], we've helped many other businesses deal with this problem by {{Solution}}. Businesses we've worked with have seen {{Evidence}} as the result of our product.
+
+Would you like to speak to me and learn more about how we can help? Let's set up a phone call soon.
+
+Warm regards,
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Problem", label: "Problem", placeholder: "low email open rates" },
+      { key: "ProblemDetail", label: "Problem Detail", placeholder: "Getting prospects to open cold emails is harder than ever." },
+      { key: "Solution", label: "Your Solution", placeholder: "AI-powered subject line optimization" },
+      { key: "Evidence", label: "Evidence/Results", placeholder: "3x improvement in open rates" },
+    ],
+  },
+  {
+    id: "hu-6", category: "Hunter.io", title: "Guest Post / Collaboration",
+    subject: "Quick collaboration with {{Company}}",
+    body: `Hi {{FirstName}},
+
+I just came across your article {{ArticleURL}} and wanted to explore the possibility of featuring our blog in it.
+
+Would you mind sharing the criteria for featuring a blog/resource in your article?
+
+Also, whatever we can do in return… just name it.
+
+Best,
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "ArticleURL", label: "Article URL", placeholder: "https://example.com/post" },
+    ],
+  },
+
+  // ── Saleshandy Templates ──
+  {
+    id: "sh-1", category: "Saleshandy", title: "The Startup Technique",
+    subject: "{{FirstName}}, do you need help with {{Solution}}?",
+    body: `Hello {{FirstName}},
+
+Have your employees at {{Company}} been dealing with {{Problem}} currently?
+
+I'm from [Your Company] and I'm working with dozens of companies from your field, like {{Examples}} to make sure their {{Problem}} is resolved on a daily basis because of our {{Service}}.
+
+Trust me, I know you might not have an easy day as the {{Position}} and your schedule might be as busy as it gets, but how about we settle for a quick call for later? We might get to the bottom of this and eradicate the problem forever.
+
+Cheers!
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "Solution", label: "Solution Area", placeholder: "email marketing" },
+      { key: "Problem", label: "Problem", placeholder: "low deliverability" },
+      { key: "Examples", label: "Example Companies", placeholder: "CompanyA, CompanyB" },
+      { key: "Service", label: "Your Service", placeholder: "email automation tools" },
+      { key: "Position", label: "Their Position", placeholder: "Head of Marketing" },
+    ],
+  },
+  {
+    id: "sh-2", category: "Saleshandy", title: "The Problem Solver",
+    subject: "{{FirstName}}, we have the answer to your problem!",
+    body: `Hey there {{FirstName}},
+
+Do you feel like you could use a break right about now? As a business professional myself, I can totally resonate with you.
+
+Our {{Product}} has helped many entrepreneurs like yourself save a lot of time and stay on top of things! I myself have saved around {{TimeSaved}} per week by setting up {{Process}}.
+
+Do you want to save time as well? If you do, then we can set up a demo call.
+
+Regards,
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Product", label: "Product Name", placeholder: "OutreachPro" },
+      { key: "TimeSaved", label: "Time Saved", placeholder: "5 hours" },
+      { key: "Process", label: "Process", placeholder: "automated email campaigns" },
+    ],
+  },
+  {
+    id: "sh-3", category: "Saleshandy", title: "The Elevator Pitch",
+    subject: "{{FirstName}}, this is perfect for you!",
+    body: `Hi {{FirstName}},
+
+I know you're probably busy so I am going to make this fast. I want to ask you a simple question: {{Question}}?
+
+Well, that is exactly what we at [Your Company] aim to resolve for our customers. The reason {{Product}} will be a perfect fit for you is because {{Reasons}}.
+
+The majority of our customers have mentioned {{Metric}} after using our services. Do you think this is something you are interested in?
+
+Let me know and I will set up a personal product demo call for you.
+
+Have an awesome day!
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Question", label: "Key Question", placeholder: "Do you struggle with tracking email opens?" },
+      { key: "Product", label: "Product Name", placeholder: "OutreachPro" },
+      { key: "Reasons", label: "Key Reasons", placeholder: "it automates follow-ups and tracks engagement" },
+      { key: "Metric", label: "Customer Metric", placeholder: "a 40% increase in reply rates" },
+    ],
+  },
+  {
+    id: "sh-4", category: "Saleshandy", title: "The Content Technique",
+    subject: "Your article about {{ArticleTitle}}",
+    body: `Hey {{FirstName}}!
+
+I happened to read your article on your blog about {{ArticleTitle}}. I loved the way you talked about it, mainly when you detailed {{WhatYouLiked}}.
+
+I work at a company called [Your Company] and we like to help other businesses in {{Area}} like {{Examples}} achieve their goals with our {{Solution}}.
+
+If you're also seeking some help in those areas, I have a few ideas for how you can get past your issues. How do you feel about a quick call this afternoon?
+
+Thank you!
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "ArticleTitle", label: "Article Title", placeholder: "scaling outbound sales" },
+      { key: "WhatYouLiked", label: "What You Liked", placeholder: "the data-driven approach" },
+      { key: "Area", label: "Area", placeholder: "email marketing" },
+      { key: "Examples", label: "Example Companies", placeholder: "CompanyA, CompanyB" },
+      { key: "Solution", label: "Your Solution", placeholder: "email tracking tools" },
+    ],
+  },
+  {
+    id: "sh-5", category: "Saleshandy", title: "Competitor Differentiation",
+    subject: "{{FirstName}}, we have just the thing for you!",
+    body: `Hello {{FirstName}},
+
+How are you doing? I recently visited your website and I noticed you were using {{CompetitorProduct}}.
+
+Our organization also specializes in {{YourProduct}}. However, we have {{Differentiators}}.
+
+I am sharing a few links with you so you can understand what makes us different:
+[Link 1]
+[Link 2]
+
+What do you think? If you are interested, let me know and I can set up a demo call for you with my team.
+
+Have a great day!
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "CompetitorProduct", label: "Competitor Product", placeholder: "MailChimp" },
+      { key: "YourProduct", label: "Your Product", placeholder: "email automation" },
+      { key: "Differentiators", label: "Key Differentiators", placeholder: "AI-powered personalization and 99% deliverability" },
+    ],
+  },
+  {
+    id: "sh-6", category: "Saleshandy", title: "Three Sentence Format",
+    subject: "A plan that could double your {{Area}} efforts",
+    body: `Hey {{FirstName}},
+
+I am [Your Name] working for [Your Company]. I have a plan for you that can double your {{Area}} efforts in a month.
+
+Let's connect this week if you're interested in knowing how!
+
+Thanks,
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Area", label: "Area", placeholder: "marketing" },
+    ],
+  },
+  {
+    id: "sh-7", category: "Saleshandy", title: "Follow-Up Sequence (3 Steps)",
+    subject: "Hey! Remember me?",
+    body: `── Step 1: Initial Follow-Up ──
+Subject: Hey! Remember me?
+
+Hi {{FirstName}},
+I emailed you a few days ago about {{Topic}}. I understand that you might be busy. Did I mention we offer a free trial with no commitments whatsoever?
+
+You can sign up for our trial here, in case you wish to try out our software.
+
+Let me know how it goes.
+Best, [Your Name]
+
+── Step 2: Second Follow-Up ──
+Subject: {{FirstName}}, any update?
+
+Hi again, {{FirstName}},
+I wanted to reach out to ask you if there were any updates regarding my previous email? Just to reiterate, {{Summary}}.
+
+Let me know :)
+Best, [Your Name]
+
+── Step 3: Final Follow-Up ──
+Subject: {{FirstName}}, let's cut to the chase!
+
+Hello {{FirstName}},
+I wanted to reach out to you one last time. Let me know if you are interested in {{Offer}}.
+
+If I don't hear back from you, I'll assume the timing wasn't right. If in the future you'd like to use our services, feel free to reach out.
+
+Wishing you the best.
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Topic", label: "Original Topic", placeholder: "email automation tools" },
+      { key: "Summary", label: "Brief Summary", placeholder: "our platform can automate your outreach" },
+      { key: "Offer", label: "Your Offer", placeholder: "a free trial of our email platform" },
+    ],
+  },
+
+  // ── Lemlist Templates ──
+  {
+    id: "le-1", category: "Lemlist", title: "Partnership for Backlinks",
+    subject: "Collaboration idea {{FirstName}}?",
+    body: `Hey {{FirstName}},
+
+{{Icebreaker}}
+
+Anyway, why I'm reaching out...
+
+Building reputable white-hat backlinks is terribly time-consuming and exhausting, especially when up against client deadlines.
+
+My name is [Your Name] and I help {{Industry}} agencies build links from reputable sources for their clients from various niches.
+
+Recently helped {{CaseStudy}}, build {{Result}} which led to {{Outcome}}.
+
+Worth exploring for {{Company}}?
+
+Best,
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "Icebreaker", label: "Icebreaker", placeholder: "Loved your recent post on SEO trends!" },
+      { key: "Industry", label: "Industry", placeholder: "SEO" },
+      { key: "CaseStudy", label: "Case Study", placeholder: "Company X" },
+      { key: "Result", label: "Result", placeholder: "15 links in 3 months" },
+      { key: "Outcome", label: "Outcome", placeholder: "24% increase in organic traffic" },
+    ],
+  },
+  {
+    id: "le-2", category: "Lemlist", title: "Generating Calls with Brands",
+    subject: "{{Company}} x [Your Company]",
+    body: `Hey {{FirstName}},
+
+Saturated digital marketing channels is greatly impacting your potential to acquire new customers and ultimately the growth of {{Company}}.
+
+At [Your Company], we focus on innovative {{Channel}} to avoid these hurdles.
+
+We typically achieve impressive results with companies similar to {{Company}} and this is why I am reaching out to you before anyone else with this.
+
+If you have 25 minutes in the coming days, I would love to show you how we can help {{Company}} reach your ideal target market.
+
+When are you available?
+
+Looking forward to meeting you!
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "Channel", label: "Marketing Channel", placeholder: "micro-influencer campaigns" },
+    ],
+  },
+  {
+    id: "le-3", category: "Lemlist", title: "Lead Gen Agency Strategy",
+    subject: "{{FirstName}} — {{ReferralName}} referred me",
+    body: `Hi {{FirstName}},
+
+Our founder, {{ReferralName}} couldn't stop talking about {{Company}} during our weekly meeting and asked me to reach out…
+
+Not sure if you have heard of us, but at [Your Company], we regularly work with {{TargetCompanyType}} to help them automate and scale their outbound sales programs.
+
+I poked around on your LinkedIn to get a sense for who you have on your team right now, and I agree that you could potentially be a good fit for our program. We see that companies of your size often run into challenges trying to scale without dumping more money into ads.
+
+Would you be open to chat about what you are currently doing to see if there is a fit?
+
+If so, just reply to this email and we can set it up.
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "ReferralName", label: "Referral Name", placeholder: "Sarah" },
+      { key: "TargetCompanyType", label: "Target Company Type", placeholder: "SaaS and professional service companies" },
+    ],
+  },
+  {
+    id: "le-4", category: "Lemlist", title: "Developer Recruitment",
+    subject: "Developers needed!",
+    body: `Hello {{FirstName}},
+
+While searching for {{Role}} in your area I found your profile on LinkedIn and I got to say that I was really impressed!
+
+I would love to invite you to join our marketplace of IT professionals at [Your Platform] and get freelance jobs.
+
+We can proudly say that there is a huge demand for {{Role}} right now.
+
+Why should you join?
+- Quick sign-up for our free, anonymous service
+- Receive job offers tailored just for you
+- Once you join, just sit back and let suitable assignments find you!
+
+If you want to find more about how it works, check the link below.
+[Your Link]
+
+It is only 1-click apply!
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Role", label: "Role", placeholder: "Developers" },
+    ],
+  },
+  {
+    id: "le-5", category: "Lemlist", title: "Multi-Step Cold Outreach",
+    subject: "{{Company}} + [Your Company]",
+    body: `── Email 1 ──
+Hey {{FirstName}},
+
+{{Icebreaker}}
+
+At [Your Company], we help companies like {{Company}} achieve {{Outcome}} through {{Method}}.
+
+Worth a quick chat?
+
+Best, [Your Name]
+
+── Email 2 (3 days later) ──
+Hey {{FirstName}},
+
+Did you have a chance to think about my proposal? I wanted to share that we recently helped {{CaseStudy}} achieve {{Result}}.
+
+Let me know if you'd like to explore this for {{Company}}.
+
+Best, [Your Name]
+
+── Email 3 (5 days later) ──
+Hey {{FirstName}},
+
+Just following up one last time. If the timing isn't right, no worries — I'll check back in a few months.
+
+But if {{Outcome}} is still a priority for {{Company}}, I'd love 15 minutes on your calendar.
+
+Best, [Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "Icebreaker", label: "Icebreaker", placeholder: "Loved your recent post!" },
+      { key: "Outcome", label: "Desired Outcome", placeholder: "2x pipeline growth" },
+      { key: "Method", label: "Your Method", placeholder: "automated outbound sequences" },
+      { key: "CaseStudy", label: "Case Study", placeholder: "Company X" },
+      { key: "Result", label: "Result", placeholder: "400% growth in traffic" },
+    ],
+  },
+
+  // ── Klenty Templates ──
+  {
+    id: "kl-1", category: "Klenty", title: "Foot in the Door",
+    subject: "The right direction, please?",
+    body: `Hi {{FirstName}},
+
+Quick question: Who handles your team's {{Department}}?
+
+{{Competitor}} is already using {{Product}} to {{Benefit}} and I don't want your organization to miss out on this opportunity.
+
+However, I am not very sure who is the right person to make the most of this opportunity.
+
+If that's you, then could you tell me how your calendar looks like this week?
+
+If not, would you be kind enough to point me to the person who would benefit the most from this conversation?
+
+Thanks,
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Department", label: "Department", placeholder: "sales enablement" },
+      { key: "Competitor", label: "Competitor Name", placeholder: "CompanyX" },
+      { key: "Product", label: "Your Product", placeholder: "OutreachPro" },
+      { key: "Benefit", label: "Key Benefit", placeholder: "double their pipeline" },
+    ],
+  },
+  {
+    id: "kl-2", category: "Klenty", title: "Word-of-Mouth Intro",
+    subject: "{{InitialContact}} told me to get in touch",
+    body: `Hello {{FirstName}},
+
+I just had an exciting conversation with {{InitialContact}}, who directed me to you.
+
+I noticed that {{Company}} is dealing with challenges like {{PainPoint1}} and {{PainPoint2}}.
+
+{{Product}} can help solve these issues rapidly, and even {{InitialContact}} strongly believes in it.
+
+However, they also pointed out that you are the person who can take a call on this and suggested we have a chat.
+
+Can we have a quick 5-10 minute call next week to explore our solution to these challenges?
+
+Shoot me an email, and I will fix a call at your convenience.
+
+Warm regards,
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "InitialContact", label: "Initial Contact", placeholder: "Sarah from Marketing" },
+      { key: "PainPoint1", label: "Pain Point 1", placeholder: "low conversion rates" },
+      { key: "PainPoint2", label: "Pain Point 2", placeholder: "manual follow-ups" },
+      { key: "Product", label: "Product Name", placeholder: "OutreachPro" },
+    ],
+  },
+  {
+    id: "kl-3", category: "Klenty", title: "Value Proposition Pitch",
+    subject: "{{FirstName}}, {{Result}}",
+    body: `Hi {{FirstName}},
+
+We recently helped a startup {{Result}} by {{Method}}.
+
+Can you point me to the person who handles {{Area}} to discuss further?
+
+Best,
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Result", label: "Result Achieved", placeholder: "increase revenue by 40%" },
+      { key: "Method", label: "Method Used", placeholder: "automating their outbound" },
+      { key: "Area", label: "Relevant Area", placeholder: "sales operations" },
+    ],
+  },
+  {
+    id: "kl-4", category: "Klenty", title: "Open with a Compliment",
+    subject: "{{FirstName}}, you have an awesome website",
+    body: `Hi {{FirstName}},
+
+I really like the clean design and usability of your website. It's really, really good.
+
+{{ValueProp}} and I would like to speak with someone who is responsible for this area of your marketing, at {{Company}}.
+
+Are you the right person to speak about this? If not, who do you recommend I should contact?
+
+Many thanks,
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "ValueProp", label: "Your Value Prop", placeholder: "We help companies increase website conversions by 35%" },
+    ],
+  },
+  {
+    id: "kl-5", category: "Klenty", title: "Scaling Customer Acquisition",
+    subject: "{{FirstName}}, reduce your cost per acquisition",
+    body: `{{FirstName}},
+
+One of our clients was able to acquire about {{Number}} customers at half of their target cost per acquisition number.
+
+Is this something that might interest you right now?
+
+If so, can you point me in the direction of the person that handles this?
+
+Best,
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Number", label: "Customer Count", placeholder: "6,000" },
+    ],
+  },
+  {
+    id: "kl-6", category: "Klenty", title: "Based on Online Profile",
+    subject: "{{FirstName}}, need your help!",
+    body: `Hi {{FirstName}},
+
+My name is [Your Name] and I head up business development efforts with [Your Company]. We recently launched a new platform that {{OneLinerPitch}}.
+
+I am taking an educated stab in the dark here, however, based on your online profile, you appear to be an appropriate person to connect with… or might at least point me in the right direction.
+
+I'd like to speak with someone from {{Company}} who is responsible for {{Area}}.
+
+If that's you, are you open to a fifteen-minute call on {{DateTime}} to discuss ways our platform can specifically help your business?
+
+If not you, can you please put me in touch with the right person?
+
+I appreciate the help!
+[Your Name]`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "OneLinerPitch", label: "One-Liner Pitch", placeholder: "automates cold outreach at scale" },
+      { key: "Area", label: "Relevant Area", placeholder: "sales operations" },
+      { key: "DateTime", label: "Suggested Date/Time", placeholder: "Tuesday at 2pm" },
+    ],
+  },
 ];
 
 const templateCategories = [...new Set(templates.map((t) => t.category))];
@@ -1150,7 +1722,7 @@ const EmailTemplateLibrary = () => {
   });
 
   return (
-    <ToolLayout title="Email Template Library" description="50+ ready-to-use email templates. Fill in your details, preview, and copy.">
+    <ToolLayout title="Email Template Library" description="75+ ready-to-use email templates from top sources. Fill in your details, preview, and copy.">
       {/* Search & Category Tabs */}
       <div className="mb-6">
         <div className="relative max-w-sm mb-4">
