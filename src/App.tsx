@@ -14,6 +14,18 @@ import ObjectionHandler from "./pages/ObjectionHandler";
 import EmailSignatureGenerator from "./pages/EmailSignatureGenerator";
 import DiscountCalculator from "./pages/DiscountCalculator";
 import PromptTemplates from "./pages/PromptTemplates";
+import WinProbability from "./pages/WinProbability";
+import PipelineHealth from "./pages/PipelineHealth";
+import QuotaTracker from "./pages/QuotaTracker";
+import SalesVelocity from "./pages/SalesVelocity";
+import LinkedInHeadline from "./pages/LinkedInHeadline";
+import ConnectionRequest from "./pages/ConnectionRequest";
+import LinkedInPost from "./pages/LinkedInPost";
+import SocialSequence from "./pages/SocialSequence";
+import PricingTable from "./pages/PricingTable";
+import ProposalOutline from "./pages/ProposalOutline";
+import SOWGenerator from "./pages/SOWGenerator";
+import BattleCard from "./pages/BattleCard";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +46,18 @@ const App = () => (
           <Route path="/signature" element={<EmailSignatureGenerator />} />
           <Route path="/discount" element={<DiscountCalculator />} />
           <Route path="/prompts" element={<PromptTemplates />} />
+          <Route path="/win-probability" element={<WinProbability />} />
+          <Route path="/pipeline-health" element={<PipelineHealth />} />
+          <Route path="/quota-tracker" element={<QuotaTracker />} />
+          <Route path="/sales-velocity" element={<SalesVelocity />} />
+          <Route path="/linkedin-headline" element={<LinkedInHeadline />} />
+          <Route path="/connection-request" element={<ConnectionRequest />} />
+          <Route path="/linkedin-post" element={<LinkedInPost />} />
+          <Route path="/social-sequence" element={<SocialSequence />} />
+          <Route path="/pricing-table" element={<PricingTable />} />
+          <Route path="/proposal-outline" element={<ProposalOutline />} />
+          <Route path="/sow-generator" element={<SOWGenerator />} />
+          <Route path="/battle-card" element={<BattleCard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -55,6 +55,9 @@ export default {
         email: "hsl(var(--email))",
         prospect: "hsl(var(--prospect))",
         docs: "hsl(var(--docs))",
+        pipeline: "hsl(var(--pipeline))",
+        linkedin: "hsl(var(--linkedin))",
+        proposal: "hsl(var(--proposal))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

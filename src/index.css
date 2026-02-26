@@ -41,6 +41,9 @@
     --email: 25 95% 55%;
     --prospect: 265 50% 55%;
     --docs: 150 45% 45%;
+    --pipeline: 25 90% 55%;
+    --linkedin: 210 70% 50%;
+    --proposal: 160 50% 45%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -85,6 +88,9 @@
     --email: 25 95% 60%;
     --prospect: 265 50% 60%;
     --docs: 150 45% 50%;
+    --pipeline: 25 90% 60%;
+    --linkedin: 210 70% 55%;
+    --proposal: 160 50% 50%;
 
     --sidebar-background: 220 20% 7%;
     --sidebar-foreground: 240 4.8% 95.9%;
