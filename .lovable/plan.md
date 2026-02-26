@@ -1,73 +1,95 @@
 
 
-# Homepage Simplification + Email Template Library
+# CloserKit Redesign — Value-First Homepage + New Expert Frameworks
 
-## What's Changing
+## Overview
 
-### 1. Homepage Redesign — Simpler, Search-First
-The current homepage has a large hero section with a GitHub button taking prime space. We'll redesign it to be search-first and ultra-clean:
-
-- **Compact header**: CloserKit logo on the left, minimal tagline, search bar prominently centered at the top
-- **Remove GitHub button** from hero — move it to a small icon in the footer only
-- **Search with suggestions**: As you type, show matching tools in a dropdown. When the search is empty, show popular/suggested tools
-- **Category pills** stay but move directly below the search bar
-- **Tighter card grid** with cleaner card design — icon + name + short description, no heavy borders
-- **Tool count badge** on each category pill (e.g., "Email & Outreach (4)")
-
-### 2. New Tool: Email Template Library
-A single new tool page at `/email-templates` that organizes ALL uploaded templates into a browsable, searchable library with 9 categories:
-
-| Category | Templates | Source File |
-|---|---|---|
-| Cold Outreach | 7 templates (new prospect, warm leads, follow-up, new market, events, referrals, decision-makers) | outreach_templates |
-| Follow-Up Emails | 5 templates (after contact, proposal, meeting, event, webinar) | follow_up_email_templates |
-| Pitching | 6 templates (initial pitch, follow-up pitch, proposal, new idea, meeting request, custom solution) | pitching_templates |
-| Value Propositions | 7 templates (new service, product launch, promo, USP, case studies, insights, partnership) | value_proposition_templates |
-| Response Handling | 2 templates (asking for details, price question + referral redirect) | response |
-| Objection Handling | 7 templates (not interested, already using service, send info, pricing, scheduling, no budget, contact later) | objection_handling |
-| Unique Scenarios | 7 templates (hiring outreach, re-engage old leads, webinar invite, holiday greetings, referral ask, reminders, company news) | unique_scenarios |
-| Offer-Specific | 11 templates (paid ads, SaaS, pay-per-call, retainer, email marketing, funnels, social media, lead gen, SEO, web design, content marketing, consulting) | specific_offer_templates |
-| Nurturing Sequences | 1 five-email sequence example | 10_email_sequences |
-
-**How it works:**
-- Category tabs at the top to filter
-- Each template shows as a card with title, subject line preview, and an "expand" button
-- Expanded view shows the full email with `{{placeholders}}` highlighted
-- Users fill in placeholder values (FirstName, Company, etc.) in a simple form
-- Live preview updates as they type
-- One-click copy button
-- All templates use the `{{variable}}` placeholder format from the uploaded files
-
-### 3. Update Homepage Categories
-Add "Templates" as a new category on the homepage. The Email Template Library tool card goes here alongside the existing AI Prompt Templates (moved from Prospecting).
-
-Updated categories: All | Calculators | Email & Outreach | Prospecting | Templates | Pipeline | LinkedIn | Proposals | Docs
+Restructure the entire homepage to lead with the most valuable content and add 15+ new expert email frameworks from the uploaded files. The goal: a salesperson lands on this page and immediately sees massive value.
 
 ---
 
-## Technical Details
+## 1. New Templates: "Expert Frameworks" Category
 
-### Files to Create
-- `src/pages/EmailTemplateLibrary.tsx` — New page component with all 50+ email templates organized by category, with variable replacement and copy-to-clipboard
+Add a new category to the Email Template Library with templates from top sales experts:
 
-### Files to Modify
-- `src/pages/Index.tsx` — Redesigned homepage: compact hero, search-first layout with suggestion dropdown, updated categories, cleaner cards
-- `src/App.tsx` — Add `/email-templates` route
-- `src/components/ToolLayout.tsx` — Minor cleanup if needed
+| Template | Source | Emails |
+|---|---|---|
+| Ask Before Pitch | Will Allred | 1 |
+| Insight Validation Framework | Leslie Venetz | 1 (framework) |
+| PWJ Pattern Interrupt | Patrick William Joyce | 1 |
+| Pain Point + Case Study Sequence | Alan Ruchtein | 2 |
+| Follow-Up: Meme, Bullet Points, Reference | Eric Nowoslawski | 3 |
+| Lead Magnet Approach | Alan Ruchtein | 2 (template + example) |
+| Selling Software to Sales | Christian Krause | 1 + example |
+| Trigger > Quick Pitch > Calculation > CTA | Thibaut Souyris | 1 + example |
+| Trigger > Agitation > Social Proof > CTA | Alan Ruchtein | 1 |
+| Feedback Only | Jed Mahrle | 2 |
 
-### Template Data Structure
-Each template will follow this pattern:
+Total: ~15 new templates, bringing the library to 165+.
+
+Each template will include the expert's name as attribution in the title or description.
+
+---
+
+## 2. Homepage Redesign — Value-First Layout
+
+The current homepage is a flat grid of tool cards. The new layout puts the best stuff front and center:
+
 ```text
-{
-  id: string
-  title: string
-  subject: string
-  body: string (with {{placeholders}})
-  category: string
-  variables: { key: string, label: string, placeholder: string }[]
-}
++--------------------------------------------------+
+|  CloserKit                          [Search bar]  |
+|  The free sales toolkit. 165+ templates,          |
+|  22 tools, zero sign-ups.                         |
++--------------------------------------------------+
+|                                                    |
+|  -- FEATURED (big hero cards) --                   |
+|  [Email Template Library]  [AI Prompt Templates]   |
+|   165+ templates            6 AI-ready prompts     |
+|   13 categories             Paste into ChatGPT     |
+|                                                    |
++--------------------------------------------------+
+|                                                    |
+|  -- ALL TOOLS --                                   |
+|  [Category pills: All | Calculators | ...]         |
+|  [Grid of remaining tool cards]                    |
+|                                                    |
++--------------------------------------------------+
+|  Footer: CloserKit · Free & open-source · GitHub   |
++--------------------------------------------------+
 ```
 
-### Search Suggestions
-When the search input is focused and empty, show a small dropdown with 4-5 suggested/popular tools. When typing, show filtered matches in the same dropdown (max 5 results) with direct links. Clicking a suggestion navigates to that tool.
+Key differences from current design:
+- **Stats banner** in the header: "165+ email templates, 22 tools, 6 AI prompts"
+- **Two featured cards** at top — Email Template Library and AI Prompt Templates — displayed as large, eye-catching cards with stats and descriptions (not mixed into the grid)
+- **Remaining tools** appear in the grid below with category filters
+- Search bar stays in header but gets a cleaner, more prominent placement
+
+---
+
+## 3. Technical Changes
+
+### Files to modify:
+
+**`src/data/externalTemplates.ts`** — Add a new `expertFrameworkTemplates` array with ~15 templates from the uploaded files, each with proper `{{variable}}` placeholders and attribution to the original author.
+
+**`src/pages/EmailTemplateLibrary.tsx`** — Import and merge the new `expertFrameworkTemplates`. Update the template count in the description.
+
+**`src/pages/Index.tsx`** — Full redesign:
+- Add a stats row in the header (template count, tool count, prompt count)
+- Add a "Featured" section with two large cards for Email Template Library and AI Prompt Templates
+- Move the remaining 20 tools into the grid below
+- Update tool count and description for the email template library entry
+- Clean up spacing, typography, and card styles for a premium feel
+
+### No new files needed. No new routes. No new dependencies.
+
+---
+
+## 4. UX Details
+
+- Featured cards will have a subtle gradient background and larger text to draw attention
+- Stats in the header will use bold numbers with labels (e.g., "165+ Templates" / "22 Tools")
+- Category pills get slightly more spacing and a cleaner active state
+- Tool cards in the grid remain compact but with better hover states
+- Mobile: featured cards stack vertically, search remains full-width
 
