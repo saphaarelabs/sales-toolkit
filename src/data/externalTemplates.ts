@@ -2349,6 +2349,235 @@ Any response would be appreciated!`,
       { key: "LeadershipType", label: "Leadership Type", placeholder: "RevOps" },
       { key: "Question1", label: "Question 1 (Opinion)", placeholder: "What's the biggest challenge you face with pipeline forecasting?" },
       { key: "Question2", label: "Question 2 (Problem Discovery)", placeholder: "How are you currently handling deal inspection across your team?" },
+     ],
+  },
+];
+
+// ═══════════════════════════════════════════════════════════
+// LinkedIn DM Templates — outreach frameworks for LinkedIn
+// ═══════════════════════════════════════════════════════════
+
+export const linkedinDmTemplates: EmailTemplate[] = [
+  {
+    id: "li-1", category: "LinkedIn DMs", title: "😯 Ask Before Pitch — Pattern Interrupt",
+    subject: "Quick question",
+    body: `Hey {{FirstName}}, {{OpenEndedQuestion}}
+
+You're {{Trigger}}. {{PotentialProblem}}
+
+{{HowProductSolves}}
+
+PS — Relevant because {{Personalization}}`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "Will" },
+      { key: "OpenEndedQuestion", label: "Open-Ended Question", placeholder: "think this would help George & Anne?" },
+      { key: "Trigger", label: "Trigger / Observation", placeholder: "hiring new sellers" },
+      { key: "PotentialProblem", label: "Potential Problem", placeholder: "Despite the same templates, some reps get results and others don't" },
+      { key: "HowProductSolves", label: "How Product Solves It", placeholder: "Lavender gives you a clearer picture on why things work. We've even seen it identify clear personalization plays for the team to use." },
+      { key: "Personalization", label: "Personalization", placeholder: "the new focus upmarket" },
+    ],
+  },
+  {
+    id: "li-2", category: "LinkedIn DMs", title: "💎 Upfront Value",
+    subject: "Something useful for you",
+    body: `Hey {{FirstName}},
+
+{{ValueOffering}}
+
+Hope it was helpful!`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "ValueOffering", label: "Value Offering", placeholder: "Here's a list of every founder at every company that just implemented HubSpot" },
+    ],
+  },
+  {
+    id: "li-3", category: "LinkedIn DMs", title: "📒 Leverage Content in Outbound",
+    subject: "{{ContentName}} for you",
+    body: `Hey {{FirstName}} — we've compiled {{ContentName}} on how folks like {{SocialProof}} are {{Outcome}}.
+
+Can I send it over to you?
+
+{{SenderName}}
+PS — Thought this was relevant because {{Personalization}}`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "Jason" },
+      { key: "ContentName", label: "Content Name", placeholder: "a cheat sheet" },
+      { key: "SocialProof", label: "Social Proof", placeholder: "Gong, Outreach, and Clari" },
+      { key: "Outcome", label: "Outcome", placeholder: "getting their AEs self-sourcing more than 30% of their own pipeline" },
+      { key: "SenderName", label: "Your Name", placeholder: "Ethan" },
+      { key: "Personalization", label: "Personalization", placeholder: "I saw you recently decreased SDR headcount and are hiring 3 more AEs right now" },
+    ],
+  },
+  {
+    id: "li-4", category: "LinkedIn DMs", title: "➕➗ Do the Math",
+    subject: "Quick math on {{Company}}",
+    body: `{{FirstName}}, {{Trigger}}.
+
+{{QuickPitch}}.
+
+{{Calculation}}.
+
+Worth a chat?`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "Mary" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "Trigger", label: "Trigger (with number)", placeholder: "noticed you have over 50 open positions on your job portal" },
+      { key: "QuickPitch", label: "Quick Pitch", placeholder: "We help tech scale-ups reduce new employee churn from 30% to 10% or less" },
+      { key: "Calculation", label: "Back-of-Napkin Calculation", placeholder: "With a typical cost of mishire around $30K per employee, this means going from 15 mishires to 5 — $300K saved" },
+    ],
+  },
+  {
+    id: "li-5", category: "LinkedIn DMs", title: "🐛 Short Trigger-Based Outreach",
+    subject: "Noticed something at {{Company}}",
+    body: `{{Trigger}}.
+
+{{ValidationAndValueProp}}.
+
+Can I share how?`,
+    variables: [
+      { key: "Company", label: "Company", placeholder: "Reach" },
+      { key: "Trigger", label: "Relevant Trigger", placeholder: "Saw that Reach's latest blog post doesn't include a Meta tag which can affect its online visibility" },
+      { key: "ValidationAndValueProp", label: "Validation + Value Prop", placeholder: "{{client}} improved theirs by creating meta tags using ChatGPT" },
+    ],
+  },
+  {
+    id: "li-6", category: "LinkedIn DMs", title: "👯 Challenge of Similar Companies",
+    subject: "Quick question, {{FirstName}}",
+    body: `Hey {{FirstName}},
+
+We are working with a lot of {{RoleType}} at {{IndustryType}} who {{Challenge}}.
+
+{{Solution}}.
+
+{{CTA}}
+
+Cheers,
+PS: {{FunnyPS}}`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "Patrick" },
+      { key: "RoleType", label: "Role Type", placeholder: "security officers" },
+      { key: "IndustryType", label: "Industry Type", placeholder: "banks" },
+      { key: "Challenge", label: "Challenge", placeholder: "faced losses of $9K per hour due to ransomware and had phishing victims every 11 seconds" },
+      { key: "Solution", label: "Solution", placeholder: "We have a global team of experts available 24/7 to respond to and contain cyber incidents and can react in hours not days" },
+      { key: "CTA", label: "CTA", placeholder: "When is the last time you tested your plan?" },
+      { key: "FunnyPS", label: "Funny/Personal PS", placeholder: "I would attach a link but we both work in security 😅" },
+    ],
+  },
+  {
+    id: "li-7", category: "LinkedIn DMs", title: "⬜ Neutral Insight",
+    subject: "Thought you'd find this interesting",
+    body: `{{FirstName}}, do you read {{ThirdPartySource}}?
+
+Given you're likely {{Context}}, I thought you'd find it interesting. {{InsightDetail}}.
+
+Check it out.
+
+{{SenderName}}
+PS: {{Followup}}`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "George" },
+      { key: "ThirdPartySource", label: "Third-Party Source", placeholder: "Outreach's blog" },
+      { key: "Context", label: "Their Context", placeholder: "ramping reps" },
+      { key: "InsightDetail", label: "Insight Detail", placeholder: "The VP of Sales Dev at Segment wrote about how she scaled her team to a $3.2B acquisition — without using canned templates" },
+      { key: "SenderName", label: "Your Name", placeholder: "Will" },
+      { key: "Followup", label: "Follow-up / PS", placeholder: "Any thoughts on my last note?" },
+    ],
+  },
+  {
+    id: "li-8", category: "LinkedIn DMs", title: "👨‍👦‍👦 Leader Responsibilities",
+    subject: "Curious, {{FirstName}}",
+    body: `{{FirstName}}, as a {{Role}} leader, curious how {{Responsibility}}?
+
+{{Offer}}
+
+Either way, {{Personalization}}!`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "Armand" },
+      { key: "Role", label: "Role", placeholder: "Sales" },
+      { key: "Responsibility", label: "Responsibility Question", placeholder: "your reps prioritize which accounts to reach out to" },
+      { key: "Offer", label: "Your Offer", placeholder: "If I can create a list for your team of Accounts researching competitors like Salesforce, would it be worth a conversation?" },
+      { key: "Personalization", label: "Personalization", placeholder: "congrats on recently being named Top Sales Coach" },
+    ],
+  },
+  {
+    id: "li-9", category: "LinkedIn DMs", title: "✏️ Manual Style — Casual & Credible",
+    subject: "Quick idea",
+    body: `Hey, {{FirstName}} – {{PersonalHook}}.
+
+I've been doing {{Expertise}} for {{Years}} years – have a few unconventional ideas that might {{Outcome}} without {{Downside}}.
+
+{{RiskReversal}}.
+
+Worth batting around a few ideas?
+
+{{SenderName}}
+PS: Not sure it's a fit for you, but {{SocialProof}}.`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "Josh" },
+      { key: "PersonalHook", label: "Personal Hook", placeholder: "Subscribed to your email list a few weeks ago" },
+      { key: "Expertise", label: "Your Expertise", placeholder: "digital marketing" },
+      { key: "Years", label: "Years of Experience", placeholder: "8" },
+      { key: "Outcome", label: "Outcome", placeholder: "goose sales of your Badass Guide" },
+      { key: "Downside", label: "Without (Downside)", placeholder: "offering discounts" },
+      { key: "RiskReversal", label: "Risk Reversal", placeholder: "I don't get paid unless you make more" },
+      { key: "SenderName", label: "Your Name", placeholder: "Henry" },
+      { key: "SocialProof", label: "Social Proof", placeholder: "several course creators I'm working with are seeing a 10-12% MoM boost in sales" },
+    ],
+  },
+  {
+    id: "li-10", category: "LinkedIn DMs", title: "🚘 Be Specific, Not Generic",
+    subject: "Thought about {{Company}}",
+    body: `Hi {{FirstName}} – We're seeing that many {{IndustryType}} companies {{CompanyQualifier}} are {{Problem}}.
+
+One of the reasons is {{Reason}}.
+
+Worth exploring for {{Company}}?
+
+Either way, {{PersonalTouch}}!`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Animal Pharm" },
+      { key: "IndustryType", label: "Industry Type", placeholder: "e-commerce companies in the pet space" },
+      { key: "CompanyQualifier", label: "Company Qualifier", placeholder: "doing at least $5K/month in revenue" },
+      { key: "Problem", label: "Problem", placeholder: "overpaying for shipping by 10-15%" },
+      { key: "Reason", label: "Reason", placeholder: "the weight and dimensions of boxes for pet products" },
+      { key: "PersonalTouch", label: "Personal Touch", placeholder: "I bought Cucumber Melon shampoo for my dog and love the smell" },
+    ],
+  },
+  {
+    id: "li-11", category: "LinkedIn DMs", title: "🫰 Why Are You Paying?",
+    subject: "Quick thought",
+    body: `Hey {{FirstName}},
+
+{{LifeSituation}}.
+
+{{ObviousChoice}}.
+
+{{CompareToProspect}}.
+
+Curious — {{CTA}}?`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "Sarah" },
+      { key: "LifeSituation", label: "Life Situation Setup", placeholder: "Imagine you're buying a car and the dealer offers you a warranty that covers everything — brakes, engine, transmission" },
+      { key: "ObviousChoice", label: "Obvious Choice", placeholder: "You'd obviously take it, right? Why pay out of pocket for something that's already covered?" },
+      { key: "CompareToProspect", label: "Compare to Prospect's Situation", placeholder: "That's kind of what's happening when teams pay full price for data enrichment tools that only cover 60% of their TAM" },
+      { key: "CTA", label: "CTA", placeholder: "have you looked at what you're actually getting for what you pay" },
+    ],
+  },
+  {
+    id: "li-12", category: "LinkedIn DMs", title: "😅 Be Cheeky — Humor + Personality",
+    subject: "Re: {{Topic}}",
+    body: `{{FirstName}} — {{DirectStatement}}.
+
+{{HumorLine}} 😉
+
+{{CTA}}`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Topic", label: "Topic", placeholder: "data inputs" },
+      { key: "DirectStatement", label: "Direct Statement", placeholder: "Yes, we can take in multiple data inputs & account for specific rules and logic" },
+      { key: "HumorLine", label: "Humor Line", placeholder: "You can thank me later for being able to read your mind" },
+      { key: "CTA", label: "CTA", placeholder: "Want me to show you how it works for your team?" },
     ],
   },
 ];
