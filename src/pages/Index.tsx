@@ -8,6 +8,7 @@ import {
   ShieldCheck,
   AtSign,
   Percent,
+  Sparkles,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -96,6 +97,15 @@ const tools: Tool[] = [
     category: "Calculators",
     color: "text-calc",
     borderColor: "border-calc",
+  },
+  {
+    name: "AI Prompt Templates",
+    description: "Pre-built sales prompts to customize and paste into any AI tool.",
+    icon: Sparkles,
+    path: "/prompts",
+    category: "Prospecting",
+    color: "text-prospect",
+    borderColor: "border-prospect",
   },
 ];
 
