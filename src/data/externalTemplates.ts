@@ -2578,6 +2578,196 @@ Curious — {{CTA}}?`,
       { key: "DirectStatement", label: "Direct Statement", placeholder: "Yes, we can take in multiple data inputs & account for specific rules and logic" },
       { key: "HumorLine", label: "Humor Line", placeholder: "You can thank me later for being able to read your mind" },
       { key: "CTA", label: "CTA", placeholder: "Want me to show you how it works for your team?" },
+     ],
+  },
+];
+
+// ═══════════════════════════════════════════════════════════
+// Personalization Plays — high-conversion personalization frameworks
+// ═══════════════════════════════════════════════════════════
+
+export const personalizationTemplates: EmailTemplate[] = [
+  {
+    id: "pp-1", category: "Personalization Plays", title: "🔍 Website Keyword Personalization",
+    subject: "Your {{Specialization}} work, {{FirstName}}",
+    body: `Hi {{FirstName}},
+
+I was on {{Company}}'s website and noticed you specifically mention {{Specialization}}.
+
+{{Pitch}}
+
+Since you already focus on {{Specialization}}, this should be a natural fit.
+
+Worth a quick chat?`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Smith & Associates" },
+      { key: "Specialization", label: "Specialization / Keyword", placeholder: "wrongful termination cases" },
+      { key: "Pitch", label: "Your Pitch", placeholder: "We help law firms like yours generate 3x more qualified leads for their specialty practice areas" },
+    ],
+  },
+  {
+    id: "pp-2", category: "Personalization Plays", title: "⭐ Online Ratings Personalization",
+    subject: "Your {{Rating}} rating, {{FirstName}}",
+    body: `Hi {{FirstName}},
+
+I noticed {{Company}} has a {{Rating}} rating on {{ReviewPlatform}} — that's impressive.
+
+{{Pitch}}
+
+Would love to help you turn that reputation into even more business.`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Acme Pest Control" },
+      { key: "Rating", label: "Rating", placeholder: "4.8-star" },
+      { key: "ReviewPlatform", label: "Review Platform", placeholder: "Google" },
+      { key: "Pitch", label: "Your Pitch", placeholder: "We help top-rated local businesses convert their online reputation into 40% more inbound leads" },
+    ],
+  },
+  {
+    id: "pp-3", category: "Personalization Plays", title: "🦸 Company Mission Summary",
+    subject: "What {{Company}} is doing",
+    body: `Hi {{FirstName}},
+
+I was on your website, and it looks like you help {{MissionSummary}}.
+
+{{Pitch}}
+
+Is this something you'd want to explore?`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "Sarah" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "MissionSummary", label: "Mission Summary (< 8 words)", placeholder: "mid-market companies automate their financial reporting" },
+      { key: "Pitch", label: "Your Pitch", placeholder: "We've helped similar companies cut their reporting time by 60% — curious if that resonates" },
+    ],
+  },
+  {
+    id: "pp-4", category: "Personalization Plays", title: "🎨 Creative Marketing Ideas for Prospects",
+    subject: "3 campaign ideas for {{Company}}",
+    body: `Hi {{FirstName}},
+
+It looks like {{Company}} helps {{WhatTheyDo}}. Have you considered running any of the following outbound campaigns to gain new customers?
+
+1. {{Idea1}}
+2. {{Idea2}}
+3. {{Idea3}}
+
+Are you doing any of these right now, or would you need help automating or initiating any of them?`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "Alex" },
+      { key: "Company", label: "Company", placeholder: "CloudSecure" },
+      { key: "WhatTheyDo", label: "What They Do", placeholder: "manage and protect Microsoft infrastructure" },
+      { key: "Idea1", label: "Campaign Idea 1", placeholder: "Target IT managers involved in cloud migration, offering tailored solutions to simplify their transition" },
+      { key: "Idea2", label: "Campaign Idea 2", placeholder: "Reach out to CISOs, highlighting your security and compliance benefits" },
+      { key: "Idea3", label: "Campaign Idea 3", placeholder: "Email Microsoft certified professionals, emphasizing compatibility with Microsoft environments" },
+    ],
+  },
+  {
+    id: "pp-5", category: "Personalization Plays", title: "☎️ Phone + Local Restaurant Hack",
+    subject: "Tried calling you",
+    body: `Hi {{FirstName}},
+
+I was just trying to call you at {{PhoneNumber}}, but it seems like I missed you, and email would be easier.
+
+{{Pitch}}
+
+PS: I noticed you're in {{Location}} — have you tried {{Restaurant}}?`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "Mike" },
+      { key: "PhoneNumber", label: "Phone Number", placeholder: "(415) 555-0123" },
+      { key: "Pitch", label: "Your Pitch", placeholder: "We're working with local businesses in your area to help them increase foot traffic by 30%. Would love to share how." },
+      { key: "Location", label: "Location", placeholder: "San Francisco" },
+      { key: "Restaurant", label: "Local Restaurant", placeholder: "Tartine Bakery" },
+    ],
+  },
+  {
+    id: "pp-6", category: "Personalization Plays", title: "📧 LinkedIn Connection DM",
+    subject: "Been following your content",
+    body: `Hey {{FirstName}},
+
+I've been following your posts about {{ContentTopic}} — really resonated with me.
+
+I'm reaching out because {{Offer}}.
+
+Would that be useful for your team?`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "Lisa" },
+      { key: "ContentTopic", label: "Content Topic", placeholder: "building SDR teams from scratch" },
+      { key: "Offer", label: "Your Offer", placeholder: "we help companies like yours automate the first 30 days of SDR onboarding so reps hit quota 2x faster" },
+    ],
+  },
+  {
+    id: "pp-7", category: "Personalization Plays", title: "👑 Job Title Duration",
+    subject: "Congrats on the new role, {{FirstName}}",
+    body: `Hi {{FirstName}},
+
+Congrats on starting as {{JobTitle}} at {{Company}} — looks like you've been in the role for about {{Duration}}.
+
+{{Pitch}}
+
+Most {{JobTitle}}s in their first {{Duration}} are evaluating {{WhatTheyEvaluate}}. Worth a conversation?`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "Rachel" },
+      { key: "Company", label: "Company", placeholder: "TechCo" },
+      { key: "JobTitle", label: "Job Title", placeholder: "VP of Sales" },
+      { key: "Duration", label: "Time in Role", placeholder: "3 months" },
+      { key: "Pitch", label: "Your Pitch", placeholder: "We help new sales leaders build pipeline 40% faster in their first quarter" },
+      { key: "WhatTheyEvaluate", label: "What They Evaluate", placeholder: "their tech stack and team processes" },
+    ],
+  },
+  {
+    id: "pp-8", category: "Personalization Plays", title: "😈 Competitor News Mention",
+    subject: "Saw news about {{Competitor}}",
+    body: `Hey {{FirstName}},
+
+I just saw that {{Competitor}} {{CompetitorNews}}.
+
+How is {{Company}} thinking about this? Are you deploying {{YourArea}} in response?
+
+{{Pitch}}`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "David" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "Competitor", label: "Competitor Name", placeholder: "RivalCo" },
+      { key: "CompetitorNews", label: "Competitor News", placeholder: "just launched a new AI-powered feature for enterprise clients" },
+      { key: "YourArea", label: "Your Area", placeholder: "your next product releases" },
+      { key: "Pitch", label: "Your Pitch", placeholder: "We help companies ship 2x faster when competitors make moves — curious if that's on your radar" },
+    ],
+  },
+  {
+    id: "pp-9", category: "Personalization Plays", title: "👯 Social Presence Analysis",
+    subject: "Your online presence, {{FirstName}}",
+    body: `Hi {{FirstName}},
+
+I Googled {{Company}} and {{SocialPresenceObservation}}.
+
+{{Pitch}}
+
+Would it be worth a quick chat about {{Topic}}?`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "Karen" },
+      { key: "Company", label: "Company", placeholder: "Sunset Realty" },
+      { key: "SocialPresenceObservation", label: "Social Presence Observation", placeholder: "noticed you have a strong presence on Zillow and LinkedIn, but I didn't see much on Instagram or Google Business" },
+      { key: "Pitch", label: "Your Pitch", placeholder: "Agents who manage all five platforms typically see 35% more inbound leads. We can help automate that." },
+      { key: "Topic", label: "Topic", placeholder: "expanding your online presence" },
+    ],
+  },
+  {
+    id: "pp-10", category: "Personalization Plays", title: "💼 Staffing Gap Finder",
+    subject: "Noticed something at {{Company}}",
+    body: `Hey {{FirstName}},
+
+I looked at {{Company}}'s team page and noticed you don't seem to have anyone dedicated to {{Function}}.
+
+{{Pitch}}
+
+Would it make sense to explore a {{Solution}}?`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "Tom" },
+      { key: "Company", label: "Company", placeholder: "GrowthCo" },
+      { key: "Function", label: "Missing Function", placeholder: "financial planning and analysis" },
+      { key: "Pitch", label: "Your Pitch", placeholder: "Without someone monitoring cash flow and burn rate directly, companies at your stage often miss early warning signs" },
+      { key: "Solution", label: "Your Solution", placeholder: "fractional CFO arrangement" },
     ],
   },
 ];
