@@ -27,6 +27,7 @@ import ProposalOutline from "./pages/ProposalOutline";
 import SOWGenerator from "./pages/SOWGenerator";
 import BattleCard from "./pages/BattleCard";
 import EmailTemplateLibrary from "./pages/EmailTemplateLibrary";
+import SkillsLibrary from "./pages/SkillsLibrary";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +61,7 @@ const App = () => (
           <Route path="/sow-generator" element={<SOWGenerator />} />
           <Route path="/battle-card" element={<BattleCard />} />
           <Route path="/email-templates" element={<EmailTemplateLibrary />} />
+          <Route path="/skills" element={<SkillsLibrary />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
