@@ -2090,6 +2090,265 @@ Best,
       { key: "Topic", label: "Topic", placeholder: "marketing" },
       { key: "Time1", label: "Time Option 1", placeholder: "Tuesday at 10am" },
       { key: "Time2", label: "Time Option 2", placeholder: "Thursday at 2pm" },
+     ],
+  },
+];
+
+// ═══════════════════════════════════════════════════════════
+// Expert Frameworks — curated from top sales practitioners
+// ═══════════════════════════════════════════════════════════
+
+export const expertFrameworkTemplates: EmailTemplate[] = [
+  {
+    id: "ef-1", category: "Expert Frameworks", title: "Ask Before Pitch (Will Allred)",
+    subject: "Quick question, {{FirstName}}",
+    body: `Hey {{FirstName}}, [open-ended question as CTA]
+
+You're {{Trigger}}. {{PotentialProblem}}
+
+{{HowProductSolves}}
+
+PS — Relevant because {{Personalization}}`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Trigger", label: "Trigger / Observation", placeholder: "hiring 5 new SDRs this quarter" },
+      { key: "PotentialProblem", label: "Potential Problem", placeholder: "Ramping that many reps usually means inconsistent messaging" },
+      { key: "HowProductSolves", label: "How Your Product Solves It", placeholder: "We give every rep a proven playbook from day one" },
+      { key: "Personalization", label: "Personalization", placeholder: "I saw your post about scaling the team" },
+    ],
+  },
+  {
+    id: "ef-2", category: "Expert Frameworks", title: "Insight Validation (Leslie Venetz)",
+    subject: "Thought on {{Topic}}, {{FirstName}}",
+    body: `Hey {{FirstName}},
+
+{{NonObviousInsight}}
+
+I could be wrong — does that match what you're seeing at {{Company}}?
+
+Companies like {{SocialProofCompany}} told us the same thing before switching to {{YourSolution}}.
+
+Worth a quick chat?`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "Topic", label: "Topic", placeholder: "outbound conversion" },
+      { key: "NonObviousInsight", label: "Non-Obvious Insight", placeholder: "Most SDR teams lose 40% of pipeline to bad data — not bad messaging" },
+      { key: "SocialProofCompany", label: "Social Proof Company", placeholder: "Gong" },
+      { key: "YourSolution", label: "Your Solution", placeholder: "our data enrichment layer" },
+    ],
+  },
+  {
+    id: "ef-3", category: "Expert Frameworks", title: "Pattern Interrupt (Patrick William Joyce)",
+    subject: "Quick one, {{FirstName}}",
+    body: `Hey {{FirstName}} – are there any discussions internally re: {{ThingYouHelpThemDo}}? We're helping companies like {{CompanyName}} achieve {{Outcome}} in {{Timeframe}} without {{BadThing}}. Is this a priority over at {{CompanyName}}?`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "CompanyName", label: "Company", placeholder: "Acme Inc" },
+      { key: "ThingYouHelpThemDo", label: "Thing You Help Them Do", placeholder: "reducing ramp time for new hires" },
+      { key: "Outcome", label: "Outcome", placeholder: "50% faster onboarding" },
+      { key: "Timeframe", label: "Timeframe", placeholder: "90 days" },
+      { key: "BadThing", label: "Without (Bad Thing)", placeholder: "adding headcount to enablement" },
+    ],
+  },
+  {
+    id: "ef-4", category: "Expert Frameworks", title: "Pain Point + Case Study #1 (Alan Ruchtein)",
+    subject: "How are you managing {{PainPoint}}?",
+    body: `Hey {{FirstName}}, how are you managing {{PainPoint}}?
+
+The reason I'm asking is because we help {{JobTitle}} at {{Subniche}} solve {{PainPoint}} by {{Offer}}.
+
+Just recently, we helped {{CaseStudy}} achieve {{Transformation}} in {{Timeframe}} and made a quick video outlining how we'd do something similar for {{Company}}.
+
+Is this something of interest?`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "PainPoint", label: "Pain Point", placeholder: "lead response time" },
+      { key: "JobTitle", label: "Job Title", placeholder: "VP Sales" },
+      { key: "Subniche", label: "Sub-niche", placeholder: "mid-market SaaS" },
+      { key: "Offer", label: "Your Offer", placeholder: "automating speed-to-lead" },
+      { key: "CaseStudy", label: "Case Study", placeholder: "ClientCo" },
+      { key: "Transformation", label: "Transformation", placeholder: "3x faster lead response" },
+      { key: "Timeframe", label: "Timeframe", placeholder: "60 days" },
+    ],
+  },
+  {
+    id: "ef-5", category: "Expert Frameworks", title: "Pain Point + Case Study #2 (Alan Ruchtein)",
+    subject: "Struggling with {{PainPoint}}?",
+    body: `Hi {{FirstName}}, not sure if you're struggling with {{PainPoint}}.
+
+The reason I ask is we helped {{CaseStudy}} achieve {{Transformation}} in {{Timeframe}} and made a quick video outlining how we'd do something similar for {{Company}}.
+
+Mind if I share it here?`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "PainPoint", label: "Pain Point", placeholder: "pipeline coverage" },
+      { key: "CaseStudy", label: "Case Study", placeholder: "ClientCo" },
+      { key: "Transformation", label: "Transformation", placeholder: "2x pipeline in 90 days" },
+      { key: "Timeframe", label: "Timeframe", placeholder: "90 days" },
+    ],
+  },
+  {
+    id: "ef-6", category: "Expert Frameworks", title: "Meme Follow-Up (Eric Nowoslawski)",
+    subject: "Re: {{ProblemYouSolve}}",
+    body: `Hey {{FirstName}} let me know if this meme resonates at all.
+
+[Attach a relevant meme]
+
+Jokes aside, let me know if you'd like to connect re: {{ProblemYouSolve}}`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "ProblemYouSolve", label: "Problem You Solve", placeholder: "outbound deliverability" },
+    ],
+  },
+  {
+    id: "ef-7", category: "Expert Frameworks", title: "Bullet Point Follow-Up (Eric Nowoslawski)",
+    subject: "More context on {{Outcome}}",
+    body: `Hey {{FirstName}} – to add some more context, here's how we achieved {{Outcome}}.
+
+- {{Item1}}
+- {{Item2}}
+- {{Item3}}
+
+Would it make sense to connect about this?`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Outcome", label: "Outcome", placeholder: "40% more demos booked" },
+      { key: "Item1", label: "Bullet 1", placeholder: "Rebuilt ICP targeting from scratch" },
+      { key: "Item2", label: "Bullet 2", placeholder: "A/B tested 12 subject lines" },
+      { key: "Item3", label: "Bullet 3", placeholder: "Cut sequence length from 8 to 4 steps" },
+    ],
+  },
+  {
+    id: "ef-8", category: "Expert Frameworks", title: "Reference Redirect Follow-Up (Eric Nowoslawski)",
+    subject: "You or {{OtherName}}?",
+    body: `Hey {{FirstName}} – I rolled the dice reaching out to you or {{OtherName}}. Let me know if this falls under you or if I should reach out to them.`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "OtherName", label: "Other Employee Name", placeholder: "Sarah" },
+    ],
+  },
+  {
+    id: "ef-9", category: "Expert Frameworks", title: "Lead Magnet Approach (Alan Ruchtein)",
+    subject: "Have you tried {{UniqueMechanism}}?",
+    body: `Hey {{FirstName}},
+
+{{UniqueMechanism}} gets {{DesiredOutcome}}.
+
+Have you tried {{UniqueMechanism}} already?
+
+{{Struggle}}
+
+So we made a {{LeadMagnet}} that gets {{DesiredOutcome}}.
+
+Mind if I share?`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "UniqueMechanism", label: "Unique Mechanism", placeholder: "Lead Magnets" },
+      { key: "DesiredOutcome", label: "Desired Outcome", placeholder: "5-10x more replies than standard cold emails" },
+      { key: "Struggle", label: "What They Struggle With", placeholder: "Testing new email styles takes at least 4 or 5 attempts to perfect" },
+      { key: "LeadMagnet", label: "Lead Magnet Type", placeholder: "template" },
+    ],
+  },
+  {
+    id: "ef-10", category: "Expert Frameworks", title: "Selling Software to Sales (Christian Krause)",
+    subject: "Missing piece at {{Company}}?",
+    body: `{{FirstName}}, if {{ValueProp}} is missing, then {{TechnicalPain}}. As a result, {{QualitativeImpact}}. This strategy causes {{QuantitativeImpact}}.
+
+{{ValidatingQuestion}}`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "ValueProp", label: "Value Prop", placeholder: "the KPI monitoring piece" },
+      { key: "TechnicalPain", label: "Technical Pain", placeholder: "you won't see how reps execute strategy in real-time" },
+      { key: "QualitativeImpact", label: "Qualitative Impact", placeholder: "you only learn about success or failure when monthly reports come in" },
+      { key: "QuantitativeImpact", label: "Quantitative Impact", placeholder: "a hit-or-miss strategy that can cost crucial ARR needed for the next funding round" },
+      { key: "ValidatingQuestion", label: "Validating Question", placeholder: "What are your thoughts?" },
+    ],
+  },
+  {
+    id: "ef-11", category: "Expert Frameworks", title: "Trigger > Pitch > Calculation > CTA (Thibaut Souyris)",
+    subject: "Noticed something at {{Company}}",
+    body: `{{FirstName}}, noticed {{Trigger}}.
+
+We help {{TargetType}} {{QuickPitch}}.
+
+{{Calculation}}
+
+Worth a chat?`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Company", label: "Company", placeholder: "Acme Inc" },
+      { key: "Trigger", label: "Trigger (with number)", placeholder: "you have over 50 open positions on your job portal" },
+      { key: "TargetType", label: "Target Type", placeholder: "tech scale-ups" },
+      { key: "QuickPitch", label: "Quick Pitch", placeholder: "reduce new employee churn from 30% to 10% or less" },
+      { key: "Calculation", label: "Back-of-Napkin Calculation", placeholder: "With a typical cost of mishire around $30K per employee, this means going from 15 mishires to 5 — $300K saved" },
+    ],
+  },
+  {
+    id: "ef-12", category: "Expert Frameworks", title: "Trigger > Agitation > Social Proof > CTA (Alan Ruchtein)",
+    subject: "Revenue loss",
+    body: `Hey {{FirstName}},
+
+{{Trigger}}. Usually, that means {{Agitation}}.
+
+Not having it under control can {{NegativeConsequence}}.
+
+We helped {{CaseStudy}} achieve {{Result}} in {{Timeframe}}.
+
+Worth a chat?`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "Trigger", label: "Trigger", placeholder: "You have several open roles at your company" },
+      { key: "Agitation", label: "Agitation", placeholder: "more difficulty, complexity, and costs when defining budgets" },
+      { key: "NegativeConsequence", label: "Negative Consequence", placeholder: "drastically impact margin gains" },
+      { key: "CaseStudy", label: "Case Study Company", placeholder: "XYZ Company" },
+      { key: "Result", label: "Specific Result", placeholder: "20% cost reduction" },
+      { key: "Timeframe", label: "Timeframe", placeholder: "6 months" },
+    ],
+  },
+  {
+    id: "ef-13", category: "Expert Frameworks", title: "Feedback Only — Competitor Research (Jed Mahrle)",
+    subject: "Quick feedback, {{FirstName}}?",
+    body: `Hey {{FirstName}},
+
+Let me preface this by saying I'm not trying to sell you anything.
+
+I was hoping to get some feedback from you as someone I would normally sell to…
+
+I've started to build the sales team here at {{YourCompany}}. We're a competitor of tools like {{Competitors}} — I'm sure your team uses one of those.
+
+I'm genuinely curious what — if anything — would it take for you to consider an alternative?
+
+Any feedback would be massively appreciated.
+
+Cheers`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "YourCompany", label: "Your Company", placeholder: "CloserKit" },
+      { key: "Competitors", label: "Competitors", placeholder: "Outreach, Salesloft, Apollo" },
+    ],
+  },
+  {
+    id: "ef-14", category: "Expert Frameworks", title: "Feedback Only — Quote Request (Jed Mahrle)",
+    subject: "Request for quote from {{FirstName}}",
+    body: `{{FirstName}} – we are speaking with other {{LeadershipType}} leaders and were curious if we could get a quote.
+
+No call is necessary, we just had two questions:
+
+1. {{Question1}}
+2. {{Question2}}
+
+We are looking to share answers from you and your peers anonymously in a report we are gathering together for the market.
+
+Any response would be appreciated!`,
+    variables: [
+      { key: "FirstName", label: "First Name", placeholder: "John" },
+      { key: "LeadershipType", label: "Leadership Type", placeholder: "RevOps" },
+      { key: "Question1", label: "Question 1 (Opinion)", placeholder: "What's the biggest challenge you face with pipeline forecasting?" },
+      { key: "Question2", label: "Question 2 (Problem Discovery)", placeholder: "How are you currently handling deal inspection across your team?" },
     ],
   },
 ];
