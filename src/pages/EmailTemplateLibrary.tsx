@@ -2,7 +2,7 @@ import { useState } from "react";
 import ToolLayout from "@/components/ToolLayout";
 import { Copy, Check, ChevronDown, ChevronUp, Search } from "lucide-react";
 import type { EmailTemplate, TemplateVariable } from "@/data/emailTemplateTypes";
-import { hunterTemplates, saleshandyTemplates, lemlistTemplates, klentyTemplates, expertFrameworkTemplates, linkedinDmTemplates } from "@/data/externalTemplates";
+import { hunterTemplates, saleshandyTemplates, lemlistTemplates, klentyTemplates, expertFrameworkTemplates, linkedinDmTemplates, personalizationTemplates } from "@/data/externalTemplates";
 
 const commonVars: TemplateVariable[] = [
   { key: "FirstName", label: "First Name", placeholder: "John" },
@@ -841,6 +841,7 @@ const templates: EmailTemplate[] = [
   ...klentyTemplates,
   ...expertFrameworkTemplates,
   ...linkedinDmTemplates,
+  ...personalizationTemplates,
 ];
 
 const templateCategories = [...new Set(templates.map((t) => t.category))];
