@@ -28,7 +28,7 @@ import {
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
-const categories = ["All", "Calculators", "Email & Outreach", "Prospecting", "Templates", "Pipeline", "LinkedIn", "Proposals", "Docs"] as const;
+const categories = ["All", "Calculators", "Email & Outreach", "Prospecting", "Pipeline", "LinkedIn", "Proposals", "Docs"] as const;
 type Category = (typeof categories)[number];
 
 interface Tool {
@@ -45,8 +45,6 @@ const tools: Tool[] = [
   { name: "Discount Calculator", description: "Calculate discount impact on revenue and protect margins.", icon: Percent, path: "/discount", category: "Calculators" },
   { name: "Cold Email Generator", description: "Get personalized cold email variations for any scenario.", icon: Mail, path: "/cold-email", category: "Email & Outreach" },
   { name: "Follow-up Sequence Builder", description: "Build a multi-step email sequence with timing and templates.", icon: ListOrdered, path: "/sequence", category: "Email & Outreach" },
-  { name: "Email Template Library", description: "150+ ready-to-use email templates across 13 categories.", icon: BookOpen, path: "/email-templates", category: "Templates" },
-  { name: "AI Prompt Templates", description: "Pre-built sales prompts to paste into any AI tool.", icon: Sparkles, path: "/prompts", category: "Templates" },
   { name: "ICP Builder", description: "Define your ideal customer profile and export it.", icon: Target, path: "/icp", category: "Prospecting" },
   { name: "Objection Handler", description: "Browse common objections with proven response frameworks.", icon: ShieldCheck, path: "/objections", category: "Prospecting" },
   { name: "Email Signature Generator", description: "Create a professional HTML email signature in seconds.", icon: AtSign, path: "/signature", category: "Docs" },
@@ -64,7 +62,24 @@ const tools: Tool[] = [
   { name: "Battle Card Creator", description: "Build competitive battle cards with talk tracks.", icon: Swords, path: "/battle-card", category: "Proposals" },
 ];
 
-const popularToolPaths = ["/email-templates", "/cold-email", "/commission", "/linkedin-headline", "/win-probability"];
+const featuredTools = [
+  {
+    name: "Email Template Library",
+    description: "The largest free collection of sales email templates. Cold outreach, follow-ups, breakups, referrals, expert frameworks — all with fill-in-the-blank personalization.",
+    icon: BookOpen,
+    path: "/email-templates",
+    stats: ["165+ templates", "14 categories", "Expert frameworks"],
+    gradient: "from-primary/10 to-primary/5",
+  },
+  {
+    name: "AI Prompt Templates",
+    description: "Pre-built prompts for ChatGPT, Claude, and any AI tool. Research prospects, draft proposals, handle objections — paste and go.",
+    icon: Sparkles,
+    path: "/prompts",
+    stats: ["6 AI prompts", "Paste into any AI", "Sales-optimized"],
+    gradient: "from-accent/20 to-accent/5",
+  },
+];
 
 const Index = () => {
   const [active, setActive] = useState<Category>("All");
@@ -80,11 +95,12 @@ const Index = () => {
     return matchesCategory && matchesSearch;
   });
 
+  const allSearchable = [...featuredTools.map(f => ({ ...f, category: "Templates" as Category })), ...tools];
   const suggestions = search === ""
-    ? tools.filter((t) => popularToolPaths.includes(t.path))
-    : tools.filter((t) => t.name.toLowerCase().includes(search.toLowerCase()) || t.description.toLowerCase().includes(search.toLowerCase())).slice(0, 5);
+    ? []
+    : allSearchable.filter((t) => t.name.toLowerCase().includes(search.toLowerCase()) || t.description.toLowerCase().includes(search.toLowerCase())).slice(0, 5);
 
-  const showDropdown = searchFocused && suggestions.length > 0;
+  const showDropdown = searchFocused && search !== "" && suggestions.length > 0;
 
   const categoryCounts = categories.reduce((acc, cat) => {
     acc[cat] = cat === "All" ? tools.length : tools.filter((t) => t.category === cat).length;
@@ -103,96 +119,150 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
+      {/* Hero Header */}
       <header className="border-b bg-card/50">
-        <div className="container max-w-5xl py-8 md:py-12">
-          <div className="flex items-center justify-between mb-6">
+        <div className="container max-w-5xl py-10 md:py-14">
+          <div className="flex flex-col gap-6">
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold font-display tracking-tight">CloserKit</h1>
-              <p className="text-sm text-muted-foreground mt-1">Free sales tools — no sign-ups, no tracking</p>
+              <h1 className="text-3xl md:text-4xl font-bold font-display tracking-tight">CloserKit</h1>
+              <p className="text-base text-muted-foreground mt-2 max-w-xl">
+                The free sales toolkit. Templates, calculators, and AI prompts — zero sign-ups, zero tracking.
+              </p>
             </div>
-          </div>
 
-          {/* Search */}
-          <div ref={searchRef} className="relative max-w-lg">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <input
-              ref={inputRef}
-              type="text"
-              placeholder="Search tools…"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              onFocus={() => setSearchFocused(true)}
-              className="w-full h-11 pl-10 pr-4 rounded-lg border bg-background text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-            />
-            {showDropdown && (
-              <div className="absolute top-full left-0 right-0 mt-1 bg-popover border rounded-lg shadow-lg z-50 overflow-hidden">
-                {search === "" && (
-                  <div className="px-3 py-2 text-xs font-medium text-muted-foreground uppercase tracking-wider">Popular</div>
-                )}
-                {suggestions.map((tool) => (
-                  <button
-                    key={tool.path}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-accent/50 transition-colors"
-                    onMouseDown={(e) => {
-                      e.preventDefault();
-                      navigate(tool.path);
-                    }}
-                  >
-                    <tool.icon className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-                    <div className="min-w-0">
-                      <div className="text-sm font-medium truncate">{tool.name}</div>
-                      <div className="text-xs text-muted-foreground truncate">{tool.description}</div>
-                    </div>
-                    <ArrowRight className="h-3 w-3 text-muted-foreground ml-auto flex-shrink-0" />
-                  </button>
-                ))}
+            {/* Stats */}
+            <div className="flex flex-wrap gap-6 text-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-2xl font-bold font-display text-foreground">165+</span>
+                <span className="text-muted-foreground">Email Templates</span>
               </div>
-            )}
+              <div className="w-px h-8 bg-border hidden sm:block" />
+              <div className="flex items-center gap-2">
+                <span className="text-2xl font-bold font-display text-foreground">22</span>
+                <span className="text-muted-foreground">Sales Tools</span>
+              </div>
+              <div className="w-px h-8 bg-border hidden sm:block" />
+              <div className="flex items-center gap-2">
+                <span className="text-2xl font-bold font-display text-foreground">6</span>
+                <span className="text-muted-foreground">AI Prompts</span>
+              </div>
+            </div>
+
+            {/* Search */}
+            <div ref={searchRef} className="relative max-w-lg">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <input
+                ref={inputRef}
+                type="text"
+                placeholder="Search all tools and templates…"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                onFocus={() => setSearchFocused(true)}
+                className="w-full h-11 pl-10 pr-4 rounded-lg border bg-background text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              />
+              {showDropdown && (
+                <div className="absolute top-full left-0 right-0 mt-1 bg-popover border rounded-lg shadow-lg z-50 overflow-hidden">
+                  {suggestions.map((tool) => (
+                    <button
+                      key={tool.path}
+                      className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-accent/50 transition-colors"
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        navigate(tool.path);
+                      }}
+                    >
+                      <tool.icon className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                      <div className="min-w-0">
+                        <div className="text-sm font-medium truncate">{tool.name}</div>
+                        <div className="text-xs text-muted-foreground truncate">{tool.description}</div>
+                      </div>
+                      <ArrowRight className="h-3 w-3 text-muted-foreground ml-auto flex-shrink-0" />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </header>
 
-      {/* Main */}
-      <main className="container max-w-5xl py-8">
-        {/* Category Pills */}
-        <div className="flex flex-wrap gap-2 mb-8">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActive(cat)}
-              className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                active === cat
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-              }`}
-            >
-              {cat} <span className="opacity-60">({categoryCounts[cat]})</span>
-            </button>
-          ))}
-        </div>
+      <main className="container max-w-5xl py-8 space-y-10">
+        {/* Featured Section */}
+        <section>
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">Most Popular</h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {featuredTools.map((tool) => (
+              <Link
+                key={tool.path}
+                to={tool.path}
+                className={`group relative rounded-xl border bg-gradient-to-br ${tool.gradient} p-6 hover:shadow-md transition-all hover:border-primary/30`}
+              >
+                <div className="flex items-start gap-4">
+                  <div className="rounded-lg bg-primary/10 p-3 flex-shrink-0">
+                    <tool.icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-semibold text-base text-card-foreground group-hover:text-foreground flex items-center gap-2">
+                      {tool.name}
+                      <ArrowRight className="h-4 w-4 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mt-1">{tool.description}</p>
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      {tool.stats.map((stat) => (
+                        <span key={stat} className="inline-flex items-center px-2 py-0.5 rounded-md bg-background/80 text-xs font-medium text-foreground border">
+                          {stat}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
 
-        {/* Grid */}
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((tool) => (
-            <Link
-              key={tool.path}
-              to={tool.path}
-              className="group flex items-start gap-3 rounded-lg border bg-card p-4 hover:bg-accent/30 hover:border-accent transition-all"
-            >
-              <div className="rounded-md bg-secondary p-2 flex-shrink-0">
-                <tool.icon className="h-4 w-4 text-foreground" />
-              </div>
-              <div className="min-w-0">
-                <h3 className="font-medium text-sm text-card-foreground group-hover:text-foreground">{tool.name}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed mt-0.5">{tool.description}</p>
-              </div>
-            </Link>
-          ))}
-          {filtered.length === 0 && (
-            <p className="col-span-full text-center text-muted-foreground py-12">No tools found matching "{search}"</p>
-          )}
-        </div>
+        {/* All Tools */}
+        <section>
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">All Tools</h2>
+          {/* Category Pills */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActive(cat)}
+                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                  active === cat
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                }`}
+              >
+                {cat} <span className="opacity-60">({categoryCounts[cat]})</span>
+              </button>
+            ))}
+          </div>
+
+          {/* Grid */}
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {filtered.map((tool) => (
+              <Link
+                key={tool.path}
+                to={tool.path}
+                className="group flex items-start gap-3 rounded-lg border bg-card p-4 hover:bg-accent/30 hover:border-accent transition-all"
+              >
+                <div className="rounded-md bg-secondary p-2 flex-shrink-0">
+                  <tool.icon className="h-4 w-4 text-foreground" />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="font-medium text-sm text-card-foreground group-hover:text-foreground">{tool.name}</h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed mt-0.5">{tool.description}</p>
+                </div>
+              </Link>
+            ))}
+            {filtered.length === 0 && (
+              <p className="col-span-full text-center text-muted-foreground py-12">No tools found matching "{search}"</p>
+            )}
+          </div>
+        </section>
       </main>
 
       {/* Footer */}
