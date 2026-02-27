@@ -58,6 +58,9 @@ export default {
         pipeline: "hsl(var(--pipeline))",
         linkedin: "hsl(var(--linkedin))",
         proposal: "hsl(var(--proposal))",
+        meeting: "hsl(var(--meeting))",
+        closing: "hsl(var(--closing))",
+        account: "hsl(var(--account))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

@@ -44,6 +44,9 @@
     --pipeline: 25 90% 55%;
     --linkedin: 210 70% 50%;
     --proposal: 160 50% 45%;
+    --meeting: 35 90% 55%;
+    --closing: 280 50% 55%;
+    --account: 350 60% 55%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -91,6 +94,9 @@
     --pipeline: 25 90% 60%;
     --linkedin: 210 70% 55%;
     --proposal: 160 50% 50%;
+    --meeting: 35 90% 60%;
+    --closing: 280 50% 60%;
+    --account: 350 60% 60%;
 
     --sidebar-background: 220 20% 7%;
     --sidebar-foreground: 240 4.8% 95.9%;
