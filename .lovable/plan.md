@@ -1,128 +1,78 @@
 
 
-# Massive Upgrade: AI Prompt Templates, Grid Layouts, and Installable CLI Package
+# AI Prompt Templates UX Overhaul
 
 ## Overview
 
-Three major improvements:
-
-1. **Add 15+ more AI Prompt Templates** covering gaps like sales hiring, competitive displacement, pricing strategy, partner enablement, and more -- bringing the total to 40+
-2. **Switch to grid layouts** for both AI Prompt Templates and Email Template Library so users can scan more content at a glance
-3. **Add search to AI Prompt Templates** page
-4. **Create an installable CLI concept** -- an `npx closerkit` command section with copy-pasteable terminal install instructions and a generated `.md` skills file
+Redesign the prompt template dialog for a seamless, no-scroll experience with one-click AI tool launchers and 5 innovative UX features.
 
 ---
 
-## Part 1: New AI Prompt Templates (15 new prompts)
+## Problem 1: Dialog requires scrolling to see preview/copy
 
-Adding these to fill gaps across the sales cycle:
+### Solution: Split-panel dialog layout
 
-### Prospecting (3 new)
-| Prompt | What It Does |
-|--------|-------------|
-| **LinkedIn Profile Optimizer** | Rewrites your LinkedIn profile to attract inbound leads |
-| **Territory Planning Playbook** | Creates a territory strategy with account tiering and coverage model |
-| **Competitive Displacement Campaign** | Builds a campaign to unseat an incumbent competitor at a target account |
+Restructure the dialog into a **two-column layout** on desktop:
+- **Left column**: Variable inputs (compact, stacked)
+- **Right column**: Live preview + action buttons (always visible)
 
-### Email & Outreach (3 new)
-| Prompt | What It Does |
-|--------|-------------|
-| **Subject Line A/B Generator** | Generates 10 subject line variants with framework labels and predicted open rates |
-| **Video Prospecting Script** | Creates a 60-second video script for Loom/Vidyard outreach |
-| **Executive Outreach Email** | C-suite specific messaging -- short, strategic, no fluff |
+On mobile, stack vertically but put **action buttons at the top** (sticky) so copy/launch is always visible.
 
-### Meeting & Discovery (2 new)
-| Prompt | What It Does |
-|--------|-------------|
-| **Technical Discovery Questions** | Deep technical qualification for SE-led conversations |
-| **Stakeholder Map Builder** | Maps the buying committee with influence levels, motivations, and engagement strategies |
-
-### Proposals & Closing (3 new)
-| Prompt | What It Does |
-|--------|-------------|
-| **Pricing Strategy Advisor** | Analyzes competitive positioning and recommends pricing/packaging approach |
-| **Executive Sponsor Email** | Draft email from your exec sponsor to their exec sponsor for late-stage deals |
-| **Procurement Navigation Guide** | Step-by-step guide for navigating procurement processes |
-
-### Account Management (2 new)
-| Prompt | What It Does |
-|--------|-------------|
-| **Customer Success Handoff** | Creates a structured handoff document from AE to CSM |
-| **Case Study Interview Script** | Generates interview questions to extract a compelling customer story |
-
-### New Category: Sales Leadership (2 new)
-| Prompt | What It Does |
-|--------|-------------|
-| **Sales Hiring Scorecard** | Creates an interview scorecard for hiring AEs, SDRs, or SEs |
-| **Pipeline Review Framework** | Structured framework for running effective pipeline review meetings |
+The preview section gets a **max-height with scroll** while the action bar stays pinned. This means users never need to scroll to find the copy button.
 
 ---
 
-## Part 2: Grid Layout for Both Pages
+## Problem 2: No way to open prompts directly in AI tools
 
-### AI Prompt Templates (`PromptTemplates.tsx`)
-- Change from `space-y-4` single column to a **2-column grid** on desktop (`grid grid-cols-1 md:grid-cols-2 gap-4`)
-- Each card shows: title, category badge, description, and a "Use Prompt" button
-- Clicking a card opens it in a **dialog/modal** (instead of inline expand) so the grid isn't disrupted
-- The modal contains: variable inputs, preview, and copy button
+### Solution: "Open in..." buttons with deep links
 
-### Email Template Library (`EmailTemplateLibrary.tsx`)
-- Same approach: **2-column grid** layout (`grid grid-cols-1 md:grid-cols-2 gap-3`)
-- Cards show: category, title, subject line preview
-- Expand into modal for variable fill-in and copy
+Add 4 icon buttons next to the Copy button that open the built prompt directly in each AI tool's web interface:
 
-### AI Skills Library (`SkillsLibrary.tsx`)
-- Convert skill cards to **2-column grid** as well for consistency
+| Tool | Icon | Deep Link |
+|------|------|-----------|
+| ChatGPT | OpenAI logo SVG | `https://chatgpt.com/?q={encodedPrompt}` |
+| Claude | Claude logo SVG | `https://claude.ai/new?q={encodedPrompt}` |
+| Gemini | Gemini logo SVG | `https://gemini.google.com/app?text={encodedPrompt}` |
+| Perplexity | Perplexity logo SVG | `https://www.perplexity.ai/?q={encodedPrompt}` |
 
----
-
-## Part 3: Search Bar for AI Prompt Templates
-
-- Add a search input at the top (same pattern as Email Template Library)
-- Filters by title, description, and category
-- Works alongside the existing category pill filters
+Each button URL-encodes the fully built prompt and opens in a new tab. Simple SVG icons for each brand, with tooltips showing the tool name.
 
 ---
 
-## Part 4: Installable CLI / Terminal Install Section
+## 5 Innovative UX Features
 
-Since this is a client-side app (no npm package backend), we create a **"Quick Install" section** on the Skills Library page that gives users a one-command way to get all skills as markdown files:
+### Feature 1: Quick-Fill Suggestions
+When a variable input is focused, show **smart placeholder chips** below it that users can click to auto-fill. For example, for "Industry" show chips like "SaaS", "FinTech", "Healthcare", "Manufacturing". This makes filling variables a one-click action instead of typing.
 
-### Approach: `npx` download script concept + copy-paste `.md` bundle
+### Feature 2: Prompt Difficulty/Time Badge
+Each card in the grid shows a small badge indicating complexity: "2 variables -- 30 sec" or "5 variables -- 2 min". This sets expectations and encourages users to try simpler prompts first.
 
-Add a prominent section at the top of the Skills Library page:
+### Feature 3: "Use Last Values" Button
+A small button in the dialog that auto-fills variables with the last values the user entered across any template. Sales reps typically sell the same product to similar prospects -- this saves massive re-typing.
 
-```text
-+--------------------------------------------------+
-| Install All Skills in Your Terminal               |
-|                                                    |
-| npx closerkit-skills init                          |
-| [Copy Command]                                     |
-|                                                    |
-| Or download all skills as a single .md file:       |
-| [Copy All Skills as Markdown]                      |
-+--------------------------------------------------+
-```
+### Feature 4: Favorite/Bookmark Prompts
+A heart/star icon on each card to bookmark favorites. Stored in localStorage. A "Favorites" filter pill appears in the category bar when any prompts are bookmarked, giving quick access to most-used prompts.
 
-- **"Copy All Skills as Markdown"** button: generates a single markdown document containing ALL skills (coding + sales) formatted as a `.cursorrules` or `AGENTS.md` file, copies to clipboard
-- **Terminal command display**: shows `npx closerkit-skills init` with a styled terminal UI -- this is aspirational/branding (the actual npm package would be a future project)
-- **"Copy as .cursorrules"** button: formats all coding agent skills into Cursor's `.cursorrules` format
-- **"Copy as CLAUDE.md"** button: formats skills for Claude Code's `CLAUDE.md` convention
+### Feature 5: Prompt Character Count + AI Model Compatibility
+Show a live character/token count in the preview section with color-coded badges: "Fits GPT-4" (green), "Fits Claude" (green), "May be long for some models" (amber). This helps users know if their prompt will work before they paste it.
 
 ---
 
 ## Technical Changes
 
-### Files to modify:
-1. **`src/data/promptTemplates.ts`** -- Add 15 new prompt template objects with full prompt text, variables, and categories. Add "Sales Leadership" to `promptCategories` and `categoryColors`.
+### File: `src/pages/PromptTemplates.tsx`
+- Redesign `DialogContent` to use a two-column flex layout (`flex flex-col md:flex-row`)
+- Left panel: variables with quick-fill chips
+- Right panel: sticky action bar (Open in ChatGPT/Claude/Gemini/Perplexity + Copy) + scrollable preview
+- Add favorites state backed by localStorage
+- Add "Favorites" category pill (conditional)
+- Add "Use Last Values" button
+- Add character count + model compatibility badges
+- Add complexity badge to grid cards
 
-2. **`src/pages/PromptTemplates.tsx`** -- Add search bar, switch to 2-column grid layout, use Dialog component for expanded view instead of inline accordion.
+### File: `src/data/promptTemplates.ts`
+- Add `quickFills` optional field to `PromptVariable` interface for suggested values
+- Add quick-fill data to common variable types (industry, role, company size, etc.)
 
-3. **`src/pages/EmailTemplateLibrary.tsx`** -- Switch template cards to 2-column grid layout, use Dialog for expanded view.
-
-4. **`src/pages/SkillsLibrary.tsx`** -- Add "Install" section at top with copy-all-as-markdown and terminal command display. Switch skill cards to 2-column grid.
-
-5. **`src/pages/Index.tsx`** -- Update prompt count from "26" to "42" in stats and featured cards.
-
-### No new dependencies needed -- uses existing Dialog component from shadcn/ui.
+### No new dependencies needed.
 
