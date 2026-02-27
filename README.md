@@ -9,7 +9,7 @@
 [![Styled with Tailwind](https://img.shields.io/badge/Styled_with-Tailwind_CSS-06B6D4?logo=tailwindcss)](https://tailwindcss.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 
-A collection of **21 fast, privacy-first tools** built for modern sales reps.  
+A collection of **22 fast, privacy-first tools**, **165+ email templates**, **41 AI prompts**, and **12 AI skills** built for modern sales reps.  
 No sign-ups. No tracking. No data stored. Just results.
 
 </div>
@@ -26,7 +26,25 @@ No sign-ups. No tracking. No data stored. Just results.
 
 ---
 
-## 🧰 Tools (21)
+## 📬 Email Template Library (165+ templates)
+
+The largest free collection of sales email templates across **14 categories**: cold outreach, follow-ups, breakups, referrals, re-engagement, event/webinar, upsell/cross-sell, onboarding, renewal, feedback, partnership, holiday, internal, and expert frameworks — all with fill-in-the-blank personalization.
+
+---
+
+## 🤖 AI Prompt Templates (41 prompts)
+
+Pre-built, sales-optimized prompts for ChatGPT, Claude, and any AI tool across **6 categories**: Prospecting, Email & Outreach, Meeting & Discovery, Proposals & Closing, Account Management, and Sales Leadership. Paste and go.
+
+---
+
+## 🧠 AI Skills Library (12 skills)
+
+Turn any AI into your sales co-pilot. Copy-paste skills for **coding agents** (Claude Code, Codex, Cursor) and **sales agents** (Clay, Apollo, custom workflows). Includes variable customization and one-click export to `.cursorrules` or `CLAUDE.md`.
+
+---
+
+## 🧰 Tools (22)
 
 ### 📊 Calculators
 | Tool | Description |
@@ -46,12 +64,12 @@ No sign-ups. No tracking. No data stored. Just results.
 |------|-------------|
 | **ICP Builder** | Define your ideal customer profile and export as a document |
 | **Objection Handler** | Browse common objections with proven response frameworks |
-| **AI Prompt Templates** | Pre-built sales prompts for any AI tool (Claude, ChatGPT, etc.) |
 
 ### 📄 Docs
 | Tool | Description |
 |------|-------------|
 | **Email Signature Generator** | Create a professional HTML email signature in seconds |
+| **AI Skills Library** | Copy-paste AI skills for coding agents and sales agents |
 
 ### 🔶 Pipeline & Forecasting
 | Tool | Description |
@@ -83,7 +101,7 @@ No sign-ups. No tracking. No data stored. Just results.
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/closerkit.git
+git clone https://github.com/saphaarelabs/sales-toolkit.git
 
 # Navigate to the project
 cd closerkit
