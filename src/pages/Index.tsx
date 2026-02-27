@@ -117,7 +117,18 @@ const Index = () => {
               </p>
             </div>
 
-            {/* Stats */}
+            {/* GitHub + Stats */}
+            <a
+              href="https://github.com/saphaarelabs/sales-toolkit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border bg-secondary/50 hover:bg-secondary text-sm font-medium text-foreground transition-colors w-fit"
+            >
+              <Github className="h-4 w-4" />
+              Star on GitHub
+              <ArrowRight className="h-3 w-3 opacity-60" />
+            </a>
+
             <div className="flex flex-wrap gap-4 md:gap-6 text-sm">
               <div className="flex items-center gap-1.5 md:gap-2">
                 <span className="text-xl md:text-2xl font-bold font-display text-foreground">165+</span>
@@ -257,7 +268,7 @@ const Index = () => {
         <div className="container max-w-5xl py-4 md:py-6 px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-muted-foreground">
           <span className="font-display font-semibold text-foreground">CloserKit</span>
           <div className="flex items-center gap-4">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+            <a href="https://github.com/saphaarelabs/sales-toolkit" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
               <Github className="h-4 w-4" />
             </a>
             <span>Free &amp; open-source</span>
