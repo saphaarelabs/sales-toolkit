@@ -159,6 +159,10 @@ export function PromptDialog({ template, onClose, values, onSetValue, lastValues
                       href={`${tool.baseUrl}${encodeURIComponent(builtPrompt)}`}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => {
+                        navigator.clipboard.writeText(builtPrompt);
+                        toast.success(`Prompt copied! Opening ${tool.name}...`);
+                      }}
                       className="inline-flex items-center justify-center gap-1.5 text-xs rounded-md border border-input bg-background px-3 h-8 hover:bg-accent hover:text-accent-foreground transition-colors"
                     >
                       <tool.icon className="h-3.5 w-3.5" />
@@ -170,6 +174,7 @@ export function PromptDialog({ template, onClose, values, onSetValue, lastValues
                 </Tooltip>
               ))}
             </div>
+            <p className="text-[11px] text-muted-foreground mt-1.5">Prompt is auto-copied when you click any tool. Some tools may require you to paste manually.</p>
 
             {/* Character count + model badges */}
             <div className="flex flex-wrap items-center gap-2 mb-3">
