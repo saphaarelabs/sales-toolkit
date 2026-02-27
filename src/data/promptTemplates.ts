@@ -21,6 +21,7 @@ export const promptCategories = [
   "Meeting & Discovery",
   "Proposals & Closing",
   "Account Management",
+  "Sales Leadership",
 ] as const;
 
 export type PromptCategory = (typeof promptCategories)[number];
@@ -31,6 +32,7 @@ export const categoryColors: Record<string, string> = {
   "Meeting & Discovery": "bg-email/10 text-email border-email/20",
   "Proposals & Closing": "bg-prospect/10 text-prospect border-prospect/20",
   "Account Management": "bg-closing/10 text-closing border-closing/20",
+  "Sales Leadership": "bg-primary/10 text-primary border-primary/20",
 };
 
 export const templates: PromptTemplate[] = [
@@ -1206,6 +1208,931 @@ Be honest in the assessment. A false save attempt wastes everyone's time.`,
       { key: "RISK_SIGNALS", label: "Risk Signals", placeholder: "e.g. usage dropped 40%, champion left, missed last 2 check-ins, asked about data export", type: "long" },
       { key: "USAGE_TRENDS", label: "Usage Trends", placeholder: "e.g. DAU went from 35 to 18, report generation down 60%, stopped using new features", type: "long" },
       { key: "RECENT_INTERACTIONS", label: "Recent Interactions", placeholder: "e.g. last QBR was tense, they raised concerns about missing features, support tickets up 3x", type: "long" },
+    ],
+  },
+
+  // ═══════════════════════════════════════════
+  // SALES LEADERSHIP (NEW CATEGORY)
+  // ═══════════════════════════════════════════
+  {
+    id: "sales-hiring-scorecard",
+    title: "Sales Hiring Scorecard",
+    description: "Create a structured interview scorecard for hiring AEs, SDRs, or Sales Engineers.",
+    category: "Sales Leadership",
+    prompt: `Act as a VP of Sales who has built 5+ sales teams from scratch. Create a comprehensive hiring scorecard for a [ROLE_TITLE] position.
+
+Company context:
+- Company: [COMPANY_NAME]
+- What you sell: [YOUR_PRODUCT]
+- Sales motion: [SALES_MOTION]
+- Average deal size: [DEAL_SIZE]
+- Team size: [TEAM_SIZE]
+
+Build a complete hiring scorecard:
+
+1. **Role Profile**
+   - Must-have vs. nice-to-have qualifications
+   - Red flags that predict failure in this role
+   - Ideal candidate profile (experience, traits, background)
+
+2. **Interview Scorecard** — Rate each category 1-5:
+
+   **Skill Assessment Areas:**
+   | Category | Weight | What to Evaluate | Sample Questions |
+   Include: Discovery skills, objection handling, closing ability, pipeline management, technical aptitude, coachability, work ethic, cultural fit
+
+3. **Role-Play Scenarios** (3 scenarios):
+   - Cold call simulation
+   - Discovery call simulation  
+   - Objection handling under pressure
+   - Scoring criteria for each
+
+4. **Behavioral Interview Questions** (10 questions):
+   - Past performance indicators
+   - Problem-solving approach
+   - Resilience and grit signals
+   - Team collaboration style
+
+5. **Reference Check Script** — 5 questions for back-channel references
+
+6. **Compensation Benchmarking**
+   - Suggested OTE range based on market
+   - Base/variable split recommendation
+   - Ramp period and quota expectations
+
+Make this a document the hiring manager can print and use in every interview round.`,
+    variables: [
+      { key: "ROLE_TITLE", label: "Role Title", placeholder: "e.g. Account Executive, SDR, Sales Engineer", type: "short" },
+      { key: "COMPANY_NAME", label: "Company", placeholder: "e.g. Acme Corp", type: "short" },
+      { key: "YOUR_PRODUCT", label: "What You Sell", placeholder: "e.g. AI-powered CRM", type: "short" },
+      { key: "SALES_MOTION", label: "Sales Motion", placeholder: "e.g. enterprise outbound, product-led growth, channel", type: "short" },
+      { key: "DEAL_SIZE", label: "Average Deal Size", placeholder: "e.g. $50K ARR", type: "short" },
+      { key: "TEAM_SIZE", label: "Current Team Size", placeholder: "e.g. 8 AEs, 4 SDRs", type: "short" },
+    ],
+  },
+  {
+    id: "pipeline-review-framework",
+    title: "Pipeline Review Framework",
+    description: "Structured framework for running effective pipeline review meetings with your sales team.",
+    category: "Sales Leadership",
+    prompt: `Act as a CRO who runs the most effective pipeline reviews in SaaS. Create a structured pipeline review framework for my team.
+
+Team context:
+- Team size: [TEAM_SIZE]
+- Average deal cycle: [DEAL_CYCLE]
+- Quota per rep: [QUOTA]
+- Current pipeline coverage: [COVERAGE]
+- CRM: [CRM]
+
+Build a comprehensive pipeline review framework:
+
+1. **Pre-Review Prep** (what reps must prepare):
+   - Pipeline snapshot: deals by stage, total value, weighted value
+   - Commit list vs. best-case list
+   - Stuck deals (>2x average stage duration)
+   - New pipeline added this week
+   - Deals that moved backward or slipped
+
+2. **Review Structure** (45-minute format):
+   | Time | Section | Focus |
+   - 0-5 min: Top-of-funnel health check
+   - 5-20 min: Commit deals deep-dive (only deals rep is committing to close this period)
+   - 20-30 min: At-risk deals and recovery plans
+   - 30-40 min: Best-case deals — what needs to happen to convert
+   - 40-45 min: Action items and accountability
+
+3. **Questions Framework** — For each deal reviewed:
+   - "What has changed since last review?"
+   - "What is the next concrete step and when?"
+   - "Who is the economic buyer and have we met them?"
+   - "What's the compelling event / why now?"
+   - "If you had to bet your own money, would you bet this closes?"
+
+4. **Red Flag Checklist**:
+   - ⚠️ Single-threaded (only one contact)
+   - ⚠️ No next step scheduled
+   - ⚠️ Haven't met the economic buyer
+   - ⚠️ Prospect is "evaluating" with no timeline
+   - ⚠️ Deal size changed without explanation
+   - ⚠️ Rep can't articulate the compelling event
+
+5. **Coaching Moments** — How to turn reviews into coaching:
+   - When to coach vs. when to direct
+   - How to ask questions that make reps think
+   - Building accountability without micromanaging
+
+6. **Post-Review Actions Template**:
+   - Deals to escalate
+   - Deals to kill
+   - Deals that need executive involvement
+   - Pipeline generation targets for next week
+
+Make this practical — something a frontline manager can use starting tomorrow.`,
+    variables: [
+      { key: "TEAM_SIZE", label: "Team Size", placeholder: "e.g. 8 AEs", type: "short" },
+      { key: "DEAL_CYCLE", label: "Average Deal Cycle", placeholder: "e.g. 45 days", type: "short" },
+      { key: "QUOTA", label: "Quota per Rep", placeholder: "e.g. $500K/quarter", type: "short" },
+      { key: "COVERAGE", label: "Current Pipeline Coverage", placeholder: "e.g. 2.8x", type: "short" },
+      { key: "CRM", label: "CRM", placeholder: "e.g. Salesforce, HubSpot", type: "short" },
+    ],
+  },
+
+  // ═══════════════════════════════════════════
+  // MORE PROSPECTING
+  // ═══════════════════════════════════════════
+  {
+    id: "linkedin-profile-optimizer",
+    title: "LinkedIn Profile Optimizer",
+    description: "Rewrite your LinkedIn profile to attract inbound leads and position you as a trusted advisor.",
+    category: "Prospecting",
+    prompt: `Act as a personal branding consultant who specializes in LinkedIn for B2B sales professionals. Rewrite my LinkedIn profile to attract inbound leads.
+
+Current profile info:
+- Name: [YOUR_NAME]
+- Current role: [YOUR_ROLE]
+- Company: [YOUR_COMPANY]
+- What you sell: [YOUR_PRODUCT]
+- Target buyer: [TARGET_BUYER]
+- Key results you've helped customers achieve: [KEY_RESULTS]
+- Your unique angle/expertise: [UNIQUE_ANGLE]
+
+Rewrite these sections:
+
+1. **Headline** (220 chars max) — 3 variations:
+   - Formula: [Who you help] + [How you help them] + [Proof/credibility]
+   - No job titles like "AE at Company" — that says nothing
+   - Example: "Helping B2B sales teams 3x reply rates | Ex-Gong, trained 500+ reps"
+
+2. **About Section** (2,600 chars max):
+   - Hook: First 2 lines must stop the scroll (this is what shows before "see more")
+   - Problem: What keeps your buyers up at night
+   - Solution: How you help (NOT a product pitch — your expertise)
+   - Proof: 2-3 specific results with numbers
+   - CTA: One clear next step
+   - Written in first person, conversational tone
+
+3. **Featured Section** — 3 content ideas to pin:
+   - A value-add post that showcases expertise
+   - A case study or customer win
+   - A lead magnet or free resource
+
+4. **Experience Section** — Rewrite current role:
+   - Lead with impact, not responsibilities
+   - Include metrics and customer outcomes
+   - Make it readable (bullets, not paragraphs)
+
+5. **Banner Image Concept** — Describe what the banner should communicate
+
+Rules: No buzzwords (passionate, driven, results-oriented). No "I help companies leverage synergies." Sound human.`,
+    variables: [
+      { key: "YOUR_NAME", label: "Your Name", placeholder: "e.g. Alex Chen", type: "short" },
+      { key: "YOUR_ROLE", label: "Current Role", placeholder: "e.g. Senior AE", type: "short" },
+      { key: "YOUR_COMPANY", label: "Company", placeholder: "e.g. Gong", type: "short" },
+      { key: "YOUR_PRODUCT", label: "What You Sell", placeholder: "e.g. revenue intelligence platform", type: "short" },
+      { key: "TARGET_BUYER", label: "Target Buyer", placeholder: "e.g. VP Sales at mid-market SaaS companies", type: "short" },
+      { key: "KEY_RESULTS", label: "Key Results", placeholder: "e.g. helped 50+ teams improve forecast accuracy by 35%", type: "long" },
+      { key: "UNIQUE_ANGLE", label: "Your Unique Angle", placeholder: "e.g. former engineer turned sales leader, specialize in technical sales", type: "long" },
+    ],
+  },
+  {
+    id: "territory-planning",
+    title: "Territory Planning Playbook",
+    description: "Create a territory strategy with account tiering, coverage model, and quarterly execution plan.",
+    category: "Prospecting",
+    prompt: `Act as a sales strategy consultant specializing in territory design. Build a comprehensive territory plan.
+
+Territory context:
+- Region/Territory: [TERRITORY]
+- Total addressable accounts: [TOTAL_ACCOUNTS]
+- Your product: [YOUR_PRODUCT]
+- Your ICP: [ICP]
+- Quarterly quota: [QUOTA]
+- Average deal size: [AVG_DEAL]
+- Win rate: [WIN_RATE]
+- Current pipeline: [CURRENT_PIPELINE]
+
+Build a territory plan:
+
+1. **Account Tiering** — Segment all accounts into tiers:
+   | Tier | Criteria | # Accounts | Time Allocation | Touch Frequency |
+   - Tier 1 (Must-Win): Perfect ICP fit, high revenue potential, active signals
+   - Tier 2 (Should-Win): Good fit, moderate potential
+   - Tier 3 (Could-Win): Decent fit, worth pursuing opportunistically
+   - Tier 4 (Nurture): Not ready now, worth monitoring
+
+2. **Coverage Model** — How to allocate your time:
+   - Hours per week by activity (prospecting, meetings, follow-up, admin)
+   - Accounts per tier to actively work
+   - Touch cadence by tier
+
+3. **Pipeline Math** — Work backward from quota:
+   - Deals needed to hit quota (quota ÷ avg deal)
+   - Opportunities needed (deals ÷ win rate)
+   - Activities needed (opps ÷ conversion rates)
+   - Daily/weekly activity targets
+
+4. **90-Day Execution Plan**:
+   | Week | Focus | Key Activities | Target Outcomes |
+   - Month 1: Pipeline foundation (research, outreach, fill the funnel)
+   - Month 2: Acceleration (demos, proposals, multi-threading)
+   - Month 3: Closing (negotiation, procurement, close deals)
+
+5. **Account Prioritization Score** — Weighted formula:
+   - ICP fit (30%)
+   - Engagement signals (25%)
+   - Revenue potential (25%)
+   - Competitive landscape (10%)
+   - Relationship strength (10%)
+
+6. **Weekly Review Cadence** — What to track each Friday:
+   - Pipeline created vs. target
+   - Conversion rates by stage
+   - Activity completion rates
+   - Accounts to add/remove from active list`,
+    variables: [
+      { key: "TERRITORY", label: "Territory", placeholder: "e.g. West Coast Enterprise, EMEA Mid-Market", type: "short" },
+      { key: "TOTAL_ACCOUNTS", label: "Total Addressable Accounts", placeholder: "e.g. 500 accounts", type: "short" },
+      { key: "YOUR_PRODUCT", label: "Your Product", placeholder: "e.g. data analytics platform", type: "short" },
+      { key: "ICP", label: "Your ICP", placeholder: "e.g. Series B+ SaaS, 200-2000 employees, using Snowflake", type: "long" },
+      { key: "QUOTA", label: "Quarterly Quota", placeholder: "e.g. $400K", type: "short" },
+      { key: "AVG_DEAL", label: "Average Deal Size", placeholder: "e.g. $60K ARR", type: "short" },
+      { key: "WIN_RATE", label: "Win Rate", placeholder: "e.g. 25%", type: "short" },
+      { key: "CURRENT_PIPELINE", label: "Current Pipeline", placeholder: "e.g. $800K weighted, 15 open opps", type: "short" },
+    ],
+  },
+  {
+    id: "competitive-displacement",
+    title: "Competitive Displacement Campaign",
+    description: "Build a campaign to unseat an incumbent competitor at a target account.",
+    category: "Prospecting",
+    prompt: `Act as a competitive sales strategist. Build a displacement campaign to unseat [COMPETITOR] at [TARGET_COMPANY].
+
+Context:
+- Target company: [TARGET_COMPANY]
+- Incumbent competitor: [COMPETITOR]
+- How long they've used them: [TENURE]
+- Known pain points with incumbent: [KNOWN_PAINS]
+- Your product: [YOUR_PRODUCT]
+- Your key advantages: [YOUR_ADVANTAGES]
+- Their contract renewal date (if known): [RENEWAL_DATE]
+
+Build a displacement strategy:
+
+1. **Competitive Intelligence Gathering**
+   - What to research about their current usage
+   - Questions to ask that expose incumbent weaknesses
+   - How to find internal dissatisfaction (G2 reviews, ex-employee LinkedIn, support forums)
+
+2. **Displacement Messaging** — 3 angles:
+   - The "Cost of Status Quo" angle: What are they losing by staying?
+   - The "Switching is Easier Than You Think" angle: Address migration fears
+   - The "Future-Proof" angle: Where is the market going that the incumbent can't follow?
+
+3. **Multi-Touch Campaign** (8 touches over 6 weeks):
+   | Touch | Channel | Message Angle | Content/Asset |
+   - Mix of email, LinkedIn, content sharing, and direct outreach
+   - Each touch builds on the previous without being repetitive
+
+4. **Champion Development** — How to find and cultivate an internal champion:
+   - Who is most likely frustrated with the current solution?
+   - How to arm them to advocate internally
+   - What materials to provide
+
+5. **Proof Points Package**:
+   - 2-3 customer stories of companies who switched FROM the competitor
+   - Migration timeline and effort data
+   - ROI comparison (their solution vs. yours)
+
+6. **Objection Playbook** for displacement-specific objections:
+   - "We've invested too much to switch" →
+   - "The switching costs are too high" →
+   - "Our team is used to [Competitor]" →
+   - "We're locked in until [date]" →
+
+Never trash-talk the competitor. Position the switch as a strategic upgrade, not an escape.`,
+    variables: [
+      { key: "TARGET_COMPANY", label: "Target Company", placeholder: "e.g. Acme Corp", type: "short" },
+      { key: "COMPETITOR", label: "Incumbent Competitor", placeholder: "e.g. Salesforce", type: "short" },
+      { key: "TENURE", label: "How Long They've Used Them", placeholder: "e.g. 3 years", type: "short" },
+      { key: "KNOWN_PAINS", label: "Known Pain Points", placeholder: "e.g. too complex, expensive, poor support, slow implementation", type: "long" },
+      { key: "YOUR_PRODUCT", label: "Your Product", placeholder: "e.g. modern CRM built for mid-market", type: "short" },
+      { key: "YOUR_ADVANTAGES", label: "Your Key Advantages", placeholder: "e.g. 10x faster setup, half the price, AI-native", type: "long" },
+      { key: "RENEWAL_DATE", label: "Their Renewal Date", placeholder: "e.g. September 2025, unknown", type: "short" },
+    ],
+  },
+
+  // ═══════════════════════════════════════════
+  // MORE EMAIL & OUTREACH
+  // ═══════════════════════════════════════════
+  {
+    id: "subject-line-generator",
+    title: "Subject Line A/B Generator",
+    description: "Generate 10 subject line variants with framework labels and predicted open rate ranges.",
+    category: "Email & Outreach",
+    prompt: `Act as an email deliverability expert who has analyzed 10M+ cold emails. Generate 10 subject line variants for the following campaign:
+
+Campaign context:
+- Product: [YOUR_PRODUCT]
+- Target audience: [TARGET_AUDIENCE]
+- Email goal: [EMAIL_GOAL]
+- Key value prop: [VALUE_PROP]
+- Industry: [INDUSTRY]
+
+Generate 10 subject lines using different proven frameworks:
+
+| # | Subject Line | Framework | Predicted Open Rate | Why It Works |
+
+**Frameworks to use:**
+1. **Curiosity Gap** — Creates an information gap they need to close
+2. **Personalized** — Uses their name, company, or specific detail
+3. **Question** — Asks something they want to answer
+4. **Number/Data** — Leads with a specific stat or number
+5. **Social Proof** — References a peer company or result
+6. **Pain Point** — Names their specific problem
+7. **Timely/Trigger** — References a recent event
+8. **Short & Mysterious** — 2-3 words that demand a click
+9. **Value-First** — Leads with what they'll get
+10. **Pattern Interrupt** — Something unexpected
+
+Rules:
+- All subject lines under 6 words (mobile-friendly)
+- No ALL CAPS, no exclamation marks, no emoji
+- No spam trigger words (free, guaranteed, limited time)
+- Each should work standalone without preview text
+- Test in pairs: similar framework, different angle
+
+Also provide:
+- **Best 3 for cold outreach** (never emailed before)
+- **Best 3 for warm follow-up** (existing relationship)
+- **Preview text recommendations** for top 3 subject lines`,
+    variables: [
+      { key: "YOUR_PRODUCT", label: "Your Product", placeholder: "e.g. sales engagement platform", type: "short" },
+      { key: "TARGET_AUDIENCE", label: "Target Audience", placeholder: "e.g. VP Sales at SaaS companies with 50-200 reps", type: "short" },
+      { key: "EMAIL_GOAL", label: "Email Goal", placeholder: "e.g. book a discovery call, share a case study", type: "short" },
+      { key: "VALUE_PROP", label: "Key Value Prop", placeholder: "e.g. reduce ramp time for new hires by 40%", type: "short" },
+      { key: "INDUSTRY", label: "Industry", placeholder: "e.g. B2B SaaS", type: "short" },
+    ],
+  },
+  {
+    id: "video-prospecting-script",
+    title: "Video Prospecting Script",
+    description: "Create a 60-second video script for Loom/Vidyard personalized outreach.",
+    category: "Email & Outreach",
+    prompt: `Act as a video prospecting coach who has trained SDRs to book 3x more meetings with video. Create a 60-second video script.
+
+Context:
+- Prospect: [PROSPECT_NAME], [PROSPECT_ROLE] at [PROSPECT_COMPANY]
+- Your product: [YOUR_PRODUCT]
+- Why you're reaching out: [OUTREACH_REASON]
+- Something specific about them: [PERSONALIZATION]
+
+Create a video script with:
+
+1. **The Hook (0-5 seconds):**
+   - Say their name and company within 3 seconds
+   - Show their website/LinkedIn on screen (builds trust)
+   - "Hey [Name], I recorded this specifically for you..."
+
+2. **The Problem (5-20 seconds):**
+   - Reference something specific about their situation
+   - Connect it to a problem you solve
+   - Use "I noticed..." or "I saw that..." NOT "I think you might..."
+
+3. **The Value (20-40 seconds):**
+   - ONE specific result (not a feature dump)
+   - Customer proof: "We helped [similar company] achieve [result]"
+   - Show, don't tell: briefly screen-share relevant proof
+
+4. **The CTA (40-60 seconds):**
+   - One clear ask (not "let me know if you're interested")
+   - Make it low-commitment: "15 minutes to see if this is relevant"
+   - End with a friendly, human sign-off
+
+**Video Production Tips:**
+- Thumbnail: Show their website on screen (increases click rate 3x)
+- Length: 45-60 seconds MAX (completion rate drops 50% after 60s)
+- Energy: Enthusiastic but not manic
+- Background: Clean, professional (or branded virtual background)
+- No scripts visible — use bullet points on a sticky note near camera
+
+**Companion Email:**
+Write the short email that accompanies the video (3 lines max + video thumbnail).`,
+    variables: [
+      { key: "PROSPECT_NAME", label: "Prospect Name", placeholder: "e.g. Sarah", type: "short" },
+      { key: "PROSPECT_ROLE", label: "Prospect Role", placeholder: "e.g. VP of Marketing", type: "short" },
+      { key: "PROSPECT_COMPANY", label: "Prospect Company", placeholder: "e.g. HubSpot", type: "short" },
+      { key: "YOUR_PRODUCT", label: "Your Product", placeholder: "e.g. personalized video platform", type: "short" },
+      { key: "OUTREACH_REASON", label: "Why You're Reaching Out", placeholder: "e.g. they're hiring SDRs and could use video to stand out", type: "long" },
+      { key: "PERSONALIZATION", label: "Personalization Detail", placeholder: "e.g. they recently posted about improving outbound response rates", type: "long" },
+    ],
+  },
+  {
+    id: "executive-outreach",
+    title: "Executive Outreach Email",
+    description: "C-suite specific messaging — short, strategic, no fluff. Built for VP+ audiences.",
+    category: "Email & Outreach",
+    prompt: `Act as a sales leader who exclusively sells to C-suite executives. Craft executive-level outreach for [EXEC_TITLE] at [COMPANY_NAME].
+
+Context:
+- Executive: [EXEC_NAME], [EXEC_TITLE] at [COMPANY_NAME]
+- Company size: [COMPANY_SIZE]
+- Industry: [INDUSTRY]
+- Your product: [YOUR_PRODUCT]
+- Strategic relevance: [STRATEGIC_RELEVANCE]
+- Mutual connection or warm angle: [WARM_ANGLE]
+
+Write 3 executive outreach variations:
+
+**Version 1: The Strategic Insight**
+- Lead with a board-level insight about their industry
+- Connect it to a decision they likely need to make
+- Offer a peer conversation, not a demo
+- Under 60 words
+
+**Version 2: The Peer Introduction**
+- Leverage a mutual connection or shared experience
+- Position as executive-to-executive dialogue
+- Reference their company's strategic direction
+- Under 50 words
+
+**Version 3: The Data Point**
+- Lead with one compelling, specific data point
+- Make it relevant to their P&L or board metrics
+- Propose a 15-minute briefing, not a sales call
+- Under 50 words
+
+**Executive Communication Rules:**
+- Never use "I'd love to" or "I was hoping to"
+- No product features — only business outcomes
+- Respect their time: every word must earn its place
+- CTA: peer conversation, briefing, or strategic discussion — never "demo"
+- Subject line: 3-4 words max, sounds like it came from a board member
+- No "as a fellow [title]" — it's transparent and cringe
+
+**Also include:**
+- Best send time for executives (research-backed)
+- LinkedIn approach if email doesn't work
+- How to leverage their EA as an ally`,
+    variables: [
+      { key: "EXEC_NAME", label: "Executive Name", placeholder: "e.g. Jennifer Walsh", type: "short" },
+      { key: "EXEC_TITLE", label: "Executive Title", placeholder: "e.g. CRO, VP Sales, CMO", type: "short" },
+      { key: "COMPANY_NAME", label: "Company", placeholder: "e.g. Snowflake", type: "short" },
+      { key: "COMPANY_SIZE", label: "Company Size", placeholder: "e.g. 3,000 employees, $1B+ revenue", type: "short" },
+      { key: "INDUSTRY", label: "Industry", placeholder: "e.g. cloud data platform", type: "short" },
+      { key: "YOUR_PRODUCT", label: "Your Product", placeholder: "e.g. revenue intelligence platform", type: "short" },
+      { key: "STRATEGIC_RELEVANCE", label: "Strategic Relevance", placeholder: "e.g. they just missed earnings forecast, likely reviewing sales effectiveness", type: "long" },
+      { key: "WARM_ANGLE", label: "Warm Angle (if any)", placeholder: "e.g. mutual connection through Board member, same alma mater, spoke at same conference", type: "short" },
+    ],
+  },
+
+  // ═══════════════════════════════════════════
+  // MORE MEETING & DISCOVERY
+  // ═══════════════════════════════════════════
+  {
+    id: "technical-discovery",
+    title: "Technical Discovery Questions",
+    description: "Deep technical qualification questions for SE-led conversations with engineering buyers.",
+    category: "Meeting & Discovery",
+    prompt: `Act as a senior Sales Engineer who has run 500+ technical discovery calls. Generate deep technical qualification questions for a call with [PROSPECT_ROLE] at [PROSPECT_COMPANY].
+
+Context:
+- Prospect: [PROSPECT_ROLE] at [PROSPECT_COMPANY]
+- Their tech stack (known): [TECH_STACK]
+- Your product: [YOUR_PRODUCT]
+- Technical differentiators: [TECH_DIFFERENTIATORS]
+- Integration requirements: [INTEGRATIONS]
+
+Generate technical discovery questions organized by category:
+
+**1. Current Architecture (5 questions)**
+- How their current solution is architected
+- What they've built in-house vs. bought
+- Pain points with current technical approach
+- Scale and performance requirements
+
+**2. Integration & Data Flow (4 questions)**
+- How data moves between systems
+- API usage and limitations
+- Data quality and governance concerns
+- Real-time vs. batch processing needs
+
+**3. Security & Compliance (3 questions)**
+- Authentication and authorization requirements
+- Data residency and privacy regulations
+- Audit and compliance needs
+- SSO and identity provider setup
+
+**4. Evaluation Criteria (4 questions)**
+- Technical must-haves vs. nice-to-haves
+- Proof of concept expectations
+- Performance benchmarks they need to see
+- Who else needs to validate technically
+
+**5. Implementation & Migration (3 questions)**
+- Migration complexity from current solution
+- Timeline expectations and resource availability
+- Training and adoption concerns
+
+For EACH question provide:
+- The question itself
+- Why you're asking (what it reveals)
+- Follow-up question based on likely answer
+- Red flag answer vs. green flag answer
+
+End with a **Technical Qualification Scorecard** template to fill during the call.`,
+    variables: [
+      { key: "PROSPECT_ROLE", label: "Prospect Role", placeholder: "e.g. CTO, VP Engineering, Head of Platform", type: "short" },
+      { key: "PROSPECT_COMPANY", label: "Prospect Company", placeholder: "e.g. Stripe", type: "short" },
+      { key: "TECH_STACK", label: "Their Tech Stack", placeholder: "e.g. AWS, React, PostgreSQL, Salesforce", type: "long" },
+      { key: "YOUR_PRODUCT", label: "Your Product", placeholder: "e.g. data integration platform", type: "short" },
+      { key: "TECH_DIFFERENTIATORS", label: "Technical Differentiators", placeholder: "e.g. real-time sync, no-code connectors, SOC2 compliant", type: "long" },
+      { key: "INTEGRATIONS", label: "Key Integrations", placeholder: "e.g. Salesforce, Snowflake, HubSpot, custom APIs", type: "short" },
+    ],
+  },
+  {
+    id: "stakeholder-map",
+    title: "Stakeholder Map Builder",
+    description: "Map the buying committee with influence levels, motivations, and engagement strategies.",
+    category: "Meeting & Discovery",
+    prompt: `Act as an enterprise deal strategist. Help me map and plan engagement for the buying committee at [COMPANY_NAME].
+
+Deal context:
+- Company: [COMPANY_NAME]
+- Deal size: [DEAL_SIZE]
+- What we sell: [YOUR_PRODUCT]
+- Current stage: [CURRENT_STAGE]
+- Known stakeholders: [KNOWN_STAKEHOLDERS]
+
+Build a comprehensive stakeholder map:
+
+1. **Buying Committee Matrix**:
+   | Name | Title | Role in Decision | Influence Level | Stance | Priority |
+   Roles: Champion, Economic Buyer, Technical Evaluator, End User, Coach, Blocker, Legal/Procurement
+
+2. **For Each Stakeholder**:
+   - **What they care about**: Their KPIs, career goals, and personal wins
+   - **How they evaluate**: Data-driven? Relationship-driven? Consensus-builder?
+   - **Key message**: The ONE thing to say that resonates with THEM
+   - **Risk**: What could make them block the deal
+   - **Engagement plan**: Specific next action to take with them
+
+3. **Influence Map** — Describe the power dynamics:
+   - Who influences whom?
+   - Who has veto power?
+   - Where are the alliances and tensions?
+   - Who is the "real" decision maker (not always the most senior)?
+
+4. **Gap Analysis**:
+   - Stakeholders we haven't identified yet (who's missing?)
+   - Stakeholders we haven't met (how to get access)
+   - Relationships that need strengthening
+
+5. **Multi-Thread Engagement Plan**:
+   | Week | Stakeholder | Action | Channel | Goal |
+   - Plan for the next 4 weeks
+   - Ensure no single point of failure
+
+6. **Deal Risk Score**: Based on stakeholder coverage, score the deal risk 1-10.
+
+Be specific to THIS deal — no generic stakeholder theory.`,
+    variables: [
+      { key: "COMPANY_NAME", label: "Company", placeholder: "e.g. Snowflake", type: "short" },
+      { key: "DEAL_SIZE", label: "Deal Size", placeholder: "e.g. $200K ARR", type: "short" },
+      { key: "YOUR_PRODUCT", label: "Your Product", placeholder: "e.g. sales enablement platform", type: "short" },
+      { key: "CURRENT_STAGE", label: "Current Stage", placeholder: "e.g. post-demo, entering evaluation", type: "short" },
+      { key: "KNOWN_STAKEHOLDERS", label: "Known Stakeholders", placeholder: "1. Sarah - VP Sales (champion, strong advocate)\n2. Mike - CFO (met once, cautious)\n3. IT team - haven't met yet\n4. Procurement - unknown", type: "long" },
+    ],
+  },
+
+  // ═══════════════════════════════════════════
+  // MORE PROPOSALS & CLOSING
+  // ═══════════════════════════════════════════
+  {
+    id: "pricing-strategy",
+    title: "Pricing Strategy Advisor",
+    description: "Analyze competitive positioning and recommend pricing, packaging, and discounting approach.",
+    category: "Proposals & Closing",
+    prompt: `Act as a SaaS pricing consultant from Simon-Kucher. Analyze my pricing strategy and recommend improvements.
+
+Context:
+- Product: [YOUR_PRODUCT]
+- Current pricing: [CURRENT_PRICING]
+- Target market: [TARGET_MARKET]
+- Competitors and their pricing: [COMPETITOR_PRICING]
+- Average deal size: [AVG_DEAL]
+- Win rate: [WIN_RATE]
+- Most common pricing objection: [PRICING_OBJECTION]
+
+Analyze and recommend:
+
+1. **Pricing Model Assessment**:
+   - Is your current model aligned with how customers get value?
+   - Per-seat vs. usage-based vs. flat-rate — which fits best?
+   - Are you leaving money on the table?
+
+2. **Competitive Price Positioning**:
+   - Where you sit vs. competitors (premium, mid-market, value)
+   - Is your positioning intentional or accidental?
+   - Price-to-value perception analysis
+
+3. **Packaging Recommendations**:
+   - Good-Better-Best tier structure
+   - What features to gate at each tier
+   - How to design packages that drive upgrades
+   - Which tier to lead with in sales conversations
+
+4. **Discounting Framework**:
+   | Scenario | Max Discount | What to Get in Return |
+   - Annual vs. monthly pricing strategy
+   - Volume discount tiers
+   - When to offer pilot pricing vs. full price
+   - How to handle "your competitor is cheaper"
+
+5. **Price Increase Strategy** (for existing customers):
+   - How to communicate increases
+   - Grandfather vs. phase-in approach
+   - Talk tracks for renewal conversations with increases
+
+6. **Metrics to Track**:
+   - Price realization rate
+   - Discount frequency and depth
+   - Win rate by price point
+   - Revenue per customer trends`,
+    variables: [
+      { key: "YOUR_PRODUCT", label: "Your Product", placeholder: "e.g. project management platform", type: "short" },
+      { key: "CURRENT_PRICING", label: "Current Pricing", placeholder: "e.g. $29/user/mo Starter, $79/user/mo Pro, $149/user/mo Enterprise", type: "long" },
+      { key: "TARGET_MARKET", label: "Target Market", placeholder: "e.g. mid-market SaaS, 50-500 employees", type: "short" },
+      { key: "COMPETITOR_PRICING", label: "Competitor Pricing", placeholder: "e.g. Monday.com: $12-24/user, Asana: $13-30/user, ClickUp: $7-19/user", type: "long" },
+      { key: "AVG_DEAL", label: "Average Deal Size", placeholder: "e.g. $35K ARR", type: "short" },
+      { key: "WIN_RATE", label: "Win Rate", placeholder: "e.g. 28%", type: "short" },
+      { key: "PRICING_OBJECTION", label: "Top Pricing Objection", placeholder: "e.g. 'too expensive compared to alternatives'", type: "short" },
+    ],
+  },
+  {
+    id: "executive-sponsor-email",
+    title: "Executive Sponsor Email",
+    description: "Draft an email from your exec sponsor to their exec for late-stage enterprise deals.",
+    category: "Proposals & Closing",
+    prompt: `Act as a VP of Sales who regularly writes executive-to-executive emails to accelerate late-stage deals. Draft an email from MY executive to THEIR executive.
+
+Deal context:
+- Our company: [YOUR_COMPANY]
+- Our executive: [OUR_EXEC_NAME], [OUR_EXEC_TITLE]
+- Their company: [THEIR_COMPANY]
+- Their executive: [THEIR_EXEC_NAME], [THEIR_EXEC_TITLE]
+- Deal status: [DEAL_STATUS]
+- Why executive involvement is needed: [WHY_EXEC]
+- Key value delivered so far: [VALUE_SO_FAR]
+
+Draft 2 email variations:
+
+**Version 1: The Strategic Partnership Angle**
+- Frame this as a strategic partnership, not a vendor transaction
+- Reference industry trends or mutual goals
+- Propose an executive alignment call
+- Tone: peer-to-peer, strategic, forward-looking
+
+**Version 2: The Momentum & Commitment Angle**
+- Reference the positive progress so far
+- Acknowledge the team's work on both sides
+- Propose clearing any remaining blockers at the exec level
+- Tone: collaborative, action-oriented
+
+**For both versions:**
+- Subject line: 4-5 words max, sounds personal
+- Length: under 100 words (executives don't read long emails)
+- CTA: specific (not "let's connect sometime")
+- Written as if OUR executive wrote it personally (not ghostwritten by sales)
+- No product pitching — this is a relationship-building email
+
+**Also provide:**
+- Best time to send this email
+- Follow-up plan if no response in 48 hours
+- How to brief your executive before they send it
+- What NOT to do (common mistakes in exec-to-exec outreach)`,
+    variables: [
+      { key: "YOUR_COMPANY", label: "Your Company", placeholder: "e.g. Acme Corp", type: "short" },
+      { key: "OUR_EXEC_NAME", label: "Our Executive Name", placeholder: "e.g. David Chen", type: "short" },
+      { key: "OUR_EXEC_TITLE", label: "Our Executive Title", placeholder: "e.g. CEO, CRO, VP Sales", type: "short" },
+      { key: "THEIR_COMPANY", label: "Their Company", placeholder: "e.g. Snowflake", type: "short" },
+      { key: "THEIR_EXEC_NAME", label: "Their Executive Name", placeholder: "e.g. Sarah Williams", type: "short" },
+      { key: "THEIR_EXEC_TITLE", label: "Their Executive Title", placeholder: "e.g. CRO, VP of Sales", type: "short" },
+      { key: "DEAL_STATUS", label: "Deal Status", placeholder: "e.g. proposal sent, stuck in procurement for 3 weeks", type: "long" },
+      { key: "WHY_EXEC", label: "Why Executive Involvement", placeholder: "e.g. deal stalled in legal, need CRO to push internally", type: "long" },
+      { key: "VALUE_SO_FAR", label: "Value Delivered So Far", placeholder: "e.g. successful POC, champion is bought in, technical validation passed", type: "long" },
+    ],
+  },
+  {
+    id: "procurement-guide",
+    title: "Procurement Navigation Guide",
+    description: "Step-by-step guide for navigating enterprise procurement processes and getting contracts signed.",
+    category: "Proposals & Closing",
+    prompt: `Act as a sales operations leader who has navigated 500+ enterprise procurement processes. Create a procurement navigation guide for this deal.
+
+Deal context:
+- Company: [COMPANY_NAME]
+- Company size: [COMPANY_SIZE]
+- Deal size: [DEAL_SIZE]
+- Known procurement requirements: [KNOWN_REQUIREMENTS]
+- Timeline pressure: [TIMELINE]
+- Procurement contact (if known): [PROCUREMENT_CONTACT]
+
+Build a procurement navigation guide:
+
+1. **Procurement Process Map** — Typical enterprise procurement stages:
+   | Stage | What Happens | Our Role | Timeline | Risk |
+   - Vendor registration / approved vendor list
+   - Security questionnaire / InfoSec review
+   - Legal redlines and contract review
+   - Procurement / purchasing approval
+   - Budget sign-off / PO creation
+   - Contract execution
+
+2. **Pre-Procurement Checklist** — Get these ready BEFORE procurement starts:
+   - [ ] Security questionnaires (SOC2, GDPR, HIPAA)
+   - [ ] Insurance certificates
+   - [ ] Standard MSA and order form
+   - [ ] Data Processing Agreement
+   - [ ] Implementation plan and SLA
+   - [ ] Reference customers in their industry
+   - [ ] Competitive pricing documentation
+
+3. **Accelerating Procurement** — Tactics to speed up the process:
+   - How to run security and legal review in PARALLEL, not sequential
+   - When and how to involve your legal team
+   - How to pre-fill their security questionnaire
+   - Building a relationship with procurement (they're not the enemy)
+
+4. **Common Procurement Blockers & Solutions**:
+   - "We need 3 competitive bids" → How to handle
+   - "Legal needs 4 weeks for review" → How to compress
+   - "Budget needs to be re-approved" → How to navigate
+   - "We need board approval above $X" → How to prepare
+   - "This needs to go through our vendor management system" → How to comply quickly
+
+5. **Communication Templates**:
+   - Email to procurement introducing yourself
+   - Status update email to champion during procurement
+   - Escalation email when procurement is stalled
+   - Thank-you email after contract signature
+
+6. **Timeline Management**:
+   - Realistic timeline estimate for this deal size
+   - Weekly check-in cadence with procurement
+   - Escalation triggers (when to involve executives)`,
+    variables: [
+      { key: "COMPANY_NAME", label: "Company", placeholder: "e.g. Acme Corp", type: "short" },
+      { key: "COMPANY_SIZE", label: "Company Size", placeholder: "e.g. 5,000 employees, Fortune 500", type: "short" },
+      { key: "DEAL_SIZE", label: "Deal Size", placeholder: "e.g. $250K ARR", type: "short" },
+      { key: "KNOWN_REQUIREMENTS", label: "Known Requirements", placeholder: "e.g. SOC2 required, need DPA, MSA redlines expected, 3-bid requirement", type: "long" },
+      { key: "TIMELINE", label: "Timeline Pressure", placeholder: "e.g. need to close by end of quarter, their budget expires March 31", type: "short" },
+      { key: "PROCUREMENT_CONTACT", label: "Procurement Contact", placeholder: "e.g. Lisa in Procurement, haven't met yet", type: "short" },
+    ],
+  },
+
+  // ═══════════════════════════════════════════
+  // MORE ACCOUNT MANAGEMENT
+  // ═══════════════════════════════════════════
+  {
+    id: "customer-success-handoff",
+    title: "Customer Success Handoff",
+    description: "Create a structured handoff document from AE to CSM with full deal context and customer expectations.",
+    category: "Account Management",
+    prompt: `Act as a revenue operations leader. Create a comprehensive AE-to-CSM handoff document for a newly closed deal.
+
+Deal details:
+- Company: [COMPANY_NAME]
+- Deal size: [DEAL_SIZE]
+- Closed date: [CLOSED_DATE]
+- Sales cycle length: [CYCLE_LENGTH]
+- Champion: [CHAMPION]
+- Executive sponsor: [EXEC_SPONSOR]
+- Primary use case: [USE_CASE]
+
+Build a handoff document:
+
+1. **Account Overview**:
+   - Company background and industry
+   - Why they bought (the REAL reason, not the surface reason)
+   - What they were using before and why they switched
+   - Decision-making process and key stakeholders
+
+2. **Stakeholder Map** (for CS team):
+   | Name | Title | Role | Relationship Strength | Key Concerns |
+   - Who loves us, who's neutral, who's a risk
+   - Communication preferences for each
+
+3. **Expectations Set During Sales**:
+   - ⚠️ Specific promises made (be honest — CS needs to know)
+   - Timeline commitments
+   - Feature requests or customizations discussed
+   - ROI targets quoted
+   - SLA or support level expectations
+
+4. **Implementation Priorities**:
+   - Phase 1 (Quick Wins): What to deliver in first 30 days
+   - Phase 2 (Core Value): Full rollout plan
+   - Phase 3 (Expansion): Future opportunities discussed
+
+5. **Risk Factors**:
+   - Known concerns or hesitations during the sales process
+   - Competitive alternatives they considered (in case of buyer's remorse)
+   - Internal politics or blockers CS should know about
+   - Technical limitations acknowledged during eval
+
+6. **Success Metrics** — What does "success" look like for this customer?
+   - Metrics they'll measure
+   - Timeline for expected results
+   - First QBR date and expectations
+
+7. **Expansion Opportunities**:
+   - Additional teams or departments discussed
+   - Upsell products or tiers mentioned
+   - Timing for expansion conversation
+
+This should be the single document CS needs to never start from scratch with a customer.`,
+    variables: [
+      { key: "COMPANY_NAME", label: "Company", placeholder: "e.g. Acme Corp", type: "short" },
+      { key: "DEAL_SIZE", label: "Deal Size", placeholder: "e.g. $80K ARR", type: "short" },
+      { key: "CLOSED_DATE", label: "Closed Date", placeholder: "e.g. March 15, 2025", type: "short" },
+      { key: "CYCLE_LENGTH", label: "Sales Cycle Length", placeholder: "e.g. 62 days", type: "short" },
+      { key: "CHAMPION", label: "Champion", placeholder: "e.g. Sarah, VP of Ops — strong advocate", type: "short" },
+      { key: "EXEC_SPONSOR", label: "Executive Sponsor", placeholder: "e.g. CFO, met twice during eval", type: "short" },
+      { key: "USE_CASE", label: "Primary Use Case", placeholder: "e.g. automate pipeline reporting, replace spreadsheet forecasting", type: "long" },
+    ],
+  },
+  {
+    id: "case-study-interview",
+    title: "Case Study Interview Script",
+    description: "Generate interview questions to extract a compelling customer story with quotable soundbites.",
+    category: "Account Management",
+    prompt: `Act as a content marketing strategist who has produced 100+ B2B case studies. Generate an interview script for a customer case study.
+
+Customer context:
+- Customer: [CUSTOMER_COMPANY]
+- Contact: [CONTACT_NAME], [CONTACT_ROLE]
+- Product they use: [YOUR_PRODUCT]
+- How long they've been a customer: [TENURE]
+- Key results: [KEY_RESULTS]
+- Use case: [USE_CASE]
+
+Create a case study interview script:
+
+1. **Pre-Interview Prep**:
+   - Research checklist (usage data, support history, growth metrics)
+   - Email template to schedule the interview
+   - What to share with them in advance (so they can prep numbers)
+   - Recording permission language
+
+2. **Interview Questions** (30-minute format):
+
+   **Opening / Warm-Up (3 min):**
+   - Tell me about your role and what your team is responsible for
+   - What does a typical day look like?
+
+   **Before State (7 min):**
+   - What was the situation before [product]? Walk me through the process.
+   - What was the biggest frustration or pain point?
+   - How was this impacting your team or business?
+   - Can you put a number on it? (time wasted, revenue lost, etc.)
+
+   **Decision Process (5 min):**
+   - What made you start looking for a solution?
+   - What else did you evaluate? Why did you choose us?
+   - Was there anything that almost stopped the deal?
+
+   **Implementation (5 min):**
+   - What was the onboarding experience like?
+   - How long before you saw first results?
+   - Any surprises (good or bad)?
+
+   **Results / After State (7 min):**
+   - What specific results have you seen? (push for numbers)
+   - What's the impact on your team day-to-day?
+   - What would happen if you had to go back to the old way?
+   - How has this changed your role or career?
+
+   **Quotable Moments (3 min):**
+   - If you had to describe [product] to a peer, what would you say?
+   - What's the one thing you'd tell someone who's on the fence?
+
+3. **Case Study Outline** — Structure for the final piece:
+   - Headline formula: "[Company] achieves [result] with [product]"
+   - Sections: Challenge → Solution → Results → What's Next
+   - Pull-quote placement recommendations
+
+4. **Follow-Up Process**:
+   - Thank-you email template
+   - Draft review process with customer
+   - Approval and publication timeline`,
+    variables: [
+      { key: "CUSTOMER_COMPANY", label: "Customer Company", placeholder: "e.g. Notion", type: "short" },
+      { key: "CONTACT_NAME", label: "Contact Name", placeholder: "e.g. Sarah Chen", type: "short" },
+      { key: "CONTACT_ROLE", label: "Contact Role", placeholder: "e.g. Head of Sales Operations", type: "short" },
+      { key: "YOUR_PRODUCT", label: "Your Product", placeholder: "e.g. revenue intelligence platform", type: "short" },
+      { key: "TENURE", label: "Customer Tenure", placeholder: "e.g. 14 months", type: "short" },
+      { key: "KEY_RESULTS", label: "Key Results", placeholder: "e.g. 35% increase in forecast accuracy, 10 hrs/week saved on reporting", type: "long" },
+      { key: "USE_CASE", label: "Primary Use Case", placeholder: "e.g. pipeline management and revenue forecasting for 40-person sales team", type: "long" },
     ],
   },
 ];
