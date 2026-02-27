@@ -78,18 +78,18 @@ export function PromptDialog({ template, onClose, values, onSetValue, lastValues
 
   return (
     <Dialog open={!!template} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0">
-        <div className="flex flex-col md:flex-row h-full max-h-[90vh]">
+      <DialogContent className="max-w-4xl max-h-[90vh] sm:max-h-[90vh] overflow-hidden p-0">
+        <div className="flex flex-col md:flex-row h-full max-h-[90vh] sm:max-h-[90vh]">
           {/* Left Panel — Variables */}
-          <div className="md:w-[45%] p-6 overflow-y-auto border-b md:border-b-0 md:border-r border-border">
+          <div className="md:w-[45%] p-4 md:p-6 overflow-y-auto border-b md:border-b-0 md:border-r border-border max-h-[45vh] md:max-h-none">
             <DialogHeader>
               <div className="flex items-center gap-2 flex-wrap">
-                <DialogTitle className="font-display">{template.title}</DialogTitle>
+                <DialogTitle className="font-display text-base md:text-lg">{template.title}</DialogTitle>
                 <span className={`text-[10px] px-2 py-0.5 rounded-full border ${categoryColors[template.category] || ""}`}>
                   {template.category}
                 </span>
               </div>
-              <DialogDescription>{template.description}</DialogDescription>
+              <DialogDescription className="text-xs md:text-sm">{template.description}</DialogDescription>
             </DialogHeader>
 
             {hasLastValues && (
@@ -103,7 +103,7 @@ export function PromptDialog({ template, onClose, values, onSetValue, lastValues
                 const fills = getQuickFills(v);
                 return (
                   <div key={v.key}>
-                    <label className="text-sm font-medium text-foreground mb-1 block">{v.label}</label>
+                    <label className="text-xs md:text-sm font-medium text-foreground mb-1 block">{v.label}</label>
                     {v.type === "long" ? (
                       <Textarea
                         placeholder={v.placeholder}
@@ -134,12 +134,12 @@ export function PromptDialog({ template, onClose, values, onSetValue, lastValues
           </div>
 
           {/* Right Panel — Copy + Preview */}
-          <div className="md:w-[55%] flex flex-col p-6 overflow-hidden">
+          <div className="md:w-[55%] flex flex-col p-4 md:p-6 overflow-hidden">
             {/* Copy Button — Prominent */}
             <Button
               onClick={copyPrompt}
               size="lg"
-              className="w-full gap-2 mb-4 text-base font-semibold shadow-sm"
+              className="w-full gap-2 mb-3 md:mb-4 text-sm md:text-base font-semibold shadow-sm"
             >
               {copiedId === template.id ? (
                 <><Check className="h-4 w-4" /> Copied!</>
@@ -149,10 +149,10 @@ export function PromptDialog({ template, onClose, values, onSetValue, lastValues
             </Button>
 
             {/* Character count + model badges */}
-            <div className="flex flex-wrap items-center gap-2 mb-4">
-              <span className="text-xs text-muted-foreground">{charCount.toLocaleString()} chars</span>
+            <div className="flex flex-wrap items-center gap-1.5 md:gap-2 mb-3 md:mb-4">
+              <span className="text-[11px] md:text-xs text-muted-foreground">{charCount.toLocaleString()} chars</span>
               {modelBadges.map((b) => (
-                <span key={b.label} className={`text-[10px] px-2 py-0.5 rounded-full border ${b.color}`}>
+                <span key={b.label} className={`text-[10px] px-1.5 md:px-2 py-0.5 rounded-full border ${b.color}`}>
                   {b.label}
                 </span>
               ))}
@@ -160,18 +160,17 @@ export function PromptDialog({ template, onClose, values, onSetValue, lastValues
 
             {/* Live Preview */}
             <div className="flex-1 overflow-hidden flex flex-col min-h-0">
-              <label className="text-sm font-medium text-foreground mb-1.5 block">Live Preview</label>
+              <label className="text-xs md:text-sm font-medium text-foreground mb-1.5 block">Live Preview</label>
               <div className="relative flex-1 min-h-0">
                 <pre
-                  className={`whitespace-pre-wrap text-sm bg-muted/50 border rounded-md p-4 text-foreground leading-relaxed font-sans overflow-y-auto ${
-                    !expanded && isLongPrompt ? "max-h-[280px]" : "max-h-[50vh]"
+                  className={`whitespace-pre-wrap text-xs md:text-sm bg-muted/50 border rounded-md p-3 md:p-4 text-foreground leading-relaxed font-sans overflow-y-auto ${
+                    !expanded && isLongPrompt ? "max-h-[180px] md:max-h-[280px]" : "max-h-[40vh] md:max-h-[50vh]"
                   }`}
                 >
                   {builtPrompt}
                 </pre>
-                {/* Fade hint for long prompts */}
                 {isLongPrompt && !expanded && (
-                  <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background/90 to-transparent rounded-b-md pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 right-0 h-12 md:h-16 bg-gradient-to-t from-background/90 to-transparent rounded-b-md pointer-events-none" />
                 )}
               </div>
               {isLongPrompt && (

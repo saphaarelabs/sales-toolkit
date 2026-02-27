@@ -105,13 +105,13 @@ const EmailTemplateLibrary = () => {
         />
       </div>
 
-      {/* Category Pills */}
-      <div className="flex flex-wrap gap-2 mb-6">
+      {/* Category Pills - horizontal scroll on mobile */}
+      <div className="flex gap-2 mb-5 md:mb-6 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:overflow-visible scrollbar-none">
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+            className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 ${
               activeCategory === cat
                 ? "bg-primary text-primary-foreground"
                 : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
@@ -155,7 +155,7 @@ const EmailTemplateLibrary = () => {
       {/* Dialog for Selected Template */}
       <Dialog open={!!selectedTemplate} onOpenChange={(open) => !open && setSelectedTemplate(null)}>
         {selectedTemplate && (
-          <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-4 md:p-6">
             <DialogHeader>
               <div className="flex items-center gap-2 flex-wrap">
                 <DialogTitle className="font-display">{selectedTemplate.title}</DialogTitle>
