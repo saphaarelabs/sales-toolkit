@@ -3,7 +3,19 @@ export interface PromptVariable {
   label: string;
   placeholder: string;
   type: "short" | "long";
+  quickFills?: string[];
 }
+
+// Common quick-fill sets for reuse
+export const QUICK_FILLS = {
+  industry: ["SaaS", "FinTech", "Healthcare", "Manufacturing", "Retail", "EdTech", "Cybersecurity"],
+  role: ["VP of Sales", "CTO", "Head of Marketing", "CEO", "Director of Ops", "CFO", "CRO"],
+  companySize: ["1-50", "51-200", "201-1000", "1001-5000", "5000+"],
+  dealSize: ["$10K", "$25K", "$50K", "$100K", "$250K+"],
+  timeframe: ["30 days", "60 days", "90 days", "This quarter", "This year"],
+  painPoint: ["Cost reduction", "Revenue growth", "Efficiency", "Compliance", "Scalability"],
+  competitor: ["Incumbent vendor", "Open-source alternative", "In-house solution", "Status quo"],
+};
 
 export interface PromptTemplate {
   id: string;
