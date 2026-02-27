@@ -23,7 +23,7 @@ const PerplexityIcon = ({ className }: { className?: string }) => (
 );
 
 export const AI_TOOLS = [
-  { name: "ChatGPT", icon: ChatGPTIcon, baseUrl: "https://chatgpt.com/?q=" },
+  { name: "ChatGPT", icon: ChatGPTIcon, baseUrl: "https://chat.openai.com/?q=" },
   { name: "Claude", icon: ClaudeIcon, baseUrl: "https://claude.ai/new?q=" },
   { name: "Gemini", icon: GeminiIcon, baseUrl: "https://gemini.google.com/app?text=" },
   { name: "Perplexity", icon: PerplexityIcon, baseUrl: "https://www.perplexity.ai/?q=" },
