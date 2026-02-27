@@ -1,66 +1,55 @@
 
 
-# Prompt Templates UX Overhaul: Remove Blocked Links + Polish UI
+# Real Install Flow: Download Buttons + npm Package Source
 
-## 1. Remove AI Tool Deep Links (Blocked by Browsers)
+## Part 1: Replace Fake Terminal with Real Download Buttons
 
-Remove the ChatGPT, Claude, Gemini, and Perplexity launcher buttons from the dialog. Keep only the **Copy** button. Remove the `AIToolIcons.tsx` import and the disclaimer text. Remove the `openInTool` function.
+**File: `src/pages/SkillsLibrary.tsx`**
 
-**File:** `src/components/prompt/PromptDialog.tsx`
-- Remove import of `AI_TOOLS` from `./AIToolIcons`
-- Remove import of `ExternalLink` icon
-- Remove the `openInTool` function
-- Remove the AI_TOOLS `.map()` block rendering the tool links
-- Remove the disclaimer `<p>` tag
-- Keep only the Copy button in the action bar
+Replace the `npx closerkit init` terminal block with a "Download Skills" section that has real, working download buttons:
 
----
+- **Download .cursorrules** -- generates and downloads a `.cursorrules` file containing all coding agent skills
+- **Download CLAUDE.md** -- generates and downloads a `CLAUDE.md` file containing all skills
+- **Download closerkit-skills.md** -- generates and downloads a full markdown bundle
 
-## 2. Fix Console Warnings (forwardRef)
+Each button uses `Blob` + `URL.createObjectURL` + a hidden `<a>` element to trigger a real browser file download. Keep the existing "Copy" buttons as secondary actions.
 
-The console shows "Function components cannot be given refs" for `PromptCard` and `PromptDialog`. This happens because they're used in contexts expecting ref-forwarding.
+The section header changes from "Install All Skills in Your Terminal" to "Download Skills for Your Project" with a `Download` icon instead of `Terminal`.
 
-**File:** `src/components/prompt/PromptCard.tsx`
-- No ref forwarding needed here since it's rendered directly, not via `asChild`. The warning is likely harmless but we can silence it.
+## Part 2: Create Real npm CLI Package Source
 
----
+Create the following files in a `cli/` directory at the project root. You would then publish this to npm with `cd cli && npm publish`.
 
-## 3. Improve Dialog UX: Make Everything Visible Without Scrolling
+**`cli/package.json`**
+- Package name: `closerkit`
+- `bin.closerkit` pointing to `./bin/cli.js`
+- Minimal dependencies (just `fs` and `path`, built-in)
 
-Restructure the right panel so the **Copy button is prominent and always visible**, and the preview doesn't require users to discover scrolling.
+**`cli/bin/cli.js`**
+- Entry point for `npx closerkit init`
+- Detects project type (looks for `.cursorrules`, `CLAUDE.md`, or defaults to markdown)
+- Writes the skills file to the current directory
+- Prints a success message with what was created
 
-**File:** `src/components/prompt/PromptDialog.tsx`
-- Make the Copy button larger and more prominent (full-width, primary styling)
-- Move character count + model badges inline with the copy button area
-- Limit the live preview to a reasonable max-height with a subtle fade/gradient at the bottom to hint there's more content
-- Add a "Show full preview" expand toggle for long prompts
+**`cli/README.md`**
+- Usage instructions for the npm package
+- Documents `npx closerkit init` command
 
----
+**`cli/skills.js`**
+- Contains all 12 skills as a JS data structure (mirrored from `src/data/skillTemplates.ts`)
+- Export functions: `generateCursorRules()`, `generateClaudeMd()`, `generateMarkdown()`
 
-## 4. Improve the Prompt Card Grid UI
+## Part 3: Update Terminal Display
 
-**File:** `src/components/prompt/PromptCard.tsx`
-- Add a subtle hover animation (scale + shadow lift)
-- Make the favorite heart more visible on hover
-- Add a small "Click to customize" hint text on hover
+Keep a terminal-style display but now show the **real** working command with a note: "Requires the closerkit npm package to be published". Also add a prominent "Or download directly" section above it pointing to the download buttons.
 
----
+## Files to Create/Edit
 
-## 5. Improve the PromptTemplates Page Layout
-
-**File:** `src/pages/PromptTemplates.tsx`
-- Add a prompt count summary next to the search bar
-- Make the grid 3-column on large screens for better density
-- Add smooth scroll-to-top when changing categories
-- Remove the duplicate `TooltipProvider` wrapper (already provided in `App.tsx`)
-
----
-
-## Summary of Files to Edit
-
-| File | Changes |
-|------|---------|
-| `src/components/prompt/PromptDialog.tsx` | Remove AI tool links, improve copy UX, add preview expand toggle |
-| `src/components/prompt/PromptCard.tsx` | Polish hover states, add interaction hints |
-| `src/pages/PromptTemplates.tsx` | 3-col grid, remove duplicate TooltipProvider, category UX |
+| File | Action |
+|------|--------|
+| `src/pages/SkillsLibrary.tsx` | Replace fake terminal with download buttons |
+| `cli/package.json` | New -- npm package manifest |
+| `cli/bin/cli.js` | New -- CLI entry point |
+| `cli/skills.js` | New -- skills data + generators |
+| `cli/README.md` | New -- package docs |
 
