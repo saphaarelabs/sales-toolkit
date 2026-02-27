@@ -1,104 +1,107 @@
 
 
-# New Feature: AI Skills Library
+# Make AI Prompt Templates the Best Sales Resource on the Internet
 
-## What We're Building
+## Overview
 
-A new **"AI Skills"** page — a library of ready-to-copy system prompts ("skills") that salespeople can paste into AI tools to instantly get a specialized sales assistant. Two flavors:
-
-1. **AI Coding Agent Skills** — For Claude Code, Codex, Antigravity, Cursor, etc. These are `.md`-style skill files that turn a coding agent into a sales tool builder.
-2. **AI Sales Agent Skills** — For Clay, AI SDR platforms, and general-purpose agents. These are system prompts that turn an AI into a specialized outbound sales agent.
-
-Each skill is a long, detailed system prompt that users copy with one click and paste into their tool.
+Expand the AI Prompt Templates from **6 prompts to 25+**, reorganized into clear categories covering the entire sales cycle. Add a category filter system, and include new Proposal/Closing prompts as requested.
 
 ---
 
-## Skills to Include
+## New Prompt Categories and Templates
 
-### AI Coding Agent Skills (paste into Claude Code / Codex)
-| Skill | What It Does |
-|---|---|
-| Cold Outreach System Builder | Builds a complete cold email system with personalization, sequencing, and A/B testing |
-| Sales Dashboard Generator | Creates pipeline dashboards with quota tracking, velocity metrics, and forecasting |
-| CRM Data Enrichment Script | Builds scripts to enrich CRM data using APIs (Clearbit, Apollo, etc.) |
-| Lead Scoring Model | Creates a lead scoring algorithm based on ICP criteria and engagement signals |
-| Outbound Sequence Automator | Builds multi-channel outreach sequences with timing logic |
+### Prospecting (existing + new)
+| # | Prompt | Status |
+|---|--------|--------|
+| 1 | Competitor Research & White Space Finder | Exists |
+| 2 | Discovery Call Question Generator | Exists |
+| 3 | Deal Strategy Advisor | Exists |
+| 4 | **Account Research Brief** — Deep-dive a target account: org chart, tech stack, recent news, strategic priorities, best entry point | NEW |
+| 5 | **ICP Refinement & Scoring** — Analyze your closed-won deals to identify patterns and refine your ICP definition | NEW |
+| 6 | **Trigger Event Spotter** — Given a company, find recent trigger events (hiring, funding, product launches, leadership changes) and craft timely outreach angles | NEW |
 
-### AI Sales Agent Skills (paste into Clay / AI SDRs)
-| Skill | What It Does |
-|---|---|
-| Hyper-Personalization Agent | Uses company data, job title duration, competitor news, and social presence to craft 1:1 messages |
-| ICP Research Agent | Analyzes a company to determine if they match your ICP and suggests the best angle |
-| Objection Handling Agent | Responds to common objections using proven frameworks (feel-felt-found, boomerang, etc.) |
-| Follow-Up Strategist | Decides the best follow-up approach based on engagement signals and timing |
-| Meeting Prep Agent | Researches a prospect before a call and generates discovery questions, talking points, and competitive intel |
-| LinkedIn DM Writer | Crafts personalized LinkedIn messages using the prospect's recent posts, job changes, and company news |
-| Competitor Battle Card Agent | Generates real-time competitive positioning based on the prospect's current stack |
+### Email & Outreach (existing + new)
+| # | Prompt | Status |
+|---|--------|--------|
+| 7 | LinkedIn Outreach Messages | Exists |
+| 8 | Breakup Email Sequence | Exists |
+| 9 | **Cold Email from Scratch** — Given product + ICP + prospect info, generate 3 cold email variations using different frameworks (problem-agitate-solve, before-after-bridge, AIDA) | NEW |
+| 10 | **Re-engagement Campaign** — Craft a sequence for dead leads/closed-lost deals that resurfaces value without desperation | NEW |
+| 11 | **Referral Request Email** — Generate warm referral ask emails for champions, existing customers, and mutual connections | NEW |
+| 12 | **Event/Webinar Follow-Up** — Personalized follow-ups referencing specific event content, booth conversations, or webinar attendance | NEW |
 
----
+### Meeting & Discovery (NEW category)
+| # | Prompt | Status |
+|---|--------|--------|
+| 13 | **Meeting Agenda Builder** — Create a structured agenda with time allocations, discovery questions, and next-step proposals | NEW |
+| 14 | **Demo Script Generator** — Build a tailored demo flow based on prospect's pain points, with talk tracks and objection responses at each stage | NEW |
+| 15 | **Post-Meeting Summary & Next Steps** — Turn raw call notes into a polished recap email with action items, timeline, and stakeholder assignments | NEW |
+| 16 | **Multi-Thread Strategy** — Identify all stakeholders needed for a deal and generate personalized outreach for each persona (champion, economic buyer, technical evaluator, blocker) | NEW |
 
-## Page Design
+### Proposals & Closing (NEW category - user requested)
+| # | Prompt | Status |
+|---|--------|--------|
+| 17 | Proposal / Executive Summary Writer | Exists (moved here) |
+| 18 | **Mutual Action Plan Generator** — Create a shared close plan with milestones, owners, dates, and risk flags for complex enterprise deals | NEW |
+| 19 | **Business Case Builder** — Generate a CFO-ready business case with ROI analysis, cost of inaction, implementation timeline, and risk mitigation | NEW |
+| 20 | **Negotiation Prep & Concession Strategy** — Analyze the deal and generate a negotiation playbook: BATNA, concession ladder, non-monetary trades, and walk-away triggers | NEW |
+| 21 | **Champion Enablement Kit** — Create internal selling materials your champion can use: one-pager, executive email draft, FAQ for skeptics, and ROI summary | NEW |
+| 22 | **Contract Redline Response** — Given common legal/procurement pushback, generate professional responses that protect your position while keeping the deal moving | NEW |
+| 23 | **Closed-Lost Win-Back** — Analyze why a deal was lost and generate a re-engagement strategy timed to their renewal/contract end date | NEW |
 
-```text
-+--------------------------------------------------+
-|  AI Skills Library                                |
-|  Copy-paste skills that turn any AI into your     |
-|  sales co-pilot. Works with Claude, ChatGPT,      |
-|  Clay, Codex, and more.                           |
-+--------------------------------------------------+
-|                                                    |
-|  [Tab: For Coding Agents] [Tab: For Sales Agents] |
-|                                                    |
-|  +----------------------------------------------+ |
-|  | Cold Outreach System Builder                  | |
-|  | Turn Claude Code into a cold email machine    | |
-|  | [Copy Skill]                [Preview v]       | |
-|  +----------------------------------------------+ |
-|  | ...more skills...                             | |
-|  +----------------------------------------------+ |
-+--------------------------------------------------+
-```
-
-Each skill card:
-- Title + short description
-- "Works with:" badges (e.g., Claude Code, Codex, Clay)
-- Expandable preview showing the full skill text
-- One-click copy button
-- Variables section (e.g., `{{YOUR_PRODUCT}}`, `{{ICP_DESCRIPTION}}`) that users fill in before copying
+### Account Management (NEW category)
+| # | Prompt | Status |
+|---|--------|--------|
+| 24 | **QBR Prep & Presentation** — Generate a Quarterly Business Review structure with usage data analysis, ROI recap, expansion opportunities, and risk assessment | NEW |
+| 25 | **Expansion/Upsell Pitch** — Craft an upsell or cross-sell pitch based on current usage, new use cases, and stakeholder mapping | NEW |
+| 26 | **Churn Risk Analysis** — Analyze account health signals and generate a save strategy with re-engagement talk tracks | NEW |
 
 ---
 
-## Technical Plan
+## UI Improvements
 
-### 1. Create `src/data/skillTemplates.ts`
-- Define `Skill` interface: `id`, `title`, `description`, `category` ("Coding Agents" | "Sales Agents"), `compatibleTools` (string array), `skill` (the full system prompt text), `variables` (same pattern as email templates)
-- Export `codingAgentSkills` and `salesAgentSkills` arrays with ~12 total skills
+### Category Tabs
+Add a horizontal tab/pill filter at the top of the page:
+- **All** | **Prospecting** | **Email & Outreach** | **Meeting & Discovery** | **Proposals & Closing** | **Account Management**
+- Same pill-style filter used on the homepage
 
-### 2. Create `src/pages/SkillsLibrary.tsx`
-- New page using the existing `ToolLayout` component
-- Tab-based UI (Coding Agents / Sales Agents) using Radix Tabs
-- Each skill rendered as an expandable card (same accordion pattern as `PromptTemplates.tsx`)
-- Variable fill-in fields, live preview, and copy button
-- "Works with" badges showing compatible tools
+### Better Category Badges
+Each category gets a distinct color:
+- Prospecting: blue
+- Email & Outreach: green  
+- Meeting & Discovery: amber
+- Proposals & Closing: purple
+- Account Management: rose
 
-### 3. Update `src/App.tsx`
-- Add route: `/skills` pointing to `SkillsLibrary`
-
-### 4. Update `src/pages/Index.tsx`
-- Add "AI Skills Library" as a third featured card on the homepage
-- Update stats banner to include skill count
-- Add to the tools grid as well
+### Prompt Count in Page Description
+Update subtitle: "26 battle-tested prompts across the entire sales cycle..."
 
 ---
 
-## Skill Content Details
+## Technical Changes
 
-Each skill will be a comprehensive system prompt (200-500 words) containing:
-- Role definition ("You are a...")
-- Specific instructions for the task
-- Output format requirements
-- Examples where helpful
-- Variable placeholders for customization (product, ICP, industry, etc.)
+### File: `src/pages/PromptTemplates.tsx`
+- Add 20 new prompt objects to the `templates` array, each with comprehensive prompt text (150-400 words), relevant variables, and proper categorization
+- Add category filter state and filtering logic (same pattern as Index.tsx category pills)
+- Update `categoryColors` with new categories
+- Update page description to reflect new count
+- Reorganize existing prompts: move "Proposal Writer" to "Proposals & Closing" category
 
-For example, the **Hyper-Personalization Agent** skill for Clay would include instructions on how to use website keywords, online ratings, company mission summaries, job title duration, competitor mentions, and social presence analysis — pulling directly from the personalization frameworks already in the template library.
+### File: `src/pages/Index.tsx`
+- Update the AI Prompt Templates featured card stats from "6 AI prompts" to "26 AI prompts"
+
+### No new files or dependencies needed.
+
+---
+
+## Prompt Quality Standards
+
+Every new prompt will follow these principles to be genuinely world-class:
+
+1. **Specific role framing** — "Act as a [specific expert]" not generic "Help me with..."
+2. **Structured output** — Every prompt specifies exact output format (sections, tables, bullet structures)
+3. **Anti-generic guardrails** — Instructions like "Never give generic advice", "Be specific to THIS company", "No filler language"
+4. **Actionable output** — Every prompt produces something the rep can immediately use (an email, a document, a strategy)
+5. **Expert methodology** — Each prompt embeds proven sales frameworks (MEDDIC, SPIN, Challenger, etc.) rather than asking AI to wing it
+6. **Variable-driven personalization** — All prompts use fill-in variables so output is customized, not cookie-cutter
 
