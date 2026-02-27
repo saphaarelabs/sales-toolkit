@@ -1,0 +1,15 @@
+{
+  "name": "closerkit",
+  "version": "1.0.0",
+  "description": "Install CloserKit AI sales skills into your project for Cursor, Claude Code, and more.",
+  "bin": {
+    "closerkit": "./bin/cli.js"
+  },
+  "keywords": ["sales", "ai", "cursor", "claude", "skills", "cursorrules", "closerkit"],
+  "license": "MIT",
+  "files": ["bin/", "skills.js"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saphaarelabs/sales-toolkit"
+  }
+}
