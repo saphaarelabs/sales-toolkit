@@ -155,16 +155,16 @@ export function PromptDialog({ template, onClose, values, onSetValue, lastValues
               {AI_TOOLS.map((tool) => (
                 <Tooltip key={tool.name}>
                   <TooltipTrigger asChild>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => openInTool(tool.baseUrl)}
-                      className="gap-1.5 text-xs"
+                    <a
+                      href={`${tool.baseUrl}${encodeURIComponent(builtPrompt)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1.5 text-xs rounded-md border border-input bg-background px-3 h-8 hover:bg-accent hover:text-accent-foreground transition-colors"
                     >
                       <tool.icon className="h-3.5 w-3.5" />
                       <span className="hidden sm:inline">{tool.name}</span>
                       <ExternalLink className="h-3 w-3 opacity-50" />
-                    </Button>
+                    </a>
                   </TooltipTrigger>
                   <TooltipContent>Open in {tool.name}</TooltipContent>
                 </Tooltip>
