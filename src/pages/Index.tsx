@@ -78,7 +78,7 @@ const featuredTools = [
     description: "Pre-built prompts for ChatGPT, Claude, and any AI tool. Research prospects, draft proposals, handle objections — paste and go.",
     icon: Sparkles,
     path: "/prompts",
-    stats: ["6 AI prompts", "Paste into any AI", "Sales-optimized"],
+    stats: ["26 AI prompts", "5 categories", "Sales-optimized"],
     gradient: "from-accent/20 to-accent/5",
   },
   {
