@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Copy, Check, RotateCcw, ExternalLink } from "lucide-react";
+import { Copy, Check, RotateCcw, ChevronDown, ChevronUp } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,13 +11,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { categoryColors, type PromptTemplate } from "@/data/promptTemplates";
-import { AI_TOOLS } from "./AIToolIcons";
 import { QuickFillChips, getQuickFills } from "./QuickFillChips";
 
 interface PromptDialogProps {
@@ -46,6 +40,7 @@ function getModelBadges(charCount: number) {
 export function PromptDialog({ template, onClose, values, onSetValue, lastValues }: PromptDialogProps) {
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [focusedVar, setFocusedVar] = useState<string | null>(null);
+  const [expanded, setExpanded] = useState(false);
 
   if (!template) return null;
 
@@ -69,10 +64,6 @@ export function PromptDialog({ template, onClose, values, onSetValue, lastValues
     setTimeout(() => setCopiedId(null), 2000);
   };
 
-  const openInTool = (baseUrl: string) => {
-    window.open(`${baseUrl}${encodeURIComponent(builtPrompt)}`, "_blank");
-  };
-
   const useLastValues = () => {
     template.variables.forEach((v) => {
       if (lastValues[v.key] && !values[v.key]) {
@@ -83,6 +74,7 @@ export function PromptDialog({ template, onClose, values, onSetValue, lastValues
   };
 
   const hasLastValues = template.variables.some((v) => lastValues[v.key] && !values[v.key]);
+  const isLongPrompt = builtPrompt.length > 600;
 
   return (
     <Dialog open={!!template} onOpenChange={(open) => !open && onClose()}>
@@ -141,43 +133,23 @@ export function PromptDialog({ template, onClose, values, onSetValue, lastValues
             </div>
           </div>
 
-          {/* Right Panel — Actions + Preview */}
+          {/* Right Panel — Copy + Preview */}
           <div className="md:w-[55%] flex flex-col p-6 overflow-hidden">
-            {/* Sticky Action Bar */}
-            <div className="flex flex-wrap items-center gap-2 pb-4 border-b border-border mb-4">
-              <Button onClick={copyPrompt} size="sm" className="gap-1.5">
-                {copiedId === template.id ? (
-                  <><Check className="h-3.5 w-3.5" /> Copied!</>
-                ) : (
-                  <><Copy className="h-3.5 w-3.5" /> Copy</>
-                )}
-              </Button>
-              {AI_TOOLS.map((tool) => (
-                <Tooltip key={tool.name}>
-                  <TooltipTrigger asChild>
-                    <a
-                      href={`${tool.baseUrl}${encodeURIComponent(builtPrompt)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => {
-                        navigator.clipboard.writeText(builtPrompt);
-                        toast.success(`Prompt copied! Opening ${tool.name}...`);
-                      }}
-                      className="inline-flex items-center justify-center gap-1.5 text-xs rounded-md border border-input bg-background px-3 h-8 hover:bg-accent hover:text-accent-foreground transition-colors"
-                    >
-                      <tool.icon className="h-3.5 w-3.5" />
-                      <span className="hidden sm:inline">{tool.name}</span>
-                      <ExternalLink className="h-3 w-3 opacity-50" />
-                    </a>
-                  </TooltipTrigger>
-                  <TooltipContent>Open in {tool.name}</TooltipContent>
-                </Tooltip>
-              ))}
-            </div>
-            <p className="text-[11px] text-muted-foreground mt-1.5">Prompt is auto-copied when you click any tool. Some tools may require you to paste manually.</p>
+            {/* Copy Button — Prominent */}
+            <Button
+              onClick={copyPrompt}
+              size="lg"
+              className="w-full gap-2 mb-4 text-base font-semibold shadow-sm"
+            >
+              {copiedId === template.id ? (
+                <><Check className="h-4 w-4" /> Copied!</>
+              ) : (
+                <><Copy className="h-4 w-4" /> Copy Prompt</>
+              )}
+            </Button>
 
             {/* Character count + model badges */}
-            <div className="flex flex-wrap items-center gap-2 mb-3">
+            <div className="flex flex-wrap items-center gap-2 mb-4">
               <span className="text-xs text-muted-foreground">{charCount.toLocaleString()} chars</span>
               {modelBadges.map((b) => (
                 <span key={b.label} className={`text-[10px] px-2 py-0.5 rounded-full border ${b.color}`}>
@@ -187,11 +159,31 @@ export function PromptDialog({ template, onClose, values, onSetValue, lastValues
             </div>
 
             {/* Live Preview */}
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 overflow-hidden flex flex-col min-h-0">
               <label className="text-sm font-medium text-foreground mb-1.5 block">Live Preview</label>
-              <pre className="whitespace-pre-wrap text-sm bg-muted/50 border rounded-md p-4 text-foreground leading-relaxed font-sans">
-                {builtPrompt}
-              </pre>
+              <div className="relative flex-1 min-h-0">
+                <pre
+                  className={`whitespace-pre-wrap text-sm bg-muted/50 border rounded-md p-4 text-foreground leading-relaxed font-sans overflow-y-auto ${
+                    !expanded && isLongPrompt ? "max-h-[280px]" : "max-h-[50vh]"
+                  }`}
+                >
+                  {builtPrompt}
+                </pre>
+                {/* Fade hint for long prompts */}
+                {isLongPrompt && !expanded && (
+                  <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background/90 to-transparent rounded-b-md pointer-events-none" />
+                )}
+              </div>
+              {isLongPrompt && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setExpanded(!expanded)}
+                  className="mt-1 gap-1 text-xs text-muted-foreground self-center"
+                >
+                  {expanded ? <><ChevronUp className="h-3 w-3" /> Show less</> : <><ChevronDown className="h-3 w-3" /> Show full preview</>}
+                </Button>
+              )}
             </div>
           </div>
         </div>

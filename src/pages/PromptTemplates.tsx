@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ToolLayout from "@/components/ToolLayout";
 import { Search } from "lucide-react";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import {
   templates,
   promptCategories,
@@ -19,6 +18,7 @@ const PromptTemplates = () => {
   const [values, setValues] = useState<Record<string, Record<string, string>>>({});
   const [activeCategory, setActiveCategory] = useState<PromptCategory | "Favorites">("All");
   const [search, setSearch] = useState("");
+  const gridRef = useRef<HTMLDivElement>(null);
 
   // Favorites
   const [favorites, setFavorites] = useState<Set<string>>(() => {
@@ -53,10 +53,15 @@ const PromptTemplates = () => {
       ...prev,
       [templateId]: { ...prev[templateId], [key]: value },
     }));
-    // Save to last values
     const updated = { ...lastValues, [key]: value };
     setLastValues(updated);
     localStorage.setItem(LAST_VALUES_KEY, JSON.stringify(updated));
+  };
+
+  // Scroll to top on category change
+  const handleCategoryChange = (cat: PromptCategory | "Favorites") => {
+    setActiveCategory(cat);
+    gridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   // Filtering
@@ -82,14 +87,14 @@ const PromptTemplates = () => {
   ];
 
   return (
-    <TooltipProvider>
-      <ToolLayout
-        title="AI Prompt Templates"
-        description={`${templates.length} battle-tested prompts across the entire sales cycle. Customize and launch directly into ChatGPT, Claude, Gemini, or Perplexity.`}
-        accentColor="bg-prospect"
-      >
-        {/* Search */}
-        <div className="relative max-w-sm mb-4">
+    <ToolLayout
+      title="AI Prompt Templates"
+      description={`${templates.length} battle-tested prompts across the entire sales cycle. Customize and copy directly into your favorite AI tool.`}
+      accentColor="bg-prospect"
+    >
+      {/* Search + Count */}
+      <div className="flex items-center gap-3 mb-4">
+        <div className="relative max-w-sm flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <input
             type="text"
@@ -99,57 +104,60 @@ const PromptTemplates = () => {
             className="w-full h-10 pl-9 pr-4 rounded-lg border bg-background text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
           />
         </div>
+        <span className="text-sm text-muted-foreground whitespace-nowrap">
+          {filtered.length} prompt{filtered.length !== 1 ? "s" : ""}
+        </span>
+      </div>
 
-        {/* Category Pills */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {allCategories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                activeCategory === cat
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-              }`}
-            >
-              {cat}{" "}
-              <span className="opacity-60">
-                ({cat === "Favorites" ? favorites.size : categoryCounts[cat] ?? 0})
-              </span>
-            </button>
-          ))}
-        </div>
+      {/* Category Pills */}
+      <div className="flex flex-wrap gap-2 mb-6">
+        {allCategories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => handleCategoryChange(cat)}
+            className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+              activeCategory === cat
+                ? "bg-primary text-primary-foreground"
+                : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+            }`}
+          >
+            {cat}{" "}
+            <span className="opacity-60">
+              ({cat === "Favorites" ? favorites.size : categoryCounts[cat] ?? 0})
+            </span>
+          </button>
+        ))}
+      </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filtered.map((template) => (
-            <PromptCard
-              key={template.id}
-              template={template}
-              isFavorite={favorites.has(template.id)}
-              onToggleFavorite={toggleFavorite}
-              onClick={() => setSelectedTemplate(template)}
-            />
-          ))}
-          {filtered.length === 0 && (
-            <p className="col-span-full text-center text-muted-foreground py-12">
-              {activeCategory === "Favorites"
-                ? "No favorites yet — click the heart icon on any prompt to bookmark it."
-                : `No prompts found matching "${search}"`}
-            </p>
-          )}
-        </div>
+      {/* Grid */}
+      <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {filtered.map((template) => (
+          <PromptCard
+            key={template.id}
+            template={template}
+            isFavorite={favorites.has(template.id)}
+            onToggleFavorite={toggleFavorite}
+            onClick={() => setSelectedTemplate(template)}
+          />
+        ))}
+        {filtered.length === 0 && (
+          <p className="col-span-full text-center text-muted-foreground py-12">
+            {activeCategory === "Favorites"
+              ? "No favorites yet — click the heart icon on any prompt to bookmark it."
+              : `No prompts found matching "${search}"`}
+          </p>
+        )}
+      </div>
 
-        {/* Dialog */}
-        <PromptDialog
-          template={selectedTemplate}
-          onClose={() => setSelectedTemplate(null)}
-          values={selectedTemplate ? values[selectedTemplate.id] || {} : {}}
-          onSetValue={(key, value) => selectedTemplate && setValue(selectedTemplate.id, key, value)}
-          lastValues={lastValues}
-        />
-      </ToolLayout>
-    </TooltipProvider>
+      {/* Dialog */}
+      <PromptDialog
+        template={selectedTemplate}
+        onClose={() => setSelectedTemplate(null)}
+        values={selectedTemplate ? values[selectedTemplate.id] || {} : {}}
+        onSetValue={(key, value) => selectedTemplate && setValue(selectedTemplate.id, key, value)}
+        lastValues={lastValues}
+      />
+    </ToolLayout>
   );
 };
 
