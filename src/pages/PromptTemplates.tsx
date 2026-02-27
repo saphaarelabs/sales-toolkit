@@ -94,7 +94,7 @@ const PromptTemplates = () => {
     >
       {/* Search + Count */}
       <div className="flex items-center gap-3 mb-4">
-        <div className="relative max-w-sm flex-1">
+        <div className="relative flex-1 max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <input
             type="text"
@@ -104,18 +104,18 @@ const PromptTemplates = () => {
             className="w-full h-10 pl-9 pr-4 rounded-lg border bg-background text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
           />
         </div>
-        <span className="text-sm text-muted-foreground whitespace-nowrap">
+        <span className="text-sm text-muted-foreground whitespace-nowrap hidden sm:inline">
           {filtered.length} prompt{filtered.length !== 1 ? "s" : ""}
         </span>
       </div>
 
-      {/* Category Pills */}
-      <div className="flex flex-wrap gap-2 mb-6">
+      {/* Category Pills - horizontal scroll on mobile */}
+      <div className="flex gap-2 mb-5 md:mb-6 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:overflow-visible scrollbar-none">
         {allCategories.map((cat) => (
           <button
             key={cat}
             onClick={() => handleCategoryChange(cat)}
-            className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+            className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 ${
               activeCategory === cat
                 ? "bg-primary text-primary-foreground"
                 : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
@@ -130,7 +130,7 @@ const PromptTemplates = () => {
       </div>
 
       {/* Grid */}
-      <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
         {filtered.map((template) => (
           <PromptCard
             key={template.id}
