@@ -39,6 +39,7 @@ const tools: Tool[] = [
   { name: "SOW Generator", description: "Generate a formatted Statement of Work document.", icon: ScrollText, path: "/sow-generator", category: "Proposals" },
   { name: "Battle Card Creator", description: "Build competitive battle cards with talk tracks.", icon: Swords, path: "/battle-card", category: "Proposals" },
   { name: "AI Skills Library", description: "Copy-paste AI skills for coding agents and sales agents.", icon: Brain, path: "/skills", category: "Docs" },
+  { name: "AI Sales Assistant", description: "AI-powered sales coach, email writer, deal analyzer, and prospect researcher.", icon: Bot, path: "/ai", category: "Prospecting" },
 ];
 
 const featuredTools = [
