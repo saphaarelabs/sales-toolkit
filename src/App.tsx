@@ -71,6 +71,7 @@ const App = () => (
                 <Route path="/email-templates" element={<EmailTemplateLibrary />} />
                 <Route path="/skills" element={<SkillsLibrary />} />
                 <Route path="/ai" element={<AIAssistant />} />
+                <Route path="/generate" element={<SellAnything />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
