@@ -28,6 +28,7 @@ import SOWGenerator from "./pages/SOWGenerator";
 import BattleCard from "./pages/BattleCard";
 import EmailTemplateLibrary from "./pages/EmailTemplateLibrary";
 import SkillsLibrary from "./pages/SkillsLibrary";
+import AIAssistant from "./pages/AIAssistant";
 
 const queryClient = new QueryClient();
 
