@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   Calculator, TrendingUp, Mail, ListOrdered, Target, ShieldCheck, AtSign, Percent,
   Sparkles, Trophy, BarChart3, Gauge, Zap, User, UserPlus, FileText, CalendarDays,
-  DollarSign, ClipboardList, ScrollText, Swords, Search, Github, BookOpen, ArrowRight, Brain,
+  DollarSign, ClipboardList, ScrollText, Swords, Search, Github, BookOpen, ArrowRight, Brain, Bot,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
