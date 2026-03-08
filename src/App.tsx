@@ -63,6 +63,7 @@ const App = () => (
           <Route path="/battle-card" element={<BattleCard />} />
           <Route path="/email-templates" element={<EmailTemplateLibrary />} />
           <Route path="/skills" element={<SkillsLibrary />} />
+          <Route path="/ai" element={<AIAssistant />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
