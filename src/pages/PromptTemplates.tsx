@@ -3,9 +3,12 @@ import ToolLayout from "@/components/ToolLayout";
 import { Search } from "lucide-react";
 import {
   templates,
-  promptCategories,
+  phaseCategories,
+  macroStages,
+  categoryColors,
   type PromptTemplate,
   type PromptCategory,
+  type MacroStage,
 } from "@/data/promptTemplates";
 import { PromptCard } from "@/components/prompt/PromptCard";
 import { PromptDialog } from "@/components/prompt/PromptDialog";
@@ -13,14 +16,16 @@ import { PromptDialog } from "@/components/prompt/PromptDialog";
 const FAVORITES_KEY = "closerkit-prompt-favorites";
 const LAST_VALUES_KEY = "closerkit-prompt-last-values";
 
+type FilterMode = "All" | "Favorites" | MacroStage;
+
 const PromptTemplates = () => {
   const [selectedTemplate, setSelectedTemplate] = useState<PromptTemplate | null>(null);
   const [values, setValues] = useState<Record<string, Record<string, string>>>({});
-  const [activeCategory, setActiveCategory] = useState<PromptCategory | "Favorites">("All");
+  const [activeFilter, setActiveFilter] = useState<FilterMode>("All");
+  const [activePhase, setActivePhase] = useState<PromptCategory | null>(null);
   const [search, setSearch] = useState("");
   const gridRef = useRef<HTMLDivElement>(null);
 
-  // Favorites
   const [favorites, setFavorites] = useState<Set<string>>(() => {
     try {
       const stored = localStorage.getItem(FAVORITES_KEY);
@@ -40,7 +45,6 @@ const PromptTemplates = () => {
     });
   };
 
-  // Last values
   const [lastValues, setLastValues] = useState<Record<string, string>>(() => {
     try {
       const stored = localStorage.getItem(LAST_VALUES_KEY);
@@ -49,50 +53,42 @@ const PromptTemplates = () => {
   });
 
   const setValue = (templateId: string, key: string, value: string) => {
-    setValues((prev) => ({
-      ...prev,
-      [templateId]: { ...prev[templateId], [key]: value },
-    }));
+    setValues((prev) => ({ ...prev, [templateId]: { ...prev[templateId], [key]: value } }));
     const updated = { ...lastValues, [key]: value };
     setLastValues(updated);
     localStorage.setItem(LAST_VALUES_KEY, JSON.stringify(updated));
   };
 
-  // Scroll to top on category change
-  const handleCategoryChange = (cat: PromptCategory | "Favorites") => {
-    setActiveCategory(cat);
+  const handleFilterChange = (filter: FilterMode) => {
+    setActiveFilter(filter);
+    setActivePhase(null);
     gridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  // Filtering
+  const activeMacro = macroStages.find((s) => s.label === activeFilter);
+  const phaseOptions: PromptCategory[] = activeMacro ? activeMacro.categories : [];
+
   const filtered = templates.filter((t) => {
-    if (activeCategory === "Favorites") return favorites.has(t.id);
-    const matchesCategory = activeCategory === "All" || t.category === activeCategory;
+    if (activeFilter === "Favorites") return favorites.has(t.id);
+    const matchesMacro = activeFilter === "All" || (activeMacro && activeMacro.categories.includes(t.category));
+    const matchesPhase = !activePhase || t.category === activePhase;
     const matchesSearch =
       search === "" ||
       t.title.toLowerCase().includes(search.toLowerCase()) ||
       t.description.toLowerCase().includes(search.toLowerCase()) ||
       t.category.toLowerCase().includes(search.toLowerCase());
-    return matchesCategory && matchesSearch;
+    return matchesMacro && matchesPhase && matchesSearch;
   });
 
-  const categoryCounts = promptCategories.reduce((acc, cat) => {
-    acc[cat] = cat === "All" ? templates.length : templates.filter((t) => t.category === cat).length;
-    return acc;
-  }, {} as Record<string, number>);
-
-  const allCategories: (PromptCategory | "Favorites")[] = [
-    ...promptCategories,
-    ...(favorites.size > 0 ? ["Favorites" as const] : []),
-  ];
+  const macroFilters: FilterMode[] = ["All", ...macroStages.map((s) => s.label as MacroStage), ...(favorites.size > 0 ? ["Favorites" as const] : [])];
 
   return (
     <ToolLayout
-      title="AI Prompt Templates"
-      description={`${templates.length} battle-tested prompts across the entire sales cycle. Customize and copy directly into your favorite AI tool.`}
+      title="The Sales AI Bible"
+      description={`${templates.length} battle-tested AI prompts across the complete 20-phase sales cycle. The only prompt library salespeople need.`}
       accentColor="bg-prospect"
     >
-      {/* Search + Count */}
+      {/* Search */}
       <div className="flex items-center gap-3 mb-4">
         <div className="relative flex-1 max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -109,25 +105,61 @@ const PromptTemplates = () => {
         </span>
       </div>
 
-      {/* Category Pills - horizontal scroll on mobile */}
-      <div className="flex gap-2 mb-5 md:mb-6 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:overflow-visible scrollbar-none">
-        {allCategories.map((cat) => (
+      {/* Macro Tabs */}
+      <div className="flex gap-2 mb-3 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:overflow-visible scrollbar-none">
+        {macroFilters.map((filter) => {
+          const macro = macroStages.find((s) => s.label === filter);
+          const count = filter === "All"
+            ? templates.length
+            : filter === "Favorites"
+            ? favorites.size
+            : templates.filter((t) => macro!.categories.includes(t.category)).length;
+          return (
+            <button
+              key={filter}
+              onClick={() => handleFilterChange(filter)}
+              className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 ${
+                activeFilter === filter
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+              }`}
+            >
+              {filter} <span className="opacity-60">({count})</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Phase Pills (when macro selected) */}
+      {phaseOptions.length > 0 && (
+        <div className="flex gap-2 mb-4 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:overflow-visible scrollbar-none">
           <button
-            key={cat}
-            onClick={() => handleCategoryChange(cat)}
-            className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 ${
-              activeCategory === cat
-                ? "bg-primary text-primary-foreground"
-                : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+            onClick={() => setActivePhase(null)}
+            className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0 border ${
+              !activePhase ? "bg-accent text-accent-foreground border-accent" : "bg-background text-muted-foreground border-border hover:border-accent"
             }`}
           >
-            {cat}{" "}
-            <span className="opacity-60">
-              ({cat === "Favorites" ? favorites.size : categoryCounts[cat] ?? 0})
-            </span>
+            All {activeMacro?.label}
           </button>
-        ))}
-      </div>
+          {phaseOptions.map((phase) => {
+            const count = templates.filter((t) => t.category === phase).length;
+            const idx = phaseCategories.indexOf(phase) + 1;
+            return (
+              <button
+                key={phase}
+                onClick={() => setActivePhase(phase)}
+                className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0 border ${
+                  activePhase === phase
+                    ? `${categoryColors[phase] || "bg-accent text-accent-foreground border-accent"}`
+                    : "bg-background text-muted-foreground border-border hover:border-accent"
+                }`}
+              >
+                {idx}. {phase} <span className="opacity-60">({count})</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       {/* Grid */}
       <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
@@ -142,14 +174,13 @@ const PromptTemplates = () => {
         ))}
         {filtered.length === 0 && (
           <p className="col-span-full text-center text-muted-foreground py-12">
-            {activeCategory === "Favorites"
+            {activeFilter === "Favorites"
               ? "No favorites yet — click the heart icon on any prompt to bookmark it."
               : `No prompts found matching "${search}"`}
           </p>
         )}
       </div>
 
-      {/* Dialog */}
       <PromptDialog
         template={selectedTemplate}
         onClose={() => setSelectedTemplate(null)}

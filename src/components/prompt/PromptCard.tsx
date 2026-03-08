@@ -8,6 +8,13 @@ interface PromptCardProps {
   onClick: () => void;
 }
 
+const aiToolColors: Record<string, string> = {
+  Claude: "bg-orange-500/10 text-orange-600 border-orange-500/20",
+  ChatGPT: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20",
+  Cursor: "bg-blue-500/10 text-blue-600 border-blue-500/20",
+  Gemini: "bg-purple-500/10 text-purple-600 border-purple-500/20",
+};
+
 function getComplexityLabel(count: number) {
   if (count <= 2) return { text: `${count} vars · ~30s`, color: "text-green-600 bg-green-500/10 border-green-500/20" };
   if (count <= 4) return { text: `${count} vars · ~1 min`, color: "text-amber-600 bg-amber-500/10 border-amber-500/20" };
@@ -41,11 +48,16 @@ export function PromptCard({ template, isFavorite, onToggleFavorite, onClick }: 
             </span>
           </div>
           <p className="text-xs text-muted-foreground line-clamp-2 mb-2">{template.description}</p>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 flex-wrap">
             <span className={`text-[10px] px-2 py-0.5 rounded-full border ${complexity.color}`}>
               {complexity.text}
             </span>
-            <span className="text-[10px] text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+            {template.optimizedFor.map((tool) => (
+              <span key={tool} className={`text-[10px] px-1.5 py-0.5 rounded-full border ${aiToolColors[tool] || ""}`}>
+                {tool}
+              </span>
+            ))}
+            <span className="text-[10px] text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity ml-auto">
               Click to customize →
             </span>
           </div>
