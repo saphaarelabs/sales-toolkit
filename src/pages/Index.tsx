@@ -44,6 +44,14 @@ const tools: Tool[] = [
 
 const featuredTools = [
   {
+    name: "AI Sales Assistant",
+    description: "Your AI-powered closing machine. Sales coach, cold email writer, deal analyzer, and prospect researcher — all in one chat interface.",
+    icon: Bot,
+    path: "/ai",
+    stats: ["4 AI modes", "Real-time streaming", "Powered by Gemini"],
+    gradient: "from-violet-500/15 to-purple-500/5",
+  },
+  {
     name: "Email Template Library",
     description: "The largest free collection of sales email templates. Cold outreach, follow-ups, breakups, referrals, expert frameworks — all with fill-in-the-blank personalization.",
     icon: BookOpen,
@@ -56,7 +64,7 @@ const featuredTools = [
     description: "Pre-built prompts for ChatGPT, Claude, and any AI tool. Research prospects, draft proposals, handle objections — paste and go.",
     icon: Sparkles,
     path: "/prompts",
-    stats: ["41 AI prompts", "6 categories", "Sales-optimized"],
+    stats: ["200+ prompts", "20 phases", "Sales-optimized"],
     gradient: "from-accent/20 to-accent/5",
   },
   {
