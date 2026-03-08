@@ -31,6 +31,7 @@ import BattleCard from "./pages/BattleCard";
 import EmailTemplateLibrary from "./pages/EmailTemplateLibrary";
 import SkillsLibrary from "./pages/SkillsLibrary";
 import AIAssistant from "./pages/AIAssistant";
+import SellAnything from "./pages/SellAnything";
 
 const queryClient = new QueryClient();
 
