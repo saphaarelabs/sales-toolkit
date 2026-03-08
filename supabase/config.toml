@@ -2,3 +2,6 @@ project_id = "xzvcmkorvycgkwqmqdjw"
 
 [functions.ai-sales-assistant]
 verify_jwt = false
+
+[functions.sell-anything]
+verify_jwt = false

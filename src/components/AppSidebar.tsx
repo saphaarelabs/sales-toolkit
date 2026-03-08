@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/sidebar";
 
 const aiTools = [
+  { title: "SellAnything AI", url: "/generate", icon: Sparkles },
   { title: "AI Sales Assistant", url: "/ai", icon: Bot },
   { title: "AI Prompt Templates", url: "/prompts", icon: Sparkles },
   { title: "AI Skills Library", url: "/skills", icon: Brain },

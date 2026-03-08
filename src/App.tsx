@@ -31,6 +31,7 @@ import BattleCard from "./pages/BattleCard";
 import EmailTemplateLibrary from "./pages/EmailTemplateLibrary";
 import SkillsLibrary from "./pages/SkillsLibrary";
 import AIAssistant from "./pages/AIAssistant";
+import SellAnything from "./pages/SellAnything";
 
 const queryClient = new QueryClient();
 
@@ -70,6 +71,7 @@ const App = () => (
                 <Route path="/email-templates" element={<EmailTemplateLibrary />} />
                 <Route path="/skills" element={<SkillsLibrary />} />
                 <Route path="/ai" element={<AIAssistant />} />
+                <Route path="/generate" element={<SellAnything />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>

@@ -1,66 +1,55 @@
 
 
-# "Describe & Sell" — SellAnything AI Feature
+# Real Install Flow: Download Buttons + npm Package Source
 
-## Overview
-A new `/generate` page with an input form, a dedicated edge function that returns structured JSON via tool calling, and a 7-tab results dashboard with per-section copy + export options.
+## Part 1: Replace Fake Terminal with Real Download Buttons
 
-## Architecture
+**File: `src/pages/SkillsLibrary.tsx`**
 
-```text
-User Input → Edge Function (tool calling, structured JSON) → Parse → 7-Tab Dashboard
-```
+Replace the `npx closerkit init` terminal block with a "Download Skills" section that has real, working download buttons:
 
-## New Files
+- **Download .cursorrules** -- generates and downloads a `.cursorrules` file containing all coding agent skills
+- **Download CLAUDE.md** -- generates and downloads a `CLAUDE.md` file containing all skills
+- **Download closerkit-skills.md** -- generates and downloads a full markdown bundle
 
-| File | Purpose |
-|------|---------|
-| `src/pages/SellAnything.tsx` | Main page: input form + results dashboard container |
-| `src/components/sell/InputSection.tsx` | Textarea, toggle rows (Product/Service/Both, B2C/B2B/Both), gold button, 6 example chips |
-| `src/components/sell/ResultsDashboard.tsx` | 7-tab layout rendering parsed JSON |
-| `src/components/sell/tabs/OverviewTab.tsx` | Hook, category, USPs, read-aloud button |
-| `src/components/sell/tabs/AudienceTab.tsx` | Persona cards with pain points / buying triggers |
-| `src/components/sell/tabs/PitchTab.tsx` | Emotional/Logical/Urgency pitches, SMS, WhatsApp |
-| `src/components/sell/tabs/B2BTab.tsx` | Prospect data, cold email sequence, LinkedIn messages, cold call script |
-| `src/components/sell/tabs/B2CTab.tsx` | Digital platforms, email templates, marketplaces, offline channels |
-| `src/components/sell/tabs/KeywordsTab.tsx` | Keywords tables, meta tags, blog/YouTube titles |
-| `src/components/sell/tabs/ObjectionsTab.tsx` | Objection cards, custom objection input |
-| `src/components/sell/ExportBar.tsx` | Copy, PDF download, CSV export, .txt export buttons |
-| `src/components/sell/types.ts` | TypeScript interfaces for the structured JSON response |
-| `supabase/functions/sell-anything/index.ts` | Edge function using Lovable AI with tool calling to return structured JSON |
+Each button uses `Blob` + `URL.createObjectURL` + a hidden `<a>` element to trigger a real browser file download. Keep the existing "Copy" buttons as secondary actions.
 
-## Modified Files
+The section header changes from "Install All Skills in Your Terminal" to "Download Skills for Your Project" with a `Download` icon instead of `Terminal`.
 
-| File | Change |
+## Part 2: Create Real npm CLI Package Source
+
+Create the following files in a `cli/` directory at the project root. You would then publish this to npm with `cd cli && npm publish`.
+
+**`cli/package.json`**
+- Package name: `closerkit`
+- `bin.closerkit` pointing to `./bin/cli.js`
+- Minimal dependencies (just `fs` and `path`, built-in)
+
+**`cli/bin/cli.js`**
+- Entry point for `npx closerkit init`
+- Detects project type (looks for `.cursorrules`, `CLAUDE.md`, or defaults to markdown)
+- Writes the skills file to the current directory
+- Prints a success message with what was created
+
+**`cli/README.md`**
+- Usage instructions for the npm package
+- Documents `npx closerkit init` command
+
+**`cli/skills.js`**
+- Contains all 12 skills as a JS data structure (mirrored from `src/data/skillTemplates.ts`)
+- Export functions: `generateCursorRules()`, `generateClaudeMd()`, `generateMarkdown()`
+
+## Part 3: Update Terminal Display
+
+Keep a terminal-style display but now show the **real** working command with a note: "Requires the closerkit npm package to be published". Also add a prominent "Or download directly" section above it pointing to the download buttons.
+
+## Files to Create/Edit
+
+| File | Action |
 |------|--------|
-| `src/App.tsx` | Add `/generate` route |
-| `src/components/AppSidebar.tsx` | Add "SellAnything AI" to AI-Powered group |
-| `src/pages/Index.tsx` | Add hero card for SellAnything AI |
-
-## Edge Function Design
-
-Uses **tool calling** (not streaming) to get structured JSON back from `google/gemini-2.5-flash`. The system prompt is the sales strategist prompt from the spec. A single tool `generate_sales_kit` is defined with the full JSON schema matching all the fields specified (hook, category, audience, pitches, b2b, b2c, keywords, objections). The function parses the tool call result and returns clean JSON.
-
-Non-streaming because we need complete structured output. A loading state with progress indicators will be shown (~15-30s generation time).
-
-## Input Section
-- Large textarea with the specified placeholder
-- Toggle group row 1: Product / Service / Both
-- Toggle group row 2: B2C / B2B / Both — Auto Detect  
-- Gold gradient "Analyze & Generate Full Sales Kit" button
-- 6 example chips: "Old movie CDs", "Legal consulting", "Handmade candles", "SaaS software", "Real estate", "Online coaching"
-
-## Results Dashboard (7 Tabs)
-Each tab renders the corresponding section of the JSON response. Every text block gets a copy button. Tabs conditionally show/hide B2B and B2C based on the `marketType` field.
-
-## Export Options
-- Per-section copy buttons throughout
-- "Download Full Sales Kit as PDF" using browser print-to-PDF
-- "Download B2B Prospect List as CSV" (generates CSV from b2b data)
-- "Download Email Templates as .txt"
-
-## Visual Design
-- Gold accent (`#D4A843`) for the generate button and result highlights
-- Loading state: animated progress bar with stage labels ("Analyzing market...", "Building pitches...", "Finding prospects...")
-- Tab badges showing content count per section
+| `src/pages/SkillsLibrary.tsx` | Replace fake terminal with download buttons |
+| `cli/package.json` | New -- npm package manifest |
+| `cli/bin/cli.js` | New -- CLI entry point |
+| `cli/skills.js` | New -- skills data + generators |
+| `cli/README.md` | New -- package docs |
 
