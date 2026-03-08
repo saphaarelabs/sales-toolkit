@@ -93,7 +93,7 @@ export function AppSidebar() {
         {groups.map((group) => {
           const isGroupActive = group.items.some((i) => currentPath === i.url);
           return (
-            <SidebarGroup key={group.label} defaultOpen={isGroupActive}>
+            <SidebarGroup key={group.label}>
               <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
