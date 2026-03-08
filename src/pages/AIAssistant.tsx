@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Send, Bot, User, Sparkles, Mail, TrendingUp, Search, RotateCcw, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import ReactMarkdown from "react-markdown";
 import { useToast } from "@/hooks/use-toast";
 
