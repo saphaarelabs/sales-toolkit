@@ -45,6 +45,14 @@ const tools: Tool[] = [
 
 const featuredTools = [
   {
+    name: "SellAnything AI",
+    description: "Describe what you sell in plain English — get a complete sales kit with pitches, audience personas, outreach sequences, keywords, and objection handlers.",
+    icon: Sparkles,
+    path: "/generate",
+    stats: ["7-tab dashboard", "B2B + B2C", "AI-powered"],
+    gradient: "from-[hsl(43,60%,55%)]/15 to-[hsl(43,60%,55%)]/5",
+  },
+  {
     name: "AI Sales Assistant",
     description: "Your AI-powered closing machine. Sales coach, cold email writer, deal analyzer, and prospect researcher — all in one chat interface.",
     icon: Bot,
