@@ -83,13 +83,23 @@ export function PromptDialog({ template, onClose, values, onSetValue, lastValues
           {/* Left Panel — Variables */}
           <div className="md:w-[45%] p-4 md:p-6 overflow-y-auto border-b md:border-b-0 md:border-r border-border max-h-[45vh] md:max-h-none">
             <DialogHeader>
-              <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex items-center gap-2 flex-wrap">
                 <DialogTitle className="font-display text-base md:text-lg">{template.title}</DialogTitle>
                 <span className={`text-[10px] px-2 py-0.5 rounded-full border ${categoryColors[template.category] || ""}`}>
                   {template.category}
                 </span>
               </div>
               <DialogDescription className="text-xs md:text-sm">{template.description}</DialogDescription>
+              {template.optimizedFor && template.optimizedFor.length > 0 && (
+                <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
+                  <span className="text-[10px] text-muted-foreground">Optimized for:</span>
+                  {template.optimizedFor.map((tool) => (
+                    <span key={tool} className="text-[10px] px-1.5 py-0.5 rounded-full border bg-muted/50 text-muted-foreground">
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+              )}
             </DialogHeader>
 
             {hasLastValues && (
