@@ -5,6 +5,7 @@ import {
   DollarSign, ClipboardList, ScrollText, Swords, Search, Github, BookOpen, ArrowRight, Brain, Bot,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 const categories = ["All", "Calculators", "Email & Outreach", "Prospecting", "Pipeline", "LinkedIn", "Proposals", "Docs"] as const;
 type Category = (typeof categories)[number];
@@ -117,7 +118,8 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Hero Header */}
       <header className="border-b bg-card/50">
-        <div className="container max-w-5xl py-8 md:py-14 px-4 sm:px-6">
+        <div className="max-w-5xl py-8 md:py-14 px-4 sm:px-6">
+          <SidebarTrigger className="mb-4" />
           <div className="flex flex-col gap-5 md:gap-6">
             <div>
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold font-display tracking-tight">CloserKit</h1>

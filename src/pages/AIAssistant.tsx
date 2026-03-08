@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Send, Bot, User, Sparkles, Mail, TrendingUp, Search, RotateCcw, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import ReactMarkdown from "react-markdown";
 import { useToast } from "@/hooks/use-toast";
 
@@ -179,15 +180,12 @@ const AIAssistant = () => {
     <div className="flex flex-col h-screen bg-background">
       {/* Top bar */}
       <header className="border-b bg-card/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="container max-w-4xl px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <a href="/" className="text-sm font-display font-semibold text-muted-foreground hover:text-foreground transition-colors">
-              CloserKit
-            </a>
-            <span className="text-muted-foreground/40">/</span>
+        <div className="max-w-4xl px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <SidebarTrigger className="shrink-0" />
             <h1 className="text-sm font-semibold font-display flex items-center gap-1.5">
               <Bot className="h-4 w-4 text-primary" />
-              AI Assistant
+              AI Sales Assistant
             </h1>
           </div>
           {messages.length > 0 && (
