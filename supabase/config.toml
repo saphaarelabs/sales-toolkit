@@ -1,0 +1,4 @@
+project_id = "xzvcmkorvycgkwqmqdjw"
+
+[functions.ai-sales-assistant]
+verify_jwt = false

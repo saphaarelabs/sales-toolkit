@@ -28,6 +28,7 @@ import SOWGenerator from "./pages/SOWGenerator";
 import BattleCard from "./pages/BattleCard";
 import EmailTemplateLibrary from "./pages/EmailTemplateLibrary";
 import SkillsLibrary from "./pages/SkillsLibrary";
+import AIAssistant from "./pages/AIAssistant";
 
 const queryClient = new QueryClient();
 
@@ -62,6 +63,7 @@ const App = () => (
           <Route path="/battle-card" element={<BattleCard />} />
           <Route path="/email-templates" element={<EmailTemplateLibrary />} />
           <Route path="/skills" element={<SkillsLibrary />} />
+          <Route path="/ai" element={<AIAssistant />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

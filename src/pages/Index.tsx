@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   Calculator, TrendingUp, Mail, ListOrdered, Target, ShieldCheck, AtSign, Percent,
   Sparkles, Trophy, BarChart3, Gauge, Zap, User, UserPlus, FileText, CalendarDays,
-  DollarSign, ClipboardList, ScrollText, Swords, Search, Github, BookOpen, ArrowRight, Brain,
+  DollarSign, ClipboardList, ScrollText, Swords, Search, Github, BookOpen, ArrowRight, Brain, Bot,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
@@ -39,9 +39,18 @@ const tools: Tool[] = [
   { name: "SOW Generator", description: "Generate a formatted Statement of Work document.", icon: ScrollText, path: "/sow-generator", category: "Proposals" },
   { name: "Battle Card Creator", description: "Build competitive battle cards with talk tracks.", icon: Swords, path: "/battle-card", category: "Proposals" },
   { name: "AI Skills Library", description: "Copy-paste AI skills for coding agents and sales agents.", icon: Brain, path: "/skills", category: "Docs" },
+  { name: "AI Sales Assistant", description: "AI-powered sales coach, email writer, deal analyzer, and prospect researcher.", icon: Bot, path: "/ai", category: "Prospecting" },
 ];
 
 const featuredTools = [
+  {
+    name: "AI Sales Assistant",
+    description: "Your AI-powered closing machine. Sales coach, cold email writer, deal analyzer, and prospect researcher — all in one chat interface.",
+    icon: Bot,
+    path: "/ai",
+    stats: ["4 AI modes", "Real-time streaming", "Powered by Gemini"],
+    gradient: "from-violet-500/15 to-purple-500/5",
+  },
   {
     name: "Email Template Library",
     description: "The largest free collection of sales email templates. Cold outreach, follow-ups, breakups, referrals, expert frameworks — all with fill-in-the-blank personalization.",
@@ -55,7 +64,7 @@ const featuredTools = [
     description: "Pre-built prompts for ChatGPT, Claude, and any AI tool. Research prospects, draft proposals, handle objections — paste and go.",
     icon: Sparkles,
     path: "/prompts",
-    stats: ["41 AI prompts", "6 categories", "Sales-optimized"],
+    stats: ["200+ prompts", "20 phases", "Sales-optimized"],
     gradient: "from-accent/20 to-accent/5",
   },
   {
