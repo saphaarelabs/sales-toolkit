@@ -5,6 +5,7 @@ import {
   DollarSign, ClipboardList, ScrollText, Swords, Search, Github, BookOpen, ArrowRight, Brain, Bot,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 const categories = ["All", "Calculators", "Email & Outreach", "Prospecting", "Pipeline", "LinkedIn", "Proposals", "Docs"] as const;
 type Category = (typeof categories)[number];
