@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.sell-anything]
 verify_jwt = false
+
+[functions.apex-advisor]
+verify_jwt = false
