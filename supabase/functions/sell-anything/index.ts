@@ -236,7 +236,8 @@ Generate a complete, hyper-specific sales kit. Be detailed and actionable. Use r
       await new Promise(r => setTimeout(r, 2000 * (attempt + 1)));
     }
 
-    if (!response.ok) {
+    if (!response || !response.ok) {
+      const status = response?.status || 500;
       if (response.status === 429) {
         return new Response(JSON.stringify({ error: "Rate limit exceeded. Please try again in a moment." }), {
           status: 429,
