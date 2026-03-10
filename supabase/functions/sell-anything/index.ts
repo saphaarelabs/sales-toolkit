@@ -210,48 +210,38 @@ Target Market: ${marketTarget}
 
 Generate a complete, hyper-specific sales kit. Be detailed and actionable. Use real Indian and global market data.`;
 
-    const payload = JSON.stringify({
-      model: "google/gemini-2.5-flash",
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: userPrompt },
-      ],
-      tools: [salesKitTool],
-      tool_choice: { type: "function", function: { name: "generate_sales_kit" } },
+    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${LOVABLE_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "google/gemini-2.5-flash",
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt },
+        ],
+        tools: [salesKitTool],
+        tool_choice: { type: "function", function: { name: "generate_sales_kit" } },
+      }),
     });
 
-    let response: Response | null = null;
-    for (let attempt = 0; attempt < 3; attempt++) {
-      response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${LOVABLE_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: payload,
-      });
-      if (response.status !== 503) break;
-      console.log(`Attempt ${attempt + 1} got 503, retrying...`);
-      await response.text(); // consume body
-      await new Promise(r => setTimeout(r, 2000 * (attempt + 1)));
-    }
-
-    if (!response || !response.ok) {
-      const status = response?.status || 500;
-      if (status === 429) {
+    if (!response.ok) {
+      if (response.status === 429) {
         return new Response(JSON.stringify({ error: "Rate limit exceeded. Please try again in a moment." }), {
           status: 429,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
-      if (status === 402) {
+      if (response.status === 402) {
         return new Response(JSON.stringify({ error: "AI credits exhausted. Please add credits to continue." }), {
           status: 402,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
-      const text = response ? await response.text() : "No response";
-      console.error("AI gateway error:", status, text);
+      const text = await response.text();
+      console.error("AI gateway error:", response.status, text);
       return new Response(JSON.stringify({ error: "Failed to generate sales kit." }), {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
