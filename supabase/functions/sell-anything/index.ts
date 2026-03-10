@@ -210,22 +210,31 @@ Target Market: ${marketTarget}
 
 Generate a complete, hyper-specific sales kit. Be detailed and actionable. Use real Indian and global market data.`;
 
-    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "google/gemini-2.5-flash",
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userPrompt },
-        ],
-        tools: [salesKitTool],
-        tool_choice: { type: "function", function: { name: "generate_sales_kit" } },
-      }),
+    const payload = JSON.stringify({
+      model: "google/gemini-2.5-flash",
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userPrompt },
+      ],
+      tools: [salesKitTool],
+      tool_choice: { type: "function", function: { name: "generate_sales_kit" } },
     });
+
+    let response: Response | null = null;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${LOVABLE_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: payload,
+      });
+      if (response.status !== 503) break;
+      console.log(`Attempt ${attempt + 1} got 503, retrying...`);
+      await response.text(); // consume body
+      await new Promise(r => setTimeout(r, 2000 * (attempt + 1)));
+    }
 
     if (!response.ok) {
       if (response.status === 429) {
