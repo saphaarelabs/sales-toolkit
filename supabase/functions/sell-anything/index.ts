@@ -238,20 +238,20 @@ Generate a complete, hyper-specific sales kit. Be detailed and actionable. Use r
 
     if (!response || !response.ok) {
       const status = response?.status || 500;
-      if (response.status === 429) {
+      if (status === 429) {
         return new Response(JSON.stringify({ error: "Rate limit exceeded. Please try again in a moment." }), {
           status: 429,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
-      if (response.status === 402) {
+      if (status === 402) {
         return new Response(JSON.stringify({ error: "AI credits exhausted. Please add credits to continue." }), {
           status: 402,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
-      const text = await response.text();
-      console.error("AI gateway error:", response.status, text);
+      const text = response ? await response.text() : "No response";
+      console.error("AI gateway error:", status, text);
       return new Response(JSON.stringify({ error: "Failed to generate sales kit." }), {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
